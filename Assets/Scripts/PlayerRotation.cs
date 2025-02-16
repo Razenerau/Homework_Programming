@@ -20,6 +20,6 @@ public class PlayerRotation : MonoBehaviour
                    //Where the mouse is \/          Where the player is \/
         Vector3 positionDifference = _mousePosition - transform.position;
         float rotationZ = Mathf.Atan2(positionDifference.x, positionDifference.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rotationZ - 90;
+        transform.rotation = Quaternion.Euler(0, 0, rotationZ * -1);
     }
 }

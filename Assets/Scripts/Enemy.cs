@@ -18,9 +18,9 @@ public class Enemy : MonoBehaviour
     public bool playerBullet = true; //Is the bullet used by player or enemy 
 
     // Tags and Names 
-    private string boundsTag = "Bounds";
-    private string bulletTag = "Bullet";
-    private string gameControllerComponent = "GameController";
+    private const string boundsTag = "Bounds";
+    private const string bulletTag = "Bullet";
+    private const string gameControllerComponent = "GameController";
 
     // Component 
     private GameController _gameController;
