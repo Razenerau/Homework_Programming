@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,6 +593,8 @@ GameObject:
   - component: {fileID: 371426097}
   - component: {fileID: 371426098}
   - component: {fileID: 371426100}
+  - component: {fileID: 371426101}
+  - component: {fileID: 371426102}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -662,10 +663,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.0163759, y: 0.36952788}
-      - {x: -0.2766432, y: -0.23586065}
-      - {x: 0.0064409375, y: -0.39143163}
-      - {x: 0.2632687, y: -0.21501166}
+    - - {x: 0.0058042966, y: 0.2814294}
+      - {x: -0.19911654, y: -0.23938459}
+      - {x: -0.0006069392, y: -0.3456204}
+      - {x: 0.21040937, y: -0.23263136}
   m_UseDelaunayMesh: 0
 --- !u!50 &371426100
 Rigidbody2D:
@@ -694,6 +695,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &371426101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371426096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81680580fd70ea344880e5b85ad78b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+--- !u!114 &371426102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371426096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92704668ca696604b9c4c4194b7e65f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &396652744
 GameObject:
   m_ObjectHideFlags: 0
