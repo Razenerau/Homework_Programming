@@ -23,6 +23,7 @@ public class PlayerDie : MonoBehaviour
         }
         else // If player's health reaches 0
         {
+            _playerHealth.decreaseHealth(1);
             deathPanel.SetActive(true);
             gameObject.SetActive(false);
         }

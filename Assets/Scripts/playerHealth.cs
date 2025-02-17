@@ -4,9 +4,31 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int _health = 5;
-    
-    public void decreaseHealth(int damage) { _health -= damage; }
+    public LivesCounter livesCounter;
 
-    public int getHealth() { return _health; }
+    private int _health = 5;
+    private int _maxHealth = 5;
+
+    public int health
+    {
+        get => _health;
+        private set
+        {
+            _health = Mathf.Clamp(value, 0, _maxHealth);
+        }
+    }
+
+    public void decreaseHealth(int damage)
+    {
+        health -= damage;
+        livesCounter.updateLivesCounter();
+    }
+
+    public void increaseLife(int num)
+    {
+        health += num;
+        livesCounter.updateLivesCounter();
+    }
+
+    public int getHealth() { return health; }
 }
