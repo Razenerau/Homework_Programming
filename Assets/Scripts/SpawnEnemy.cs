@@ -10,6 +10,9 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject preFab;
     private int index = 0;
 
+    // Player Components
+    private PlayerShoot _playerShoot;
+
 
     //Bullet Spawning Timers 
     public float Timer = 30f;  //How long should it take till player can next bullet 
@@ -42,6 +45,7 @@ public class SpawnEnemy : MonoBehaviour
         //Randomizes the postion 
         Vector3 newPosition = GetOrientation();
         var enemy = Instantiate(preFab, newPosition, Quaternion.identity);
+
         //Attach to trash 
         enemy.transform.SetParent(enemyTrash);
    
@@ -115,5 +119,17 @@ public class SpawnEnemy : MonoBehaviour
                 }
         }
         return newSpeed;
+    }
+    public void SetPlayerShootSpawnEnemy(PlayerShoot playerShoot)
+    {
+        if (playerShoot != null)
+        {
+            _playerShoot = playerShoot;
+            Debug.Log("PlayerShoot reference set for: " + gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("playerShoot not found");
+        }
     }
 }

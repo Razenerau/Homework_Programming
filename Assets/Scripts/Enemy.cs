@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
             //Updates the Score 
             _gameController.UpdateScore();
             //Destorys the bullet
-            _playerShoot.returnBulletToPool(collision.gameObject);
+            //_playerShoot.returnBulletToPool(collision.gameObject);
             //Destorys the enemy 
             Destroy(gameObject);
         }
@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
         if (playerShoot != null)
         {
             _playerShoot = playerShoot;
-            Debug.Log("PlayerShoot reference set for enemy: " + gameObject.name);
+            Debug.Log("PlayerShoot reference set for: " + gameObject.name);
         }
         else
         {

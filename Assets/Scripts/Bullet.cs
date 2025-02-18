@@ -74,5 +74,12 @@ public class Bullet : MonoBehaviour
     public void SetPlayerShoot(PlayerShoot playerShoot)
     {
         _playerShoot = playerShoot;
-    } 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // If it touches 
+        Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name);
+        _playerShoot.returnBulletToPool(gameObject);
+    }
 }

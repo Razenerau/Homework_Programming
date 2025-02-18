@@ -6,10 +6,12 @@ public class PlayerShoot : MonoBehaviour
 {
     public GameObject preFab;
     public GameObject enemyPreFab;
+    public GameObject Spawner;
     public Transform bulletTrash;
     public Transform bulletSpawn;
 
     private Enemy _enemy;
+    private SpawnEnemy _spawnEnemy;
 
     [SerializeField] private float _shootCooldown = 0.5f;            // Interval between bullets
     private float _currentCooldown = 0.5f;                           // Time before next bullet can be shot
@@ -20,8 +22,12 @@ public class PlayerShoot : MonoBehaviour
     {
         _currentCooldown = _shootCooldown;
         InitializePool(10); // Initialize the pool with 10 bullets
+
         _enemy = enemyPreFab.GetComponent<Enemy>();
         _enemy.SetPlayerShootEnemy(this);
+
+        _spawnEnemy = Spawner.GetComponent<SpawnEnemy>();
+        _spawnEnemy.SetPlayerShootSpawnEnemy(this);
     }
 
     private void Update()
