@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
 
     // Component 
     private GameController _gameController;
+    private PlayerShoot _playerShoot;
 
     //==================================================================================================================
     // Base Method  
@@ -57,10 +58,12 @@ public class Enemy : MonoBehaviour
         // If it touches the bullet, it updates 
         if (collision.gameObject.tag == bulletTag)
         {
+            Debug.Log("Bullet Collides with Enemy\nBullet's name: " + collision.gameObject.name);
+
             //Updates the Score 
             _gameController.UpdateScore();
             //Destorys the bullet
-            Destroy(collision.gameObject);
+            _playerShoot.returnBulletToPool(collision.gameObject);
             //Destorys the enemy 
             Destroy(gameObject);
         }
@@ -68,6 +71,18 @@ public class Enemy : MonoBehaviour
         else if(collision.gameObject.tag == boundsTag)
         {
             Destroy(gameObject);
+        }
+    }
+    public void SetPlayerShootEnemy(PlayerShoot playerShoot)
+    { 
+        if (playerShoot != null)
+        {
+            _playerShoot = playerShoot;
+            Debug.Log("PlayerShoot reference set for enemy: " + gameObject.name);
+        }
+        else
+        {
+            Debug.LogWarning("playerShoot not found");
         }
     }
 }

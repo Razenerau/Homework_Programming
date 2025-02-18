@@ -14,11 +14,13 @@ public class Bullet : MonoBehaviour
 
     //Movement Controls 
     private Rigidbody2D _rigidbody2D; //The rigidbody that will move the bullet 
-    public float speed = 2;           //Speed at which the bullet moves 
+    public float speed = 4;           //Speed at which the bullet moves 
 
     //Flag and Timer 
     public float deathTime = 1.5f;   //How long before the bullet dies 
     public bool playerBullet = true; //Is the bullet used by player or enemy 
+
+    [SerializeField] private PlayerShoot _playerShoot;
 
     //==================================================================================================================
     // Base Method  
@@ -30,6 +32,11 @@ public class Bullet : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         PlayerBullet();
         StartCoroutine(Death());
+    }
+
+    private void Update()
+    {
+        PlayerBullet();
     }
 
     //==================================================================================================================
@@ -60,6 +67,12 @@ public class Bullet : MonoBehaviour
     private IEnumerator Death()
     {
         yield return new WaitForSeconds(deathTime);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        _playerShoot.returnBulletToPool(gameObject);
     }
+
+    public void SetPlayerShoot(PlayerShoot playerShoot)
+    {
+        _playerShoot = playerShoot;
+    } 
 }
