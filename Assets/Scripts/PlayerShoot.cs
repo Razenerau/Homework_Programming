@@ -9,8 +9,8 @@ public class PlayerShoot : MonoBehaviour
 
     private bool _canShoot = true;
 
-    private const float Timer = 0.5f;
-    private float _currentTime = 0.5f;
+    private const float Timer = 0.5f; // Interval between bullets
+    private float _currentTime = 0.5f; // Time before next bullet can be shot
 
     private void Update()
     {
