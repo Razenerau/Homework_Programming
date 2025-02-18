@@ -763,6 +763,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preFab: {fileID: 7854287240566403132, guid: 1ea6bd9350d50894899d6d0e9622592e, type: 3}
+  enemyPreFab: {fileID: 8609101725108192800, guid: 0160e3823e62ee04380588c48d8e39e8, type: 3}
+  Spawner: {fileID: 1425513144}
   bulletTrash: {fileID: 1629114352}
   bulletSpawn: {fileID: 1442179157}
   _shootCooldown: 0.5

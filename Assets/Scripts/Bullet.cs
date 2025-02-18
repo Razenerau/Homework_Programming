@@ -34,11 +34,6 @@ public class Bullet : MonoBehaviour
         StartCoroutine(Death());
     }
 
-    private void Update()
-    {
-        PlayerBullet();
-    }
-
     //==================================================================================================================
     // Bullet Set Up  
     //==================================================================================================================
@@ -74,6 +69,8 @@ public class Bullet : MonoBehaviour
     public void SetPlayerShoot(PlayerShoot playerShoot)
     {
         _playerShoot = playerShoot;
+        PlayerBullet();
+        StartCoroutine(Death());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
