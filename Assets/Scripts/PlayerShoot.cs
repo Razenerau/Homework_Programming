@@ -9,30 +9,47 @@ public class PlayerShoot : MonoBehaviour
 
     private bool _canShoot = true;
 
-    private const float Timer = 0.5f; // Interval between bullets
-    private float _currentTime = 0.5f; // Time before next bullet can be shot
+    private float _shootCooldown = 0.5f;      // Interval between bullets
+    private float _currentCooldown = 0.5f;    // Time before next bullet can be shot
+
+    public float accessCooldown
+    {
+        get { return _shootCooldown; }
+        set { _shootCooldown = value; }
+    }
 
     private void Update()
     {
-        if (!_canShoot)
-        {
-            _currentTime -= Time.deltaTime;
+        // Time interval between shooting bullets
+        handleBulletCoolDown();
 
-            if(_currentTime < 0)
-            {
-                _canShoot = true;
-                _currentTime = Timer;
-            }
-        }
-
+        // Shooting 
         if (Input.GetKeyDown(KeyCode.Mouse0) && _canShoot == true)
         {
-            GameObject bullet = Instantiate(preFab, bulletSpawn.position, Quaternion.identity);
-
-            bullet.transform.SetParent(bulletTrash);
-
-            _canShoot = false;
+            shoot();
         }
+    }
 
+    private void handleBulletCoolDown()
+    {
+        if (!_canShoot)
+        {
+            _currentCooldown -= Time.deltaTime;
+
+            if (_currentCooldown < 0)
+            {
+                _canShoot = true;
+                _currentCooldown = _shootCooldown;
+            }
+        }
+    }
+
+    private void shoot()
+    {
+        GameObject bullet = Instantiate(preFab, bulletSpawn.position, Quaternion.identity);
+
+        bullet.transform.SetParent(bulletTrash);
+
+        _canShoot = false;
     }
 }
