@@ -14,10 +14,10 @@ public class Bullet : MonoBehaviour
 
     //Movement Controls 
     private Rigidbody2D _rigidbody2D; //The rigidbody that will move the bullet 
-    public float speed = 4;           //Speed at which the bullet moves 
+    public float speed = 2.5f;           //Speed at which the bullet moves 
 
     //Flag and Timer 
-    public float deathTime = 1.5f;   //How long before the bullet dies 
+    public float deathTime = 1.2f;   //How long before the bullet dies 
     public bool playerBullet = true; //Is the bullet used by player or enemy 
 
     [SerializeField] private PlayerShoot _playerShoot;
@@ -26,12 +26,12 @@ public class Bullet : MonoBehaviour
     // Base Method  
     //==================================================================================================================
 
-    //Checks who is shooting the bullet and set up the bullet settings 
+    // Unnecessary for player bullets \/ \/ \/
     private void Start()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        PlayerBullet();
-        StartCoroutine(Death());
+        //_rigidbody2D = GetComponent<Rigidbody2D>();
+        //PlayerBullet();
+        //StartCoroutine(Death());
     }
 
     //==================================================================================================================
@@ -41,6 +41,7 @@ public class Bullet : MonoBehaviour
     //If the player is shooting connect the camera and mousePos then set up bullet rotation 
     private void PlayerBullet()
     {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _camera = GameObject.Find("Game_Camera").GetComponent<Camera>();
         _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         RotationUpdate(_mousePos);
@@ -50,6 +51,8 @@ public class Bullet : MonoBehaviour
     //And set it 
     private void RotationUpdate(Vector3 pos1)
     {
+        if (_rigidbody2D == null) Debug.LogWarning("NO rigidbody found in " + gameObject.name);
+        if (_rigidbody2D != null) Debug.LogWarning("Rigidbody found in " + gameObject.name);
         var pos2 = transform.position;
         var dir = pos1 - pos2;
         var rotation = pos2 - pos1;
