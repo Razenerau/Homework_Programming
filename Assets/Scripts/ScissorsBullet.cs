@@ -20,7 +20,7 @@ public class ScissorsBullet : MonoBehaviour
     public float deathTime = 1.2f;   //How long before the bullet dies 
     public bool playerBullet = true; //Is the bullet used by player or enemy 
 
-    private const string bulletType = "scissors";
+    private const string _bulletType = "scissors";
 
     [SerializeField] private PlayerShoot _playerShoot;
 
@@ -66,7 +66,7 @@ public class ScissorsBullet : MonoBehaviour
     {
         yield return new WaitForSeconds(deathTime);
         gameObject.SetActive(false);
-        _playerShoot.returnBulletToPool(gameObject, bulletType);
+        _playerShoot.returnBulletToPool(gameObject, _bulletType);
     }
 
     public void SetPlayerShoot(PlayerShoot playerShoot)
@@ -80,6 +80,6 @@ public class ScissorsBullet : MonoBehaviour
     {
         // If it touches 
         //Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name);
-        _playerShoot.returnBulletToPool(gameObject);
+        _playerShoot.returnBulletToPool(gameObject, _bulletType);
     }
 }

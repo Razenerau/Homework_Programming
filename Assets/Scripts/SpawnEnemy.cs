@@ -120,7 +120,7 @@ public class SpawnEnemy : MonoBehaviour
         }
         return newSpeed;
     }
-    public void SetPlayerShootSpawnEnemy(PlayerShoot playerShoot)
+    public void SetPlayerShoot(PlayerShoot playerShoot)
     {
         if (playerShoot != null)
         {

@@ -10,6 +10,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject Spawner;
     public Transform bulletTrash;
     public Transform bulletSpawn;
+    public Transform scissorsBulletTrash;
 
     private Enemy _enemy;
     private SpawnEnemy _spawnEnemy;
@@ -22,17 +23,19 @@ public class PlayerShoot : MonoBehaviour
     private float _currentCooldown = 0.5f;                           // Time before next bullet can be shot
     private bool _canShoot = true;
 
-    private Queue<GameObject> _bulletPool = new Queue<GameObject>(); // Stores all bullets available for shooting
+    private Queue<GameObject> _bulletPool = new Queue<GameObject>();            // Stores all common bullets available for shooting
+    private Queue<GameObject> _scissorsBulletPool = new Queue<GameObject>();    // Stores all scissors bullets available for shooting
     private void Start()
     {
         _currentCooldown = _shootCooldown;
         InitializePool(10, _commonBulletType); // Initialize the pool with 10 bullets
+        InitializePool(10, _scissorsBulletType);
 
         _enemy = enemyPreFab.GetComponent<Enemy>();
-        _enemy.SetPlayerShootEnemy(this);
+        _enemy.SetPlayerShoot(this);
 
         _spawnEnemy = Spawner.GetComponent<SpawnEnemy>();
-        _spawnEnemy.SetPlayerShootSpawnEnemy(this);
+        _spawnEnemy.SetPlayerShoot(this);
     }
 
     private void Update()
@@ -63,10 +66,10 @@ public class PlayerShoot : MonoBehaviour
             case _scissorsBulletType :
                 for (int i = 0; i < poolSize; i++)
                 {
-                    GameObject bullet = Instantiate(preFab); // Creates a new bullet
-                    bullet.transform.SetParent(bulletTrash);
-                    bullet.SetActive(false);
-                    _bulletPool.Enqueue(bullet); // Adds bullet to the pool
+                    GameObject ScissorsBullet = Instantiate(scissorsPreFab); // Creates a new bullet
+                    ScissorsBullet.transform.SetParent(scissorsBulletTrash);
+                    ScissorsBullet.SetActive(false);
+                    _scissorsBulletPool.Enqueue(ScissorsBullet); // Adds bullet to the pool
                 }
             break;
         }
@@ -109,18 +112,6 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    public void returnBulletToPool(GameObject bullet)
-    {
-        Debug.Log("Returning bullet to pool: " + bullet.name);
-
-        Rigidbody2D rigidbody2D = bullet.GetComponent<Rigidbody2D>();
-        if(rigidbody2D != null) rigidbody2D.velocity = Vector2.zero;
-
-        bullet.SetActive(false);
-        _bulletPool.Enqueue(bullet);
-
-        Debug.Log("Bullet pool size: " + _bulletPool.Count);
-    }
     public void returnBulletToPool(GameObject bullet, string bulletType)
     {
         Debug.Log("Returning bullet to pool: " + bullet.name);
@@ -129,9 +120,18 @@ public class PlayerShoot : MonoBehaviour
         if (rigidbody2D != null) rigidbody2D.velocity = Vector2.zero;
 
         bullet.SetActive(false);
-        _bulletPool.Enqueue(bullet);
 
-        Debug.Log("Bullet pool size: " + _bulletPool.Count);
+        switch (bulletType)
+        {
+            case _commonBulletType :
+                    _bulletPool.Enqueue(bullet);
+                Debug.Log("Bullet pool size: " + _bulletPool.Count);
+                break;
+            case _scissorsBulletType :
+                _scissorsBulletPool.Enqueue(bullet);
+                Debug.Log("Scissors bullet pool size: " + _scissorsBulletPool.Count);
+                break;
+        }
     }
     public float accessCooldown
     {

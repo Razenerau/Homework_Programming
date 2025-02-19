@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void SetPlayerShootEnemy(PlayerShoot playerShoot)
+    public void SetPlayerShoot(PlayerShoot playerShoot)
     { 
         if (playerShoot != null)
         {
