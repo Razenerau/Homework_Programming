@@ -23,8 +23,8 @@ public class PlayerShoot : MonoBehaviour
     private float _currentCommonBulletsCooldown = 0.5f;                           // Time before next bullet can be shot
     private bool _canShootCommonBullets = true;
 
-    [SerializeField] private float _shootScissorBulletsCooldown = 1f;            // Interval between bullets
-    private float _currentScissorBulletsCooldown = 1f;                           // Time before next bullet can be shot
+    [SerializeField] private float _shootScissorsBulletsCooldown = 2.5f;            // Interval between bullets
+    private float _currentScissorsBulletsCooldown = 2.5f;                           // Time before next bullet can be shot
     private bool _canShootScissorsBullets = true;
 
     private Queue<GameObject> _bulletPool = new Queue<GameObject>();            // Stores all common bullets available for shooting
@@ -32,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
-        _currentCommonBulletsCooldown = _shootScissorBulletsCooldown;
+        _currentCommonBulletsCooldown = _shootScissorsBulletsCooldown;
 
         InitializePool(10, _commonBulletType); // Initialize the pool with 10 bullets
         InitializePool(10, _scissorsBulletType);
@@ -98,6 +98,17 @@ public class PlayerShoot : MonoBehaviour
                 _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
             }
         }
+
+        if (!_canShootScissorsBullets)
+        {
+            _currentScissorsBulletsCooldown -= Time.deltaTime;
+
+            if (_currentScissorsBulletsCooldown < 0)
+            {
+                _canShootScissorsBullets = true;
+                _currentScissorsBulletsCooldown = _shootScissorsBulletsCooldown;
+            }
+        }
     }
 
     private void shoot(string bulletType)
@@ -135,7 +146,7 @@ public class PlayerShoot : MonoBehaviour
                     ScissorsBullet scissorsBulletScript = scissorsBullet.GetComponent<ScissorsBullet>();
                     if (scissorsBulletScript != null) scissorsBulletScript.SetPlayerShoot(this); // Pass the reference
 
-                    //_canShootScissorsBullets = false;
+                    _canShootScissorsBullets = false;
                 }
                 else
                 {
