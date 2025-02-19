@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 //Controls the bullet that can hit player on Enemy 
-public class Bullet : MonoBehaviour
+public class ScissorsBullet : MonoBehaviour
 {
     //==================================================================================================================
     // Variables 
@@ -19,6 +19,8 @@ public class Bullet : MonoBehaviour
     //Flag and Timer 
     public float deathTime = 1.2f;   //How long before the bullet dies 
     public bool playerBullet = true; //Is the bullet used by player or enemy 
+
+    private const string bulletType = "scissors";
 
     [SerializeField] private PlayerShoot _playerShoot;
 
@@ -64,7 +66,7 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(deathTime);
         gameObject.SetActive(false);
-        _playerShoot.returnBulletToPool(gameObject);
+        _playerShoot.returnBulletToPool(gameObject, bulletType);
     }
 
     public void SetPlayerShoot(PlayerShoot playerShoot)

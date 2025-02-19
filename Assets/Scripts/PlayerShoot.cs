@@ -6,12 +6,17 @@ public class PlayerShoot : MonoBehaviour
 {
     public GameObject preFab;
     public GameObject enemyPreFab;
+    public GameObject scissorsPreFab;
     public GameObject Spawner;
     public Transform bulletTrash;
     public Transform bulletSpawn;
 
     private Enemy _enemy;
     private SpawnEnemy _spawnEnemy;
+
+    // Bullet Types
+    private const string _commonBulletType = "common";
+    private const string _scissorsBulletType = "scissors";
 
     [SerializeField] private float _shootCooldown = 0.5f;            // Interval between bullets
     private float _currentCooldown = 0.5f;                           // Time before next bullet can be shot
@@ -21,7 +26,7 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         _currentCooldown = _shootCooldown;
-        InitializePool(10); // Initialize the pool with 10 bullets
+        InitializePool(10, _commonBulletType); // Initialize the pool with 10 bullets
 
         _enemy = enemyPreFab.GetComponent<Enemy>();
         _enemy.SetPlayerShootEnemy(this);
@@ -42,15 +47,30 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private void InitializePool(int poolSize)
+    private void InitializePool(int poolSize, string bulletType)
     {
-        for(int i = 0;  i < poolSize; i++)
+        switch (bulletType)
         {
-            GameObject bullet = Instantiate(preFab); // Creates a new bullet
-            bullet.transform.SetParent(bulletTrash);
-            bullet.SetActive(false);
-            _bulletPool.Enqueue(bullet); // Adds bullet to the pool
+            case _commonBulletType :
+                for (int i = 0; i < poolSize; i++)
+                {
+                    GameObject bullet = Instantiate(preFab); // Creates a new bullet
+                    bullet.transform.SetParent(bulletTrash);
+                    bullet.SetActive(false);
+                    _bulletPool.Enqueue(bullet); // Adds bullet to the pool
+                }
+            break;
+            case _scissorsBulletType :
+                for (int i = 0; i < poolSize; i++)
+                {
+                    GameObject bullet = Instantiate(preFab); // Creates a new bullet
+                    bullet.transform.SetParent(bulletTrash);
+                    bullet.SetActive(false);
+                    _bulletPool.Enqueue(bullet); // Adds bullet to the pool
+                }
+            break;
         }
+        
     }
 
     private void handleBulletCoolDown()
@@ -95,6 +115,18 @@ public class PlayerShoot : MonoBehaviour
 
         Rigidbody2D rigidbody2D = bullet.GetComponent<Rigidbody2D>();
         if(rigidbody2D != null) rigidbody2D.velocity = Vector2.zero;
+
+        bullet.SetActive(false);
+        _bulletPool.Enqueue(bullet);
+
+        Debug.Log("Bullet pool size: " + _bulletPool.Count);
+    }
+    public void returnBulletToPool(GameObject bullet, string bulletType)
+    {
+        Debug.Log("Returning bullet to pool: " + bullet.name);
+
+        Rigidbody2D rigidbody2D = bullet.GetComponent<Rigidbody2D>();
+        if (rigidbody2D != null) rigidbody2D.velocity = Vector2.zero;
 
         bullet.SetActive(false);
         _bulletPool.Enqueue(bullet);
