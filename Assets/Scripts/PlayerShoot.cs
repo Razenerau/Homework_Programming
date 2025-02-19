@@ -19,15 +19,21 @@ public class PlayerShoot : MonoBehaviour
     private const string _commonBulletType = "common";
     private const string _scissorsBulletType = "scissors";
 
-    [SerializeField] private float _shootCooldown = 0.5f;            // Interval between bullets
-    private float _currentCooldown = 0.5f;                           // Time before next bullet can be shot
-    private bool _canShoot = true;
+    [SerializeField] private float _shootCommonBulletsCooldown = 0.5f;            // Interval between bullets
+    private float _currentCommonBulletsCooldown = 0.5f;                           // Time before next bullet can be shot
+    private bool _canShootCommonBullets = true;
+
+    [SerializeField] private float _shootScissorBulletsCooldown = 1f;            // Interval between bullets
+    private float _currentScissorBulletsCooldown = 1f;                           // Time before next bullet can be shot
+    private bool _canShootScissorsBullets = true;
 
     private Queue<GameObject> _bulletPool = new Queue<GameObject>();            // Stores all common bullets available for shooting
     private Queue<GameObject> _scissorsBulletPool = new Queue<GameObject>();    // Stores all scissors bullets available for shooting
     private void Start()
     {
-        _currentCooldown = _shootCooldown;
+        _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
+        _currentCommonBulletsCooldown = _shootScissorBulletsCooldown;
+
         InitializePool(10, _commonBulletType); // Initialize the pool with 10 bullets
         InitializePool(10, _scissorsBulletType);
 
@@ -44,9 +50,13 @@ public class PlayerShoot : MonoBehaviour
         handleBulletCoolDown();
 
         // Shooting 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _canShoot == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _canShootCommonBullets == true)
         {
-            shoot();
+            shoot(_commonBulletType);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1) && _canShootScissorsBullets == true)
+        {
+            shoot(_scissorsBulletType);
         }
     }
 
@@ -78,37 +88,60 @@ public class PlayerShoot : MonoBehaviour
 
     private void handleBulletCoolDown()
     {
-        if (!_canShoot)
+        if (!_canShootCommonBullets)
         {
-            _currentCooldown -= Time.deltaTime;
+            _currentCommonBulletsCooldown -= Time.deltaTime;
 
-            if (_currentCooldown < 0)
+            if (_currentCommonBulletsCooldown < 0)
             {
-                _canShoot = true;
-                _currentCooldown = _shootCooldown;
+                _canShootCommonBullets = true;
+                _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
             }
         }
     }
 
-    private void shoot()
+    private void shoot(string bulletType)
     {
-        //GameObject bullet = Instantiate(preFab, bulletSpawn.position, Quaternion.identity);
-        if(_bulletPool.Count > 0)
+        switch (bulletType)
         {
-            GameObject bullet = _bulletPool.Dequeue();
-            bullet.transform.position = bulletSpawn.position;
-            bullet.SetActive(true);
-            bullet.transform.SetParent(bulletTrash);
+            case _commonBulletType:
+                if (_bulletPool.Count > 0)
+                {
+                    GameObject bullet = _bulletPool.Dequeue();
+                    bullet.transform.position = bulletSpawn.position;
+                    bullet.SetActive(true);
+                    bullet.transform.SetParent(bulletTrash);
 
-            // Pass the PlayerShoot reference to the bullet
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-            if (bulletScript != null) bulletScript.SetPlayerShoot(this); // Pass the reference
+                    // Pass the PlayerShoot reference to the bullet
+                    Bullet bulletScript = bullet.GetComponent<Bullet>();
+                    if (bulletScript != null) bulletScript.SetPlayerShoot(this); // Pass the reference
 
-            _canShoot = false;
-        }
-        else
-        {
-            Debug.Log("Bullet Pool is Empty!");
+                    _canShootCommonBullets = false;
+                }
+                else
+                {
+                    Debug.Log("Bullet Pool is Empty!");
+                }
+                break;
+            case _scissorsBulletType :
+                if (_scissorsBulletPool.Count > 0)
+                {
+                    GameObject scissorsBullet = _scissorsBulletPool.Dequeue();
+                    scissorsBullet.transform.position = bulletSpawn.position;
+                    scissorsBullet.SetActive(true);
+                    scissorsBullet.transform.SetParent(scissorsBulletTrash);
+
+                    // Pass the PlayerShoot reference to the bullet
+                    ScissorsBullet scissorsBulletScript = scissorsBullet.GetComponent<ScissorsBullet>();
+                    if (scissorsBulletScript != null) scissorsBulletScript.SetPlayerShoot(this); // Pass the reference
+
+                    //_canShootScissorsBullets = false;
+                }
+                else
+                {
+                    Debug.Log("Scissors Bullet Pool is Empty!");
+                }
+                break;
         }
     }
 
@@ -135,7 +168,7 @@ public class PlayerShoot : MonoBehaviour
     }
     public float accessCooldown
     {
-        get { return _shootCooldown; }
-        set { _shootCooldown = value; }
+        get { return _shootCommonBulletsCooldown; }
+        set { _shootCommonBulletsCooldown = value; }
     }
 }

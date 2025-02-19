@@ -18,9 +18,9 @@ public class Enemy : MonoBehaviour
     public bool playerBullet = true; //Is the bullet used by player or enemy 
 
     // Tags and Names 
-    private const string boundsTag = "Bounds";
-    private const string bulletTag = "Bullet";
-    private const string gameControllerComponent = "GameController";
+    private const string _boundsTag = "Bounds";
+    private const string _bulletTag = "Player Bullet";
+    private const string _gameControllerComponent = "GameController";
 
     // Component 
     private GameController _gameController;
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     //Checks who is shooting the bullet and set up the bullet settings 
     private void Start()
     {
-        _gameController = GameObject.Find(gameControllerComponent).GetComponent<GameController>();
+        _gameController = GameObject.Find(_gameControllerComponent).GetComponent<GameController>();
         StartCoroutine(Death());
     }
 
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // If it touches the bullet, it updates 
-        if (collision.gameObject.tag == bulletTag)
+        if (collision.gameObject.tag == _bulletTag)
         {
             Debug.Log("Bullet Collides with Enemy\nBullet's name: " + collision.gameObject.name);
 
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
         // If the enemy touches a bound it gets destored 
-        else if(collision.gameObject.tag == boundsTag)
+        else if(collision.gameObject.tag == _boundsTag)
         {
             Destroy(gameObject);
         }
