@@ -7,6 +7,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject preFab;
     public GameObject enemyPreFab;
     public GameObject scissorsPreFab;
+    public GameObject paperPreFab;
     public GameObject Spawner;
     public Transform bulletTrash;
     public Transform bulletSpawn;
