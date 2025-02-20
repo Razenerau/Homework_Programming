@@ -24,13 +24,18 @@ public class PlayerShoot : MonoBehaviour
     private const string _scissorsBulletType = "scissors";
     private const string _paperBulletType = "paper";
 
-    [SerializeField] private float _shootCommonBulletsCooldown = 0.5f;            // Interval between bullets
-    private float _currentCommonBulletsCooldown = 0.5f;                           // Time before next bullet can be shot
+    // Cooldowns
+    [SerializeField] private float _shootCommonBulletsCooldown = 0.4f;            // Interval between bullets
+    private float _currentCommonBulletsCooldown = 0.4f;                           // Time before next bullet can be shot
     private bool _canShootCommonBullets = true;
 
     [SerializeField] private float _shootScissorsBulletsCooldown = 2.5f;            // Interval between bullets
     private float _currentScissorsBulletsCooldown = 2.5f;                           // Time before next bullet can be shot
     private bool _canShootScissorsBullets = true;
+
+    [SerializeField] private float _shootPaperBulletsCooldown = 1.5f;            // Interval between bullets
+    private float _currentPaperBulletsCooldown = 1.5f;                           // Time before next bullet can be shot
+    private bool _canShootPaperBullets = true;
 
     private Queue<GameObject> _bulletPool = new Queue<GameObject>();            // Stores all common bullets available for shooting
     private Queue<GameObject> _scissorsBulletPool = new Queue<GameObject>();    // Stores all scissors bullets available for shooting
@@ -40,9 +45,9 @@ public class PlayerShoot : MonoBehaviour
         _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
         _currentCommonBulletsCooldown = _shootScissorsBulletsCooldown;
 
-        InitializePool(10, _commonBulletType); // Initialize the pool with 10 bullets
+        InitializePool(20, _commonBulletType); // Initialize the pool with 10 bullets
         InitializePool(10, _scissorsBulletType);
-        InitializePool(1, _paperBulletType);
+        InitializePool(5, _paperBulletType);
 
         _enemy = enemyPreFab.GetComponent<Enemy>();
         _enemy.SetPlayerShoot(this);
@@ -57,7 +62,7 @@ public class PlayerShoot : MonoBehaviour
         handleBulletCoolDown();
 
         // Shooting 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _canShootCommonBullets == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0)) // && _canShootCommonBullets == true)
         {
             shoot(_commonBulletType);
         }
@@ -65,7 +70,7 @@ public class PlayerShoot : MonoBehaviour
         {
             shoot(_scissorsBulletType);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _canShootPaperBullets == true)
         {
             shoot(_paperBulletType);
         }
@@ -129,6 +134,17 @@ public class PlayerShoot : MonoBehaviour
                 _currentScissorsBulletsCooldown = _shootScissorsBulletsCooldown;
             }
         }
+
+        if (!_canShootPaperBullets)
+        {
+            _currentPaperBulletsCooldown -= Time.deltaTime;
+
+            if (_currentPaperBulletsCooldown < 0)
+            {
+                _canShootPaperBullets = true;
+                _currentPaperBulletsCooldown = _shootPaperBulletsCooldown;
+            }
+        }
     }
 
     private void shoot(string bulletType)
@@ -185,7 +201,7 @@ public class PlayerShoot : MonoBehaviour
                     PaperBullet paperBulletScript = paperBullet.GetComponent<PaperBullet>();
                     if (paperBulletScript != null) paperBulletScript.SetPlayerShoot(this); // Pass the reference
 
-                    //_canShootpaperBullets = false; // needed if there's a cooldown
+                    _canShootPaperBullets = false; // needed if there's a cooldown
                 }
                 else
                 {
