@@ -8,9 +8,12 @@ public class PlayerShoot : MonoBehaviour
     public GameObject enemyPreFab;
     public GameObject scissorsPreFab;
     public GameObject paperPreFab;
+
     public GameObject Spawner;
-    public Transform bulletTrash;
     public Transform bulletSpawn;
+
+    public Transform bulletTrash;
+    public Transform paperBulletTrash;
     public Transform scissorsBulletTrash;
 
     private Enemy _enemy;
@@ -19,6 +22,7 @@ public class PlayerShoot : MonoBehaviour
     // Bullet Types
     private const string _commonBulletType = "common";
     private const string _scissorsBulletType = "scissors";
+    private const string _paperBulletType = "paper";
 
     [SerializeField] private float _shootCommonBulletsCooldown = 0.5f;            // Interval between bullets
     private float _currentCommonBulletsCooldown = 0.5f;                           // Time before next bullet can be shot
@@ -30,6 +34,7 @@ public class PlayerShoot : MonoBehaviour
 
     private Queue<GameObject> _bulletPool = new Queue<GameObject>();            // Stores all common bullets available for shooting
     private Queue<GameObject> _scissorsBulletPool = new Queue<GameObject>();    // Stores all scissors bullets available for shooting
+    private Queue<GameObject> _paperBulletPool = new Queue<GameObject>();    // Stores all paper bullets available for shooting
     private void Start()
     {
         _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
@@ -37,6 +42,7 @@ public class PlayerShoot : MonoBehaviour
 
         InitializePool(10, _commonBulletType); // Initialize the pool with 10 bullets
         InitializePool(10, _scissorsBulletType);
+        InitializePool(1, _paperBulletType);
 
         _enemy = enemyPreFab.GetComponent<Enemy>();
         _enemy.SetPlayerShoot(this);
@@ -58,6 +64,10 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && _canShootScissorsBullets == true)
         {
             shoot(_scissorsBulletType);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            shoot(_paperBulletType);
         }
     }
 
@@ -83,6 +93,15 @@ public class PlayerShoot : MonoBehaviour
                     _scissorsBulletPool.Enqueue(ScissorsBullet); // Adds bullet to the pool
                 }
             break;
+            case _paperBulletType:
+                for (int i = 0; i < poolSize; i++)
+                {
+                    GameObject paperBullet = Instantiate(paperPreFab); // Creates a new bullet
+                    paperBullet.transform.SetParent(paperBulletTrash);
+                    paperBullet.SetActive(false);
+                    _paperBulletPool.Enqueue(paperBullet); // Adds bullet to the pool
+                }
+                break;
         }
         
     }
@@ -154,6 +173,25 @@ public class PlayerShoot : MonoBehaviour
                     Debug.Log("Scissors Bullet Pool is Empty!");
                 }
                 break;
+            case _paperBulletType :
+                if (_paperBulletPool.Count > 0)
+                {
+                    GameObject paperBullet = _paperBulletPool.Dequeue();
+                    paperBullet.transform.position = bulletSpawn.position;
+                    paperBullet.SetActive(true);
+                    paperBullet.transform.SetParent(paperBulletTrash);
+
+                    // Pass the PlayerShoot reference to the bullet
+                    PaperBullet paperBulletScript = paperBullet.GetComponent<PaperBullet>();
+                    if (paperBulletScript != null) paperBulletScript.SetPlayerShoot(this); // Pass the reference
+
+                    //_canShootpaperBullets = false; // needed if there's a cooldown
+                }
+                else
+                {
+                    Debug.Log("Paper Bullet Pool is Empty!");
+                }
+                break;
         }
     }
 
@@ -176,11 +214,24 @@ public class PlayerShoot : MonoBehaviour
                 _scissorsBulletPool.Enqueue(bullet);
                 Debug.Log("Scissors bullet pool size: " + _scissorsBulletPool.Count);
                 break;
+            case _paperBulletType:
+                _paperBulletPool.Enqueue(bullet);
+                Debug.Log("Paper bullet pool size: " + _paperBulletPool.Count);
+                break;
         }
     }
-    public float accessCooldown
+
+    //===========================================================================================
+    // GETTER AND SETTER
+    //===========================================================================================
+    public float accessCommonBulletCooldown
     {
         get { return _shootCommonBulletsCooldown; }
         set { _shootCommonBulletsCooldown = value; }
+    }
+    public float accessScissorsBulletCooldown
+    {
+        get { return _shootScissorsBulletsCooldown; }
+        set { _shootScissorsBulletsCooldown = value; }
     }
 }

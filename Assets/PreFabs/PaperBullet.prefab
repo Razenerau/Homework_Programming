@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5418304950022103200}
   - component: {fileID: 1547647567229047097}
   - component: {fileID: 8945729262122416538}
+  - component: {fileID: -6659385334653987419}
   m_Layer: 0
   m_Name: PaperBullet
-  m_TagString: Untagged
+  m_TagString: Player Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,6 +107,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-6659385334653987419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474233373212498085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3ba0c5177287b42a329240c9ee8315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTime: 2
+  playerBullet: 1
+  _playerShoot: {fileID: 0}
 --- !u!1 &5397644604752162774
 GameObject:
   m_ObjectHideFlags: 0

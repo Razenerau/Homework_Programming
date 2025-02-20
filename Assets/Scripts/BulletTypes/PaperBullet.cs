@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 //Controls the bullet that can hit player on Enemy 
-public class paperBullet : MonoBehaviour
+public class PaperBullet : MonoBehaviour
 {
     //==================================================================================================================
     // Variables 
@@ -14,7 +14,7 @@ public class paperBullet : MonoBehaviour
 
     //Movement Controls 
     private Rigidbody2D _rigidbody2D; //The rigidbody that will move the bullet 
-    public float speed = 0f;           //Speed at which the bullet moves 
+    //public float speed = 0f;           //Speed at which the bullet moves 
 
     //Flag and Timer 
     public float deathTime = 2f;   //How long before the bullet dies 
