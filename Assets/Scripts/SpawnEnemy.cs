@@ -7,17 +7,18 @@ public class SpawnEnemy : MonoBehaviour
     // 
     public List<Transform> transforms = new List<Transform>();
     public Transform enemyTrash;
-    public GameObject preFab;
+    public GameObject rockPreFab;
+    public GameObject paperPreFab;
+    public GameObject scissorsPreFab;
     private int index = 0;
 
     // Player Components
     private PlayerShoot _playerShoot;
 
-
     //Bullet Spawning Timers 
-    public float Timer = 30f;  //How long should it take till player can next bullet 
-    private float _currentTime = 0.5f; //Counter to allow player to shoot 
-    private bool _canSpawn = true;     //Tells us if we can shoot or not 
+    public float Timer = 30f;                //How long should it take till player can next bullet 
+    private float _currentTime = 0.5f;       //Counter to allow player to shoot 
+    private bool _canSpawn = true;           //Tells us if we can shoot or not 
 
     // Update is called once per frame
     void Update()
@@ -42,9 +43,25 @@ public class SpawnEnemy : MonoBehaviour
     private void EnemySpawn()
     {
         if(enemyTrash.childCount > 10){ return;}
-        //Randomizes the postion 
+
+        //Randomizes the postion and enemy
         Vector3 newPosition = GetOrientation();
-        var enemy = Instantiate(preFab, newPosition, Quaternion.identity);
+        int randomEnemy = Random.Range(1, 4);
+
+        GameObject enemy;
+
+        switch (randomEnemy)
+        {
+            case 1:
+                enemy = Instantiate(rockPreFab, newPosition, Quaternion.identity);
+                break;
+            case 2:
+                enemy = Instantiate(paperPreFab, newPosition, Quaternion.identity);
+                break;
+            default:
+                enemy = Instantiate(scissorsPreFab, newPosition, Quaternion.identity);
+                break;
+        }
 
         //Attach to trash 
         enemy.transform.SetParent(enemyTrash);
