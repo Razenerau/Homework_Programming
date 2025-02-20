@@ -95,10 +95,10 @@ GameObject:
   - component: {fileID: 6319728637295020515}
   - component: {fileID: 7851407795714027954}
   - component: {fileID: 1306876364857980075}
-  - component: {fileID: 2442468950450188958}
+  - component: {fileID: 4664048730041516776}
   m_Layer: 0
   m_Name: PaperEnemy
-  m_TagString: Enemy
+  m_TagString: Enemy Paper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2442468950450188958
+--- !u!114 &4664048730041516776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,11 +190,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8609101725108192800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae2f7fc514157c4da0b714e198e25d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 723ed6475afb8d14e9cc3b3e78b2e077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 1306876364857980075}
-  minSpeed: 1
-  maxSpeed: 4
+  rigidbody2D: {fileID: 0}
+  minSpeed: 3
+  maxSpeed: 5
   deathTime: 30
   playerBullet: 1
