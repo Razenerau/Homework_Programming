@@ -57,17 +57,22 @@ public class PaperEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If it touches the bullet, it updates 
-        if (collision.gameObject.tag == _playerRockBulletTag)
+        // If it touches the scissors, it updates 
+        if (collision.gameObject.tag == _playerScissorsBulletTag)
         {
-            Debug.Log("Bullet Collides with Enemy\nBullet's name: " + collision.gameObject.name);
-
             //Updates the Score 
             _gameController.UpdateScore();
-            //Destorys the bullet
-            //_playerShoot.returnBulletToPool(collision.gameObject);
+            
             //Destorys the enemy 
             Destroy(gameObject);
+        }
+        // If it touches the paper, it updates 
+        if (collision.gameObject.tag == _playerPaperBulletTag)
+        {
+            Debug.Log("PAPER Collides with PAPER\nBullet's name: " + collision.gameObject.name);
+
+            // Reverse velocity
+            rigidbody2D.velocity = -rigidbody2D.velocity;
         }
         // If the enemy touches a bound it gets destored 
         else if(collision.gameObject.tag == _boundsTag)

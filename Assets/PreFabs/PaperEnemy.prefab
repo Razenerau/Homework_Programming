@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723ed6475afb8d14e9cc3b3e78b2e077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 0}
+  rigidbody2D: {fileID: 1306876364857980075}
   minSpeed: 3
   maxSpeed: 5
   deathTime: 30

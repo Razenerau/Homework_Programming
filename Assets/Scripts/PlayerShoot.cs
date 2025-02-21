@@ -213,8 +213,6 @@ public class PlayerShoot : MonoBehaviour
 
     public void returnBulletToPool(GameObject bullet, string bulletType)
     {
-        Debug.Log("Returning bullet to pool: " + bullet.name);
-
         Rigidbody2D rigidbody2D = bullet.GetComponent<Rigidbody2D>();
         if (rigidbody2D != null) rigidbody2D.velocity = Vector2.zero;
 
@@ -224,15 +222,12 @@ public class PlayerShoot : MonoBehaviour
         {
             case _commonBulletType :
                     _bulletPool.Enqueue(bullet);
-                Debug.Log("Bullet pool size: " + _bulletPool.Count);
                 break;
             case _scissorsBulletType :
                 _scissorsBulletPool.Enqueue(bullet);
-                Debug.Log("Scissors bullet pool size: " + _scissorsBulletPool.Count);
                 break;
             case _paperBulletType:
                 _paperBulletPool.Enqueue(bullet);
-                Debug.Log("Paper bullet pool size: " + _paperBulletPool.Count);
                 break;
         }
     }

@@ -9,6 +9,12 @@ TagManager:
   - Bounds
   - Health
   - Player Bullet
+  - Enemy Rock
+  - Enemy Paper
+  - Enemy Scissors
+  - Player Rock Bullet
+  - Player Paper Bullet
+  - Player Scissors Bullet
   layers:
   - Default
   - TransparentFX

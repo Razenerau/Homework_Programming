@@ -62,8 +62,7 @@ public class ScissorsEnemy : MonoBehaviour
 
             //Updates the Score 
             _gameController.UpdateScore();
-            //Destorys the bullet
-            //_playerShoot.returnBulletToPool(collision.gameObject);
+     
             //Destorys the enemy 
             Destroy(gameObject);
         }
