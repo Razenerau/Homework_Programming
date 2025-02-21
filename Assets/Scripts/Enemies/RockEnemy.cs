@@ -19,7 +19,9 @@ public class Enemy : MonoBehaviour
 
     // Tags and Names 
     private const string _boundsTag = "Bounds";
-    private const string _bulletTag = "Player Bullet";
+    private const string _playerRockBulletTag = "Player Rock Bullet";
+    private const string _playerPaperBulletTag = "Player Paper Bullet";
+    private const string _playerScissorsBulletTag = "Player Scissors Bullet";
     private const string _gameControllerComponent = "GameController";
 
     // Component 
@@ -55,20 +57,25 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If it touches the bullet, it updates 
-        if (collision.gameObject.tag == _bulletTag)
+        // If it touches the paper, it destroys 
+        if (collision.gameObject.tag == _playerPaperBulletTag)
         {
-            Debug.Log("Bullet Collides with Enemy\nBullet's name: " + collision.gameObject.name);
-
             //Updates the Score 
             _gameController.UpdateScore();
-            //Destorys the bullet
-            //_playerShoot.returnBulletToPool(collision.gameObject);
+
             //Destorys the enemy 
             Destroy(gameObject);
         }
+        // If it touches the paper, it bounces  
+        if (collision.gameObject.tag == _playerRockBulletTag)
+        {
+            Debug.Log("ROCK Collides with ROCK\nBullet's name: " + collision.gameObject.name);
+
+            // Reverse velocity
+            rigidbody2D.velocity = -rigidbody2D.velocity;
+        }
         // If the enemy touches a bound it gets destored 
-        else if(collision.gameObject.tag == _boundsTag)
+        else if (collision.gameObject.tag == _boundsTag)
         {
             Destroy(gameObject);
         }

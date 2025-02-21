@@ -23,19 +23,11 @@ public class Bullet : MonoBehaviour
     // Bullet Types
     private const string _commonBulletType = "common";
 
+    // Tags
+    private const string _enemyRockBulletTag = "Enemy Rock";
+    private const string _boundsTag = "Bounds";
+
     [SerializeField] private PlayerShoot _playerShoot;
-
-    //==================================================================================================================
-    // Base Method  
-    //==================================================================================================================
-
-    // Unnecessary for player bullets \/ \/ \/
-    private void Start()
-    {
-        //_rigidbody2D = GetComponent<Rigidbody2D>();
-        //PlayerBullet();
-        //StartCoroutine(Death());
-    }
 
     //==================================================================================================================
     // Bullet Set Up  
@@ -79,8 +71,26 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If it touches 
-        //Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name);
-        _playerShoot.returnBulletToPool(gameObject, _commonBulletType);
+        //Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name
+
+        //Collision with rock
+        if(collision.gameObject.tag == _enemyRockBulletTag)
+        {
+            // Get the normal vector of the collision surface
+            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
+
+            // Get the current velocity of the Rigidbody2D
+            Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
+
+            // Calculate the reflected direction using the law of reflection
+            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
+
+            // Apply the reflected direction to the velocity
+            _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
+        }
+        else if (collision.gameObject.tag.Contains("Enemy") || collision.gameObject.tag == _boundsTag)
+        {
+            _playerShoot.returnBulletToPool(gameObject, _commonBulletType);
+        }
     }
 }

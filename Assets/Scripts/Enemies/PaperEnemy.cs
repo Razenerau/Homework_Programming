@@ -57,7 +57,7 @@ public class PaperEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If it touches the scissors, it updates 
+        // If it touches the scissors, it destroys 
         if (collision.gameObject.tag == _playerScissorsBulletTag)
         {
             //Updates the Score 
@@ -66,7 +66,7 @@ public class PaperEnemy : MonoBehaviour
             //Destorys the enemy 
             Destroy(gameObject);
         }
-        // If it touches the paper, it updates 
+        // If it touches the paper, it bounces  
         if (collision.gameObject.tag == _playerPaperBulletTag)
         {
             Debug.Log("PAPER Collides with PAPER\nBullet's name: " + collision.gameObject.name);

@@ -46,27 +46,27 @@ public class SpawnEnemy : MonoBehaviour
 
         //Randomizes the postion and enemy
         Vector3 newPosition = GetOrientation();
-        int randomEnemy = 2; //Random.Range(1, 4);
+        int randomEnemy = 1; //Random.Range(1, 4);
 
         GameObject enemy;
 
         switch (randomEnemy)
         {
-            case 1:
+            case 1: // Rock
                 enemy = Instantiate(rockPreFab, newPosition, Quaternion.identity);
 
                 //Attach to trash 
                 enemy.transform.SetParent(enemyTrash);
                 enemy.GetComponent<Enemy>().SetSpeed(GetSpeed());
                 break;
-            case 2:
+            case 2: // Paper
                 enemy = Instantiate(paperPreFab, newPosition, Quaternion.identity);
 
                 //Attach to trash 
                 enemy.transform.SetParent(enemyTrash);
                 enemy.GetComponent<PaperEnemy>().SetSpeed(GetSpeed());
                 break;
-            default:
+            default: // Scissors
                 enemy = Instantiate(scissorsPreFab, newPosition, Quaternion.identity);
 
                 //Attach to trash 
