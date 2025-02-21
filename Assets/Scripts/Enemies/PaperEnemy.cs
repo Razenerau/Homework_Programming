@@ -62,7 +62,7 @@ public class PaperEnemy : MonoBehaviour
         {
             //Updates the Score 
             _gameController.UpdateScore();
-            
+
             //Destorys the enemy 
             Destroy(gameObject);
         }
