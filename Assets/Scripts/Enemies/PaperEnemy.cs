@@ -61,7 +61,7 @@ public class PaperEnemy : MonoBehaviour
         if (collision.gameObject.tag == _playerScissorsBulletTag)
         {
             //Updates the Score 
-            _gameController.UpdateScore();
+            _gameController.UpdateScore(2);
 
             //Destorys the enemy 
             Destroy(gameObject);

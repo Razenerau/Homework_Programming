@@ -61,7 +61,7 @@ public class ScissorsEnemy : MonoBehaviour
         if (collision.gameObject.tag == _playerRockBulletTag)
         {
             //Updates the Score 
-            _gameController.UpdateScore();
+            _gameController.UpdateScore(3);
 
             //Destorys the enemy 
             Destroy(gameObject);
