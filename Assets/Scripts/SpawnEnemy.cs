@@ -46,7 +46,7 @@ public class SpawnEnemy : MonoBehaviour
 
         //Randomizes the postion and enemy
         Vector3 newPosition = GetOrientation();
-        int randomEnemy = 1; //Random.Range(1, 4);
+        int randomEnemy = 3; //Random.Range(1, 4);
 
         GameObject enemy;
 

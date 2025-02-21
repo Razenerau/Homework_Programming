@@ -19,7 +19,9 @@ public class ScissorsEnemy : MonoBehaviour
 
     // Tags and Names 
     private const string _boundsTag = "Bounds";
-    private const string _bulletTag = "Player Bullet";
+    private const string _playerRockBulletTag = "Player Rock Bullet";
+    private const string _playerPaperBulletTag = "Player Paper Bullet";
+    private const string _playerScissorsBulletTag = "Player Scissors Bullet";
     private const string _gameControllerComponent = "GameController";
 
     // Component 
@@ -55,19 +57,25 @@ public class ScissorsEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If it touches the bullet, it updates 
-        if (collision.gameObject.tag == _bulletTag)
+        // If it touches the rock, it destroys 
+        if (collision.gameObject.tag == _playerRockBulletTag)
         {
-            Debug.Log("Bullet Collides with Enemy\nBullet's name: " + collision.gameObject.name);
-
             //Updates the Score 
             _gameController.UpdateScore();
-     
+
             //Destorys the enemy 
             Destroy(gameObject);
         }
+        // If it touches the scissors, it bounces  
+        if (collision.gameObject.tag == _playerScissorsBulletTag)
+        {
+            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
+            Vector2 incidentDirection = rigidbody2D.velocity.normalized;
+            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
+            rigidbody2D.velocity = reflectedDirection * rigidbody2D.velocity.magnitude;
+        }
         // If the enemy touches a bound it gets destored 
-        else if(collision.gameObject.tag == _boundsTag)
+        else if (collision.gameObject.tag == _boundsTag)
         {
             Destroy(gameObject);
         }
