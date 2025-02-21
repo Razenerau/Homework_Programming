@@ -23,9 +23,8 @@ public class PaperBullet : MonoBehaviour
     // Bullet Types and Tags
     private const string _bulletType = "paper";
     private const string _boundsTag = "Bounds";
-    private const string _rockTag = "Rock";
-    private const string _scissorsTag = "Scissors";
-    private const string _paperTag = "Paper";
+    private const string _enemyPaperBulletTag = "Enemy Paper";
+    private const string _enemyScissorsBulletTag = "Enemy Scissors";
 
     private const string _enemyTag = "Enemy";
 
@@ -72,7 +71,18 @@ public class PaperBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name);
-        if (collision.gameObject.tag == _enemyTag || collision.gameObject.tag == _boundsTag) 
+
+        //Collision with paper
+        if (collision.gameObject.tag == _enemyPaperBulletTag)
+        {
+            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
+            Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
+            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
+            _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
+        }
+        else if (collision.gameObject.tag == _enemyScissorsBulletTag)
+        {
             _playerShoot.returnBulletToPool(gameObject, _bulletType);
+        }
     }
 }
