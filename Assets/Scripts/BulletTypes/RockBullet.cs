@@ -81,8 +81,8 @@ public class Bullet : MonoBehaviour
             Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
             _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
 
-            Vector3 moveDirection = _rigidbody2D.velocity;
-            transform.LookAt(transform.position + moveDirection);
+            //Vector3 moveDirection = _rigidbody2D.velocity;
+            //transform.LookAt(transform.position + moveDirection);
         }
         else if (collision.gameObject.tag.Contains("Enemy") || collision.gameObject.tag == _boundsTag)
         {
