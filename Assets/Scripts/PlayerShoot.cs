@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    public SFX sfx;
+
     public GameObject preFab;
     public GameObject enemyPreFab;
     public GameObject scissorsPreFab;
@@ -42,6 +44,7 @@ public class PlayerShoot : MonoBehaviour
     private Queue<GameObject> _paperBulletPool = new Queue<GameObject>();    // Stores all paper bullets available for shooting
     private void Start()
     {
+        if (sfx == null) Debug.LogWarning("sfx not found!"); 
         _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
         _currentCommonBulletsCooldown = _shootScissorsBulletsCooldown;
 
@@ -164,13 +167,15 @@ public class PlayerShoot : MonoBehaviour
                     if (bulletScript != null) bulletScript.SetPlayerShoot(this); // Pass the reference
 
                     _canShootCommonBullets = false;
+
+                    sfx.shootRock();
                 }
                 else
                 {
                     Debug.Log("Bullet Pool is Empty!");
                 }
                 break;
-            case _scissorsBulletType :
+            case _scissorsBulletType:
                 if (_scissorsBulletPool.Count > 0)
                 {
                     GameObject scissorsBullet = _scissorsBulletPool.Dequeue();
@@ -183,6 +188,8 @@ public class PlayerShoot : MonoBehaviour
                     if (scissorsBulletScript != null) scissorsBulletScript.SetPlayerShoot(this); // Pass the reference
 
                     _canShootScissorsBullets = false;
+
+                    sfx.shootScissors();
                 }
                 else
                 {
@@ -202,6 +209,8 @@ public class PlayerShoot : MonoBehaviour
                     if (paperBulletScript != null) paperBulletScript.SetPlayerShoot(this); // Pass the reference
 
                     _canShootPaperBullets = false; // needed if there's a cooldown
+
+                    sfx.shootPaper();
                 }
                 else
                 {
