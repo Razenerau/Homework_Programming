@@ -27,6 +27,7 @@ public class ScissorsEnemy : MonoBehaviour
     // Component 
     private GameController _gameController;
     private PlayerShoot _playerShoot;
+    public AudioSource deathSound;
 
     //==================================================================================================================
     // Base Method  
@@ -65,6 +66,7 @@ public class ScissorsEnemy : MonoBehaviour
 
             //Destorys the enemy 
             Destroy(gameObject);
+            deathSound.Play();
         }
         // If it touches the scissors, it bounces  
         if (collision.gameObject.tag == _playerScissorsBulletTag)
