@@ -28,6 +28,7 @@ public class PaperEnemy : MonoBehaviour
     private GameController _gameController;
     private PlayerShoot _playerShoot;
     public AudioSource deathSound;
+    //public AudioClip clip;
 
     //==================================================================================================================
     // Base Method  
@@ -64,9 +65,10 @@ public class PaperEnemy : MonoBehaviour
             //Updates the Score 
             _gameController.UpdateScore(2);
 
+            deathSound.Play();
+
             //Destorys the enemy 
             Destroy(gameObject);
-            deathSound.Play();
         }
         // If it touches the paper, it bounces  
         if (collision.gameObject.tag == _playerPaperBulletTag)

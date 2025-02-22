@@ -76,17 +76,13 @@ public class Bullet : MonoBehaviour
         //Collision with rock
         if(collision.gameObject.tag == _enemyRockBulletTag)
         {
-            // Get the normal vector of the collision surface
             Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-
-            // Get the current velocity of the Rigidbody2D
             Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
-
-            // Calculate the reflected direction using the law of reflection
             Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
-
-            // Apply the reflected direction to the velocity
             _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
+
+            Vector3 moveDirection = _rigidbody2D.velocity;
+            transform.LookAt(transform.position + moveDirection);
         }
         else if (collision.gameObject.tag.Contains("Enemy") || collision.gameObject.tag == _boundsTag)
         {
