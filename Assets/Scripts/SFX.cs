@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SFX : MonoBehaviour
@@ -26,4 +27,7 @@ public class SFX : MonoBehaviour
         source.clip = shootPaperClip;
         source.Play();
     }
+
+    //public List<AudioClip> clips = new List<AudioClip>();
+
 }
