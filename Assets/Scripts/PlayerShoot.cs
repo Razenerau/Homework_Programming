@@ -21,11 +21,6 @@ public class PlayerShoot : MonoBehaviour
     private Enemy _enemy;
     private SpawnEnemy _spawnEnemy;
 
-    // Bullet Types
-    private const string _commonBulletType = "common";
-    private const string _scissorsBulletType = "scissors";
-    private const string _paperBulletType = "paper";
-
     // Cooldowns
     [SerializeField] private float _shootCommonBulletsCooldown = 0.4f;            // Interval between bullets
     private float _currentCommonBulletsCooldown = 0.4f;                           // Time before next bullet can be shot
@@ -48,9 +43,9 @@ public class PlayerShoot : MonoBehaviour
         _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
         _currentCommonBulletsCooldown = _shootScissorsBulletsCooldown;
 
-        InitializePool(20, _commonBulletType); // Initialize the pool with 10 bullets
-        InitializePool(10, _scissorsBulletType);
-        InitializePool(5, _paperBulletType);
+        InitializePool(20, Structs.BulletType.ROCK); // Initialize the pool with 10 bullets
+        InitializePool(10, Structs.BulletType.SCISSORS);
+        InitializePool(5, Structs.BulletType.PAPER);
 
         _enemy = enemyPreFab.GetComponent<Enemy>();
         _enemy.SetPlayerShoot(this);
@@ -67,15 +62,15 @@ public class PlayerShoot : MonoBehaviour
         // Shooting 
         if (Input.GetKeyDown(KeyCode.Mouse0)) // && _canShootCommonBullets == true)
         {
-            shoot(_commonBulletType);
+            shoot(Structs.BulletType.ROCK);
         }
         if (Input.GetKeyDown(KeyCode.Mouse1) && _canShootScissorsBullets == true)
         {
-            shoot(_scissorsBulletType);
+            shoot(Structs.BulletType.SCISSORS);
         }
         if (Input.GetKeyDown(KeyCode.Space) && _canShootPaperBullets == true)
         {
-            shoot(_paperBulletType);
+            shoot(Structs.BulletType.PAPER);
         }
     }
 
@@ -83,7 +78,7 @@ public class PlayerShoot : MonoBehaviour
     {
         switch (bulletType)
         {
-            case _commonBulletType :
+            case Structs.BulletType.ROCK:
                 for (int i = 0; i < poolSize; i++)
                 {
                     GameObject bullet = Instantiate(preFab); // Creates a new bullet
@@ -92,7 +87,7 @@ public class PlayerShoot : MonoBehaviour
                     _bulletPool.Enqueue(bullet); // Adds bullet to the pool
                 }
             break;
-            case _scissorsBulletType :
+            case Structs.BulletType.SCISSORS:
                 for (int i = 0; i < poolSize; i++)
                 {
                     GameObject ScissorsBullet = Instantiate(scissorsPreFab); // Creates a new bullet
@@ -101,7 +96,7 @@ public class PlayerShoot : MonoBehaviour
                     _scissorsBulletPool.Enqueue(ScissorsBullet); // Adds bullet to the pool
                 }
             break;
-            case _paperBulletType:
+            case Structs.BulletType.PAPER:
                 for (int i = 0; i < poolSize; i++)
                 {
                     GameObject paperBullet = Instantiate(paperPreFab); // Creates a new bullet
@@ -154,7 +149,7 @@ public class PlayerShoot : MonoBehaviour
     {
         switch (bulletType)
         {
-            case _commonBulletType:
+            case Structs.BulletType.ROCK:
                 if (_bulletPool.Count > 0)
                 {
                     GameObject bullet = _bulletPool.Dequeue();
@@ -175,7 +170,7 @@ public class PlayerShoot : MonoBehaviour
                     Debug.Log("Bullet Pool is Empty!");
                 }
                 break;
-            case _scissorsBulletType:
+            case Structs.BulletType.SCISSORS:
                 if (_scissorsBulletPool.Count > 0)
                 {
                     GameObject scissorsBullet = _scissorsBulletPool.Dequeue();
@@ -196,7 +191,7 @@ public class PlayerShoot : MonoBehaviour
                     Debug.Log("Scissors Bullet Pool is Empty!");
                 }
                 break;
-            case _paperBulletType :
+            case Structs.BulletType.PAPER:
                 if (_paperBulletPool.Count > 0)
                 {
                     GameObject paperBullet = _paperBulletPool.Dequeue();
@@ -229,13 +224,13 @@ public class PlayerShoot : MonoBehaviour
 
         switch (bulletType)
         {
-            case _commonBulletType :
+            case Structs.BulletType.ROCK:
                     _bulletPool.Enqueue(bullet);
                 break;
-            case _scissorsBulletType :
+            case Structs.BulletType.SCISSORS:
                 _scissorsBulletPool.Enqueue(bullet);
                 break;
-            case _paperBulletType:
+            case Structs.BulletType.PAPER:
                 _paperBulletPool.Enqueue(bullet);
                 break;
         }
