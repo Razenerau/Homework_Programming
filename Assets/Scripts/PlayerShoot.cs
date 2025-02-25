@@ -22,9 +22,11 @@ public class PlayerShoot : MonoBehaviour
     private SpawnEnemy _spawnEnemy;
 
     // Cooldowns
+    /*
     [SerializeField] private float _shootCommonBulletsCooldown = 0.4f;            // Interval between bullets
     private float _currentCommonBulletsCooldown = 0.4f;                           // Time before next bullet can be shot
     private bool _canShootCommonBullets = true;
+    */
 
     [SerializeField] private float _shootScissorsBulletsCooldown = 2.5f;            // Interval between bullets
     private float _currentScissorsBulletsCooldown = 2.5f;                           // Time before next bullet can be shot
@@ -40,8 +42,8 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         if (sfx == null) Debug.LogWarning("sfx not found!"); 
-        _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
-        _currentCommonBulletsCooldown = _shootScissorsBulletsCooldown;
+        //_currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
+        _currentScissorsBulletsCooldown = _shootScissorsBulletsCooldown;
 
         InitializePool(20, Structs.BulletType.ROCK); // Initialize the pool with 10 bullets
         InitializePool(10, Structs.BulletType.SCISSORS);
@@ -62,15 +64,8 @@ public class PlayerShoot : MonoBehaviour
         // Shooting 
         if (Input.GetKeyDown(KeyCode.Mouse0)) // && _canShootCommonBullets == true)
         {
-            shoot(Structs.BulletType.ROCK);
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse1) && _canShootScissorsBullets == true)
-        {
-            shoot(Structs.BulletType.SCISSORS);
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && _canShootPaperBullets == true)
-        {
-            shoot(Structs.BulletType.PAPER);
+            //shoot(Structs.BulletType.ROCK);
+            shoot(SwitchBulletType.currentBulletType);
         }
     }
 
@@ -111,6 +106,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void handleBulletCoolDown()
     {
+        /*
         if (!_canShootCommonBullets)
         {
             _currentCommonBulletsCooldown -= Time.deltaTime;
@@ -121,6 +117,7 @@ public class PlayerShoot : MonoBehaviour
                 _currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
             }
         }
+        */
 
         if (!_canShootScissorsBullets)
         {
@@ -161,7 +158,7 @@ public class PlayerShoot : MonoBehaviour
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
                     if (bulletScript != null) bulletScript.SetPlayerShoot(this); // Pass the reference
 
-                    _canShootCommonBullets = false;
+                    //_canShootCommonBullets = false;
 
                     sfx.shootRock();
                 }
@@ -171,7 +168,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 break;
             case Structs.BulletType.SCISSORS:
-                if (_scissorsBulletPool.Count > 0)
+                if (_scissorsBulletPool.Count > 0 && _canShootScissorsBullets)
                 {
                     GameObject scissorsBullet = _scissorsBulletPool.Dequeue();
                     scissorsBullet.transform.position = bulletSpawn.position;
@@ -192,7 +189,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 break;
             case Structs.BulletType.PAPER:
-                if (_paperBulletPool.Count > 0)
+                if (_paperBulletPool.Count > 0 && _canShootPaperBullets)
                 {
                     GameObject paperBullet = _paperBulletPool.Dequeue();
                     paperBullet.transform.position = bulletSpawn.position;
@@ -239,11 +236,13 @@ public class PlayerShoot : MonoBehaviour
     //===========================================================================================
     // GETTER AND SETTER
     //===========================================================================================
+    /*
     public float accessCommonBulletCooldown
     {
         get { return _shootCommonBulletsCooldown; }
         set { _shootCommonBulletsCooldown = value; }
     }
+    */
     public float accessScissorsBulletCooldown
     {
         get { return _shootScissorsBulletsCooldown; }
