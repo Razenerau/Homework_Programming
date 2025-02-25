@@ -21,6 +21,7 @@ public class ScissorsBullet : MonoBehaviour
     public bool playerBullet = true; //Is the bullet used by player or enemy 
 
     //Tags and Types
+    private const string _rockEnemy = "Enemy Rock";
     private const string _bulletType = "scissors";
     private const string _boundsTag = "Bounds";
 
@@ -83,5 +84,6 @@ public class ScissorsBullet : MonoBehaviour
         // If it touches 
         //Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name);
         if (collision.gameObject.tag == _boundsTag) _playerShoot.returnBulletToPool(gameObject, _bulletType);
+        if (collision.gameObject.tag == _rockEnemy) Destroy(gameObject);
     }
 }

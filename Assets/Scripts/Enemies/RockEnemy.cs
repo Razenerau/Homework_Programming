@@ -84,16 +84,4 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void SetPlayerShoot(PlayerShoot playerShoot)
-    { 
-        if (playerShoot != null)
-        {
-            _playerShoot = playerShoot;
-            Debug.Log("PlayerShoot reference set for: " + gameObject.name);
-        }
-        else
-        {
-            Debug.LogWarning("playerShoot not found");
-        }
-    }
 }

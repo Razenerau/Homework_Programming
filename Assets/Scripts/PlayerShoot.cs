@@ -49,9 +49,6 @@ public class PlayerShoot : MonoBehaviour
         InitializePool(10, Structs.BulletType.SCISSORS);
         InitializePool(5, Structs.BulletType.PAPER);
 
-        _enemy = enemyPreFab.GetComponent<Enemy>();
-        _enemy.SetPlayerShoot(this);
-
         _spawnEnemy = Spawner.GetComponent<SpawnEnemy>();
         _spawnEnemy.SetPlayerShoot(this);
     }
@@ -247,5 +244,10 @@ public class PlayerShoot : MonoBehaviour
     {
         get { return _shootScissorsBulletsCooldown; }
         set { _shootScissorsBulletsCooldown = value; }
+    }
+    public float accessPaperBulletCooldown
+    {
+        get { return _shootPaperBulletsCooldown; }
+        set { _shootPaperBulletsCooldown = value; }
     }
 }

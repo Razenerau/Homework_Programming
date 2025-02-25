@@ -592,16 +592,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 371426097}
-  - component: {fileID: 371426098}
+  - component: {fileID: 371426106}
   - component: {fileID: 371426100}
+  - component: {fileID: 371426108}
   - component: {fileID: 371426101}
   - component: {fileID: 371426102}
   - component: {fileID: 371426103}
   - component: {fileID: 371426104}
   - component: {fileID: 371426105}
-  - component: {fileID: 371426106}
-  - component: {fileID: 371426108}
   - component: {fileID: 371426107}
+  - component: {fileID: 371426109}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -626,55 +626,6 @@ Transform:
   - {fileID: 1442179157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &371426098
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371426096}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.0058042966, y: 0.2814294}
-      - {x: -0.19911654, y: -0.23938459}
-      - {x: -0.0006069392, y: -0.3456204}
-      - {x: 0.21040937, y: -0.23263136}
-  m_UseDelaunayMesh: 0
 --- !u!50 &371426100
 Rigidbody2D:
   serializedVersion: 4
@@ -775,7 +726,6 @@ MonoBehaviour:
   bulletTrash: {fileID: 1629114352}
   paperBulletTrash: {fileID: 761859149}
   scissorsBulletTrash: {fileID: 1816763475}
-  _shootCommonBulletsCooldown: 0.5
   _shootScissorsBulletsCooldown: 1
   _shootPaperBulletsCooldown: 1
 --- !u!61 &371426106
@@ -935,6 +885,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &371426109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371426096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54a8d929b8041548a0341572039986b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &396652744
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,7 +931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -722.00006, y: 240.00003}
+  m_AnchoredPosition: {x: -791, y: -307}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &396652746
@@ -1135,7 +1097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 126, y: 272}
+  m_AnchoredPosition: {x: 177, y: -230}
   m_SizeDelta: {x: 500, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &503438463
@@ -1151,14 +1113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.972549, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.5705695, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a060b263c58562f4b88b15f334afb741, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7189323df96311246a906a32289c91a5, type: 3}
   m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1167,7 +1129,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 80
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &503438464
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1494,9 +1456,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -820, y: 339}
+  m_AnchoredPosition: {x: -880, y: -402}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.49999964}
 --- !u!1 &997040337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,7 +2354,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 2104900327, guid: 0eb98c88d6240b141a8e54df6954ee1b, type: 3}
-  m_Color: {r: 0.85882354, g: 0.5411765, b: 0.45490196, a: 1}
+  m_Color: {r: 0, g: 0.5705695, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
