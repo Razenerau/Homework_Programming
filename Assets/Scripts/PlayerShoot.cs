@@ -20,6 +20,7 @@ public class PlayerShoot : MonoBehaviour
 
     private Enemy _enemy;
     private SpawnEnemy _spawnEnemy;
+    public SpriteColor showCooldown;
 
     // Cooldowns
     /*
