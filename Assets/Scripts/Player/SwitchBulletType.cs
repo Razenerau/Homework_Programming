@@ -20,16 +20,21 @@ public class SwitchBulletType : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            //Pass ref to cooldownModel here
+
             switch (currentBulletType)
             {
                 case Structs.BulletType.ROCK:
                     _currentBulletType = Structs.BulletType.PAPER;
+                    CooldownModel.SetState(CooldownModel.States.PAPER);
                     break;
                 case Structs.BulletType.PAPER:
                     _currentBulletType = Structs.BulletType.SCISSORS;
+                    CooldownModel.SetState(CooldownModel.States.SCISSORS);
                     break;
                 case Structs.BulletType.SCISSORS:
                     _currentBulletType = Structs.BulletType.ROCK;
+                    CooldownModel.SetState(CooldownModel.States.ROCK);
                     break;
             }
             Debug.Log("Current bullet type: " +  _currentBulletType);

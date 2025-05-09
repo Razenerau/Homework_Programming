@@ -142,6 +142,8 @@ public class PlayerShoot : MonoBehaviour
 
     private void shoot(string bulletType)
     {
+        CooldownModel.Cooldown();
+
         switch (bulletType)
         {
             case Structs.BulletType.ROCK:
