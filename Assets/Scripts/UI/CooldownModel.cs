@@ -46,7 +46,7 @@ public class CooldownModel : MonoBehaviour
         switch (CurrentState)
         {
             case States.ROCK:
-                
+                SpriteColor.pulse();
                 break;
             case States.PAPER:
 

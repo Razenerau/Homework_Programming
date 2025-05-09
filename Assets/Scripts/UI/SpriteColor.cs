@@ -77,11 +77,11 @@ public class SpriteColor : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Mouse0)) _isPulsating=true;
+        /*if(Input.GetKeyUp(KeyCode.Mouse0)) _isPulsating=true;
         if(_isPulsating)
         {
             pulse();
-        } 
+        } */
     }
     private static void whiteSprite()
     {
@@ -100,22 +100,23 @@ public class SpriteColor : MonoBehaviour
         Instance.image.color = Color.white;
     }
 
-    private static void pulse()
+    public static void pulse()
     {
-        Instance.time += Time.deltaTime;
-        Instance._currentPulseTime = incrementOnce(Instance.time, Instance._pulseTime);
+        Instance.StartCoroutine(Instance.PulseCoroutine());
+    }
 
-        Instance._pulseColor.a = Mathf.Clamp(Instance._pulseColor.a, 1f, 1f);
-        Instance._color.a = Mathf.Clamp(Instance._color.a, 1f, 1f);
-
-        Color _lerpedColor = Color.Lerp(Instance._pulseColor, Instance._color, Instance._currentPulseTime);
-        colorSprite(_lerpedColor);
-
-        if(Instance._currentPulseTime >= Instance._pulseTime)
+    private IEnumerator PulseCoroutine()
+    {
+        if (image != null)
         {
-            Instance.time = 0;
-            colorSprite(Instance._color);
-            Instance._isPulsating = false;
+            // Set to white
+            image.color = Color.white;
+
+            // Wait for 5 seconds
+            yield return new WaitForSeconds(0.1f);
+
+            // Set to original
+            image.color = _color;
         }
     }
 
