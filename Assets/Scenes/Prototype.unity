@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 15258157}
   - component: {fileID: 15258161}
   - component: {fileID: 15258160}
+  - component: {fileID: 15258162}
   - component: {fileID: 15258158}
   m_Layer: 5
   m_Name: RockCooldown
@@ -174,8 +175,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isSolidColor: 1
   _color: {r: 0, g: 0.5705695, b: 1, a: 1}
-  _canPulse: 1
+  CanPulse: 0
   _pulseColor: {r: 1, g: 1, b: 1, a: 0}
+  _rockSprite: {fileID: 482805779, guid: 0eb98c88d6240b141a8e54df6954ee1b, type: 3}
+  _paperSprite: {fileID: 1803722998, guid: 0eb98c88d6240b141a8e54df6954ee1b, type: 3}
+  _scissorsSprite: {fileID: -611445284, guid: 0eb98c88d6240b141a8e54df6954ee1b, type: 3}
 --- !u!114 &15258160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +218,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15258156}
   m_CullTransparentMesh: 1
+--- !u!114 &15258162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15258156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f4eb2551365da40aac68bfb7d8095d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &30266621
 GameObject:
   m_ObjectHideFlags: 0
