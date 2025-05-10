@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
     // Tags
     private const string _enemyRockBulletTag = "Enemy Rock";
     private const string _boundsTag = "Bounds";
+   
 
     [SerializeField] private PlayerShoot _playerShoot;
 
@@ -76,13 +77,11 @@ public class Bullet : MonoBehaviour
         //Collision with rock
         if(collision.gameObject.tag == _enemyRockBulletTag)
         {
-            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
-            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
-            _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
+            // change vector
+            _rigidbody2D.velocity = Structs.CollisionVector(_rigidbody2D, collision);
 
-            //Vector3 moveDirection = _rigidbody2D.velocity;
-            //transform.LookAt(transform.position + moveDirection);
+            // Change rotation
+            transform.rotation = Structs.CollisionRotation(_rigidbody2D);
         }
         else if (collision.gameObject.tag.Contains("Enemy") || collision.gameObject.tag == _boundsTag)
         {

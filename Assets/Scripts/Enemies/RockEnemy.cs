@@ -73,10 +73,11 @@ public class Enemy : MonoBehaviour
         // If it touches the paper, it bounces  
         if (collision.gameObject.tag == _playerRockBulletTag)
         {
-            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 incidentDirection = rigidbody2D.velocity.normalized;
-            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
-            rigidbody2D.velocity = reflectedDirection * rigidbody2D.velocity.magnitude;
+            // change vector
+            rigidbody2D.velocity = Structs.CollisionVector(rigidbody2D, collision);
+
+            // Change rotation
+            transform.rotation = Structs.CollisionRotation(rigidbody2D);
         }
         // If the enemy touches a bound it gets destored 
         else if (collision.gameObject.tag == _boundsTag)

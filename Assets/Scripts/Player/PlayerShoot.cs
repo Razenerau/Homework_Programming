@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    public static PlayerShoot Instance;
+
     public SFX sfx;
 
     public GameObject preFab;
@@ -31,17 +33,30 @@ public class PlayerShoot : MonoBehaviour
 
     [SerializeField] private float _shootScissorsBulletsCooldown = 2.5f;            // Interval between bullets
     private float _currentScissorsBulletsCooldown = 2.5f;                           // Time before next bullet can be shot
-    private bool _canShootScissorsBullets = true;
+    public bool CanShootScissorsBullets { get; private set; }
 
     [SerializeField] private float _shootPaperBulletsCooldown = 1.5f;            // Interval between bullets
     private float _currentPaperBulletsCooldown = 1.5f;                           // Time before next bullet can be shot
-    private bool _canShootPaperBullets = true;
+    public bool CanShootPaperBullets { get; private set; }
 
     private Queue<GameObject> _bulletPool = new Queue<GameObject>();            // Stores all common bullets available for shooting
     private Queue<GameObject> _scissorsBulletPool = new Queue<GameObject>();    // Stores all scissors bullets available for shooting
     private Queue<GameObject> _paperBulletPool = new Queue<GameObject>();    // Stores all paper bullets available for shooting
     private void Start()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        CanShootScissorsBullets = true;
+        CanShootPaperBullets = true;
+
         if (sfx == null) Debug.LogWarning("sfx not found!"); 
         //_currentCommonBulletsCooldown = _shootCommonBulletsCooldown;
         _currentScissorsBulletsCooldown = _shootScissorsBulletsCooldown;
@@ -66,6 +81,7 @@ public class PlayerShoot : MonoBehaviour
             shoot(SwitchBulletType.currentBulletType);
         }
     }
+
 
     private void InitializePool(int poolSize, string bulletType)
     {
@@ -117,24 +133,28 @@ public class PlayerShoot : MonoBehaviour
         }
         */
 
-        if (!_canShootScissorsBullets)
+        if (!CanShootScissorsBullets)
         {
+            CooldownModel.SetState(true);
+
             _currentScissorsBulletsCooldown -= Time.deltaTime;
 
             if (_currentScissorsBulletsCooldown < 0)
             {
-                _canShootScissorsBullets = true;
+                CooldownModel.SetState(false);
+
+                CanShootScissorsBullets = true;
                 _currentScissorsBulletsCooldown = _shootScissorsBulletsCooldown;
             }
         }
 
-        if (!_canShootPaperBullets)
+        if (!CanShootPaperBullets)
         {
             _currentPaperBulletsCooldown -= Time.deltaTime;
 
             if (_currentPaperBulletsCooldown < 0)
             {
-                _canShootPaperBullets = true;
+                CanShootPaperBullets = true;
                 _currentPaperBulletsCooldown = _shootPaperBulletsCooldown;
             }
         }
@@ -164,11 +184,11 @@ public class PlayerShoot : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Bullet Pool is Empty!");
+                    //Debug.Log("Bullet Pool is Empty!");
                 }
                 break;
             case Structs.BulletType.SCISSORS:
-                if (_scissorsBulletPool.Count > 0 && _canShootScissorsBullets)
+                if (_scissorsBulletPool.Count > 0 && CanShootScissorsBullets)
                 {
                     GameObject scissorsBullet = _scissorsBulletPool.Dequeue();
                     scissorsBullet.transform.position = bulletSpawn.position;
@@ -179,17 +199,17 @@ public class PlayerShoot : MonoBehaviour
                     ScissorsBullet scissorsBulletScript = scissorsBullet.GetComponent<ScissorsBullet>();
                     if (scissorsBulletScript != null) scissorsBulletScript.SetPlayerShoot(this); // Pass the reference
 
-                    _canShootScissorsBullets = false;
+                    CanShootScissorsBullets = false;
 
                     sfx.shootScissors();
                 }
                 else
                 {
-                    Debug.Log("Scissors Bullet Pool is Empty!");
+                    //Debug.Log("Scissors Bullet Pool is Empty!");
                 }
                 break;
             case Structs.BulletType.PAPER:
-                if (_paperBulletPool.Count > 0 && _canShootPaperBullets)
+                if (_paperBulletPool.Count > 0 && CanShootPaperBullets)
                 {
                     GameObject paperBullet = _paperBulletPool.Dequeue();
                     paperBullet.transform.position = bulletSpawn.position;
@@ -200,13 +220,13 @@ public class PlayerShoot : MonoBehaviour
                     PaperBullet paperBulletScript = paperBullet.GetComponent<PaperBullet>();
                     if (paperBulletScript != null) paperBulletScript.SetPlayerShoot(this); // Pass the reference
 
-                    _canShootPaperBullets = false; // needed if there's a cooldown
+                    CanShootPaperBullets = false; // needed if there's a cooldown
 
                     sfx.shootPaper();
                 }
                 else
                 {
-                    Debug.Log("Paper Bullet Pool is Empty!");
+                    //Debug.Log("Paper Bullet Pool is Empty!");
                 }
                 break;
         }

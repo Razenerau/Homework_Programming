@@ -24,6 +24,7 @@ public class ScissorsBullet : MonoBehaviour
     private const string _rockEnemy = "Enemy Rock";
     private const string _bulletType = "scissors";
     private const string _boundsTag = "Bounds";
+    private const string _enemyScissorsBulletTag = "Enemy Scissors";
 
     [SerializeField] private PlayerShoot _playerShoot;
 
@@ -83,7 +84,17 @@ public class ScissorsBullet : MonoBehaviour
     {
         // If it touches 
         //Debug.Log("Bullet Collides with object\nObject's name: " + collision.gameObject.name);
-        if (collision.gameObject.tag == _boundsTag) _playerShoot.returnBulletToPool(gameObject, _bulletType);
-        if (collision.gameObject.tag == _rockEnemy) Destroy(gameObject);
+        if (collision.gameObject.tag ==  _enemyScissorsBulletTag)
+        {
+            // change vector
+            _rigidbody2D.velocity = Structs.CollisionVector(_rigidbody2D, collision);
+
+            // Change rotation
+            transform.rotation = Structs.CollisionRotation(_rigidbody2D);
+        }
+        else if (collision.gameObject.tag == _boundsTag || collision.gameObject.tag == _rockEnemy)
+        {
+            _playerShoot.returnBulletToPool(gameObject, _bulletType);
+        }  
     }
 }

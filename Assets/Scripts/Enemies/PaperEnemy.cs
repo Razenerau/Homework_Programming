@@ -73,10 +73,7 @@ public class PaperEnemy : MonoBehaviour
         // If it touches the paper, it bounces  
         if (collision.gameObject.tag == _playerPaperBulletTag)
         {
-            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 incidentDirection = rigidbody2D.velocity.normalized;
-            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
-            rigidbody2D.velocity = reflectedDirection * rigidbody2D.velocity.magnitude;
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x * -1, rigidbody2D.velocity.y * -1);
         }
         // If the enemy touches a bound it gets destored 
         else if(collision.gameObject.tag == _boundsTag)

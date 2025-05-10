@@ -18,6 +18,8 @@ public class SpriteColor : MonoBehaviour
     private bool _isSolidColor;
     [SerializeField]
     private Color _color;
+    [SerializeField]
+    private Color _cooldownColor;
    
     [SerializeField]
     public bool CanPulse = false;
@@ -39,8 +41,6 @@ public class SpriteColor : MonoBehaviour
     private Sprite _paperSprite;
     [SerializeField]
     private Sprite _scissorsSprite;
-
-    float time = 0f;
 
     public static SpriteColor Instance;
 
@@ -75,14 +75,6 @@ public class SpriteColor : MonoBehaviour
         colorSprite(_color);
     }
 
-    void Update()
-    {
-        /*if(Input.GetKeyUp(KeyCode.Mouse0)) _isPulsating=true;
-        if(_isPulsating)
-        {
-            pulse();
-        } */
-    }
     private static void whiteSprite()
     {
         Instance.image.material.shader = Instance.shaderGUItext;
@@ -138,6 +130,19 @@ public class SpriteColor : MonoBehaviour
             case CooldownModel.States.SCISSORS:
                 Instance.image.sprite = _scissorsSprite;
                 break;
+        }
+    }
+
+    public void SetSprite(bool isCooldown)
+    {
+        if (isCooldown)
+        {
+            if (_cooldownColor == null) Debug.Log("no color");
+            colorSprite(_cooldownColor);
+        }
+        else
+        {
+            colorSprite(_color);
         }
     }
 }
