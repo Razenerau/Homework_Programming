@@ -44,6 +44,7 @@ public class ScissorsEnemy : MonoBehaviour
     public void SetSpeed(Vector3 newSpeed)
     {
         rigidbody2D.velocity = newSpeed * Random.Range(minSpeed,maxSpeed);
+        transform.rotation = Structs.CollisionRotation(rigidbody2D);
     }
 
     //==================================================================================================================
