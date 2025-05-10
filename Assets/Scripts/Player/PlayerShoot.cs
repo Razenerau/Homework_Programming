@@ -44,6 +44,8 @@ public class PlayerShoot : MonoBehaviour
     private Queue<GameObject> _paperBulletPool = new Queue<GameObject>();    // Stores all paper bullets available for shooting
     private void Start()
     {
+
+        gameObject.SetActive(true);
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -51,7 +53,7 @@ public class PlayerShoot : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
         CanShootScissorsBullets = true;

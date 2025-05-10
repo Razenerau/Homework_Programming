@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(true);
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
