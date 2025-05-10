@@ -23,12 +23,6 @@ public class SpriteColor : MonoBehaviour
    
     [SerializeField]
     public bool CanPulse = false;
-    private float _pulseTime = 0.1f;
-    private float _currentPulseTime = 0;
-
-    [SerializeField]
-    private Color _pulseColor;
-    private bool _isPulsating = false;
 
     private Image image;
     private Shader shaderGUItext;
@@ -102,7 +96,7 @@ public class SpriteColor : MonoBehaviour
         if (image != null)
         {
             // Set to white
-            image.color = Color.white;
+            image.color = _cooldownColor; //Color.white;
 
             // Wait for 5 seconds
             yield return new WaitForSeconds(0.1f);
@@ -137,7 +131,6 @@ public class SpriteColor : MonoBehaviour
     {
         if (isCooldown)
         {
-            if (_cooldownColor == null) Debug.Log("no color");
             colorSprite(_cooldownColor);
         }
         else

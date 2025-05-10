@@ -22,6 +22,8 @@ public class SwitchBulletType : MonoBehaviour
         {
             //Pass ref to cooldownModel here
 
+            //CooldownModel.SetStateColor(false);
+
             switch (currentBulletType)
             {
                 case Structs.BulletType.ROCK:

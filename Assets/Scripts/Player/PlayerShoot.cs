@@ -135,13 +135,14 @@ public class PlayerShoot : MonoBehaviour
 
         if (!CanShootScissorsBullets)
         {
-            CooldownModel.SetState(true);
+            if (CooldownModel.CurrentState == CooldownModel.States.SCISSORS) CooldownModel.SetStateColor(true);
+            else CooldownModel.SetStateColor(false);
 
             _currentScissorsBulletsCooldown -= Time.deltaTime;
 
             if (_currentScissorsBulletsCooldown < 0)
             {
-                CooldownModel.SetState(false);
+                CooldownModel.SetStateColor(false);
 
                 CanShootScissorsBullets = true;
                 _currentScissorsBulletsCooldown = _shootScissorsBulletsCooldown;
@@ -150,10 +151,15 @@ public class PlayerShoot : MonoBehaviour
 
         if (!CanShootPaperBullets)
         {
+            if (CooldownModel.CurrentState == CooldownModel.States.PAPER) CooldownModel.SetStateColor(true);
+            else CooldownModel.SetStateColor(false);
+
             _currentPaperBulletsCooldown -= Time.deltaTime;
 
             if (_currentPaperBulletsCooldown < 0)
             {
+                CooldownModel.SetStateColor(false);
+
                 CanShootPaperBullets = true;
                 _currentPaperBulletsCooldown = _shootPaperBulletsCooldown;
             }
@@ -190,6 +196,8 @@ public class PlayerShoot : MonoBehaviour
             case Structs.BulletType.SCISSORS:
                 if (_scissorsBulletPool.Count > 0 && CanShootScissorsBullets)
                 {
+                    CooldownModel.SetStateColor(true);
+
                     GameObject scissorsBullet = _scissorsBulletPool.Dequeue();
                     scissorsBullet.transform.position = bulletSpawn.position;
                     scissorsBullet.SetActive(true);
@@ -211,6 +219,8 @@ public class PlayerShoot : MonoBehaviour
             case Structs.BulletType.PAPER:
                 if (_paperBulletPool.Count > 0 && CanShootPaperBullets)
                 {
+                    CooldownModel.SetStateColor(true);
+
                     GameObject paperBullet = _paperBulletPool.Dequeue();
                     paperBullet.transform.position = bulletSpawn.position;
                     paperBullet.SetActive(true);

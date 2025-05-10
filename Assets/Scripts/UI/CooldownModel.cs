@@ -42,7 +42,7 @@ public class CooldownModel : MonoBehaviour
         spriteColor.SetSprite(CurrentState);
     }
 
-    public static void SetState(bool isCooldown)
+    public static void SetStateColor(bool isCooldown)
     {
         SpriteColor spriteColor = Instance.GetComponent<SpriteColor>();
         spriteColor.SetSprite(isCooldown);
