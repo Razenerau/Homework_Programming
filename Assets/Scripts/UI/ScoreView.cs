@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class ScoreView : MonoBehaviour
 {
+    public static ScoreView Instance; 
     [SerializeField] private GameObject _preFab;
-    private GameObject[] _UIpreFabList = new GameObject[3];
+    private GameObject[] _UIpreFabList = new GameObject[15];
+    int howManyPulsing;
 
     private RectTransform _rectTransform;
 
@@ -15,11 +17,24 @@ public class ScoreView : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
 
-        for (int i = 0; i < 3;  i++)
+        for (int i = 0; i < 15;  i++)
         {
             GameObject like = InitializePreFab(i);
 
             SetOpacity(like, 0f);
+        }
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -47,7 +62,7 @@ public class ScoreView : MonoBehaviour
         gameObject.transform.position = _rectTransform.position;
             
         float elapsed = 0f;
-        float duration = 1f;
+        float duration = 0.5f;
         SetOpacity(gameObject, 1f);
 
         while (elapsed < duration)
@@ -63,12 +78,67 @@ public class ScoreView : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeMultiple(int times)
+    public IEnumerator FadeMultiple(int times)
     {
-        for (int i = 0; i < times; i++)
+        if (howManyPulsing == 0)
         {
-            StartCoroutine(Fade(_UIpreFabList[i]));
-            yield return new WaitForSeconds(0.5f);
+            howManyPulsing++;
+
+            for (int i = 0; i < times; i++)
+            {
+                StartCoroutine(Fade(_UIpreFabList[i]));
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            howManyPulsing--;
+        }
+        else if (howManyPulsing == 1)
+        {
+            howManyPulsing++;
+
+            for (int i = 0; i < times; i++)
+            {
+                StartCoroutine(Fade(_UIpreFabList[i + 3]));
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            howManyPulsing--;
+        }
+        else if (howManyPulsing == 2)
+        {
+            howManyPulsing++;
+
+            for (int i = 0; i < times; i++)
+            {
+                StartCoroutine(Fade(_UIpreFabList[i + 6]));
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            howManyPulsing--;
+        }
+        else if (howManyPulsing == 3)
+        {
+            howManyPulsing++;
+
+            for (int i = 0; i < times; i++)
+            {
+                StartCoroutine(Fade(_UIpreFabList[i + 9]));
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            howManyPulsing--;
+        }
+        else
+        {
+            howManyPulsing++;
+
+            for (int i = 0; i < times; i++)
+            {
+                StartCoroutine(Fade(_UIpreFabList[i + 12]));
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            howManyPulsing--;
         }
     }
 
@@ -77,7 +147,11 @@ public class ScoreView : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(FadeMultiple(3));
-            //StartCoroutine(Fade(_UIpreFabList[0]));
         }
+    }
+
+    public void VisualizeLikes(int times)
+    {
+        StartCoroutine(FadeMultiple(times));
     }
 }

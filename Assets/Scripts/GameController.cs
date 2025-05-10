@@ -14,12 +14,14 @@ public class GameController: MonoBehaviour
     public void UpdateScore()
     {
         score++;
-        scoreText.text = score.ToString(); 
+        scoreText.text = score.ToString();
+        ScoreView.Instance.VisualizeLikes(1);
     }
     public void UpdateScore(int addScore)
     {
         score += addScore;
         scoreText.text = score.ToString();
+        ScoreView.Instance.VisualizeLikes(addScore);
     }
 
     // Reload the current scene 
