@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,21 +42,33 @@ public class ScoreView : MonoBehaviour
         image.color = newColor;
     }
 
-    private System.Collections.IEnumerator Fade(GameObject[] gameObject, int times)
+    private System.Collections.IEnumerator Fade(GameObject gameObject)
+    {
+        gameObject.transform.position = _rectTransform.position;
+            
+        float elapsed = 0f;
+        float duration = 1f;
+        SetOpacity(gameObject, 1f);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            SetOpacity(gameObject, alpha);
+
+            float yPos = gameObject.transform.position.y;
+            yPos += elapsed * 0.5f;
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, yPos, 0);
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeMultiple(int times)
     {
         for (int i = 0; i < times; i++)
         {
-            float elapsed = 0f;
-            float duration = 1f;
-            SetOpacity(gameObject[i], 1f);
-
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
-                SetOpacity(gameObject[i], alpha);
-                yield return null;
-            }
+            StartCoroutine(Fade(_UIpreFabList[i]));
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -63,7 +76,8 @@ public class ScoreView : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(Fade(_UIpreFabList, 3));
+            StartCoroutine(FadeMultiple(3));
+            //StartCoroutine(Fade(_UIpreFabList[0]));
         }
     }
 }
