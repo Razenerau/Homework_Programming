@@ -27,7 +27,7 @@ public class TextManager : MonoBehaviour
     {
         _x += Time.deltaTime;
 
-        _rockTransform.position = SineGraph(_x, 0);
+        _rockTransform.position = SineGraph(_x, _xOffset);
         _paperTransform.position = SineGraph(_x, _xOffset);
         _scissorsTransform.position = SineGraph(_x, _xOffset * 2f);
     }
