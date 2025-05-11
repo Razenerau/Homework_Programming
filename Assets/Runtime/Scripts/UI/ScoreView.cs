@@ -64,7 +64,7 @@ public class ScoreView : MonoBehaviour
         gameObject.transform.position = _rectTransform.position;
             
         float elapsed = 0f;
-        float duration = 0.4f;
+        float duration = 0.5f;
         SetOpacity(gameObject, 1f);
 
         while (elapsed < duration)

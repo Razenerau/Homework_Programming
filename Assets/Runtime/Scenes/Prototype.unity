@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1139,7 +1139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preFab: {fileID: 7724979881939343882, guid: 0659f6d6d86da0f48bf0ef19addd7033, type: 3}
-  _scale: 3
+  _scale: 1
+  _duration: 0.35
 --- !u!114 &396652749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,8 +1162,8 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -2552,7 +2553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6856ef17fae3e434e918b7b79b2d0f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preFab: {fileID: 1831485340532660743, guid: 20ea0dd4896484642b8761a2612f6932, type: 3}
+  _preFab: {fileID: 8945064412093396433, guid: 20ea0dd4896484642b8761a2612f6932, type: 3}
+  CanSpawn: 0
 --- !u!4 &1507125026
 Transform:
   m_ObjectHideFlags: 0

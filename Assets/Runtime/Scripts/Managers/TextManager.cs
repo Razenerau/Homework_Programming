@@ -19,7 +19,7 @@ public class TextManager : MonoBehaviour
 
     private void Start()
     {
-        _yInt = _rockTransform.position.y;
+        _yInt = transform.position.y;
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class TextManager : MonoBehaviour
     {
         _x += Time.deltaTime;
 
-        _rockTransform.position = SineGraph(_x, _xOffset);
+        _rockTransform.position = SineGraph(_x, 0);
         _paperTransform.position = SineGraph(_x, _xOffset);
         _scissorsTransform.position = SineGraph(_x, _xOffset * 2f);
     }
