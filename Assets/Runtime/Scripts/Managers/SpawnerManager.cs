@@ -37,24 +37,32 @@ public class SpawnerManager : MonoBehaviour
         StartCounterView.SetVisible(true);
 
         yield return StartCoroutine(Countdown(delay, 3));
-        yield return StartCoroutine(FlashText(delay, "GO GO GO", 3));
+        yield return StartCoroutine(FlashText(delay / 5, "GO GO GO", 3));
 
         _spawner = Instantiate(_preFab, Vector3.zero, Quaternion.identity);
         StartWave(0);
-        //StartWave(WaveType.ALL, 10f, 20); // Replace values with ones from wave list
     }
 
     private static IEnumerator FlashText(float delay, string text, int repeatTimes)
     {
         for (int i = 0; i < repeatTimes; i++)
         {
-            yield return new WaitForSeconds(delay / 5);
+            yield return new WaitForSeconds(delay);
             StartCounterView.SetText(text);
             StartCounterView.SetVisible(true);
 
-            yield return new WaitForSeconds(delay / 5);
+            yield return new WaitForSeconds(delay);
             StartCounterView.SetVisible(false);
         }
+    }
+
+    private static IEnumerator DisplayText(float delay, string text)
+    {
+        StartCounterView.SetText(text);
+        StartCounterView.SetVisible(true);
+
+        yield return new WaitForSeconds(delay);
+        StartCounterView.SetVisible(false);
     }
 
     private static IEnumerator Countdown(float delay, int startingNum)
@@ -76,12 +84,9 @@ public class SpawnerManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null; // Wait for next frame
         }
-    }
 
-    private void StartWave(WaveType type, float duration, int maxEnemyCount)
-    {
-        _spawner.maxEnemyCount = maxEnemyCount;
-        StartCoroutine(WaveDuration(duration, type));
+        // Run end wave routine
+        StartCoroutine(EndWave());
     }
 
     private void StartWave(int waveIndex)
@@ -94,6 +99,15 @@ public class SpawnerManager : MonoBehaviour
 
         _spawner.maxEnemyCount = maxEnemyCount;
         StartCoroutine(WaveDuration(duration, type));
+    }
+
+    private IEnumerator EndWave()
+    {
+        _waveIndex++;
+        yield return StartCoroutine(DisplayText(3.5f, $"WAVE {_waveIndex} COMPLETE"));
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(FlashText(0.2f, $"WAVE {_waveIndex + 1}", 3));
+        StartWave(_waveIndex);  
     }
 
 }
