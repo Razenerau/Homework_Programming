@@ -399,8 +399,8 @@ MonoBehaviour:
   _rockTransform: {fileID: 1333881942}
   _paperTransform: {fileID: 119213169}
   _scissorsTransform: {fileID: 2054648829}
-  _amplitude: 30
-  _period: 1
+  _amplitude: 25
+  _period: 0.4
   _xOffset: 0.4
 --- !u!1 &375443645
 GameObject:
