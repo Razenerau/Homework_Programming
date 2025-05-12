@@ -2619,24 +2619,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WavesList:
   - Type: 0
-    Duration: 10
-    MaxEnemyCount: 10
+    Duration: 20
+    MaxEnemyCount: 5
     Requirements: []
   - Type: 2
-    Duration: 10
-    MaxEnemyCount: 10
+    Duration: 20
+    MaxEnemyCount: 5
     Requirements: []
   - Type: 3
-    Duration: 10
-    MaxEnemyCount: 15
+    Duration: 30
+    MaxEnemyCount: 10
     Requirements: []
   - Type: 1
-    Duration: 15
-    MaxEnemyCount: 20
+    Duration: 30
+    MaxEnemyCount: 10
     Requirements: []
   - Type: 4
-    Duration: 15
-    MaxEnemyCount: 15
+    Duration: 30
+    MaxEnemyCount: 12
+    Requirements: []
+  - Type: 3
+    Duration: 30
+    MaxEnemyCount: 12
+    Requirements: []
+  - Type: 6
+    Duration: 30
+    MaxEnemyCount: 12
+    Requirements: []
+  - Type: 6
+    Duration: 25
+    MaxEnemyCount: 22
+    Requirements: []
+  - Type: 0
+    Duration: 45
+    MaxEnemyCount: 1
+    Requirements: []
+  - Type: 6
+    Duration: 45
+    MaxEnemyCount: 30
     Requirements: []
 --- !u!1 &1629114351
 GameObject:

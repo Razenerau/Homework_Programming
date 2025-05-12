@@ -11,7 +11,7 @@ public class SpawnerManager : MonoBehaviour
     private SpawnEnemy _spawner;
     public bool CanSpawn = false;
 
-    [Flags]
+
     public enum WaveType
     {
         ROCK,
