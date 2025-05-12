@@ -68,7 +68,7 @@ public class PlayerShoot : MonoBehaviour
         InitializePool(5, Structs.BulletType.PAPER);
 
         _spawnEnemy = Spawner.GetComponent<SpawnEnemy>();
-        _spawnEnemy.SetPlayerShoot(this);
+        //_spawnEnemy.SetPlayerShoot(this);
     }
 
     private void Update()

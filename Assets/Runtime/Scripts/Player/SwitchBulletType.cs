@@ -39,7 +39,7 @@ public class SwitchBulletType : MonoBehaviour
                     CooldownModel.SetState(CooldownModel.States.ROCK);
                     break;
             }
-            Debug.Log("Current bullet type: " +  _currentBulletType);
+           //Debug.Log("Current bullet type: " +  _currentBulletType);
         }
     }
 }

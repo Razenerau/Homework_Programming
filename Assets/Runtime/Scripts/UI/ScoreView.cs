@@ -8,6 +8,8 @@ public class ScoreView : MonoBehaviour
 {
     public static ScoreView Instance; 
     [SerializeField] private GameObject _preFab;
+    [SerializeField] private float _scale;
+    [SerializeField] private float _duration;
     private GameObject[] _UIpreFabList = new GameObject[15];
     int howManyPulsing;
 
@@ -43,7 +45,7 @@ public class ScoreView : MonoBehaviour
         GameObject like = Instantiate(_preFab, _rectTransform.position, Quaternion.identity);
         like.name = $"Like_{i}";
         like.transform.SetParent(_rectTransform);
-        like.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        like.transform.localScale = new Vector3(_scale, _scale, _scale);
 
         _UIpreFabList[i] = like;
         return like;
@@ -73,7 +75,7 @@ public class ScoreView : MonoBehaviour
 
             float yPos = gameObject.transform.position.y;
             yPos += elapsed * 0.5f;
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, yPos, 0);
+            gameObject.transform.position = new Vector3(_rectTransform.position.x, yPos, 0);
             yield return null;
         }
     }
@@ -87,7 +89,7 @@ public class ScoreView : MonoBehaviour
             for (int i = 0; i < times; i++)
             {
                 StartCoroutine(Fade(_UIpreFabList[i]));
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(_duration);
             }
 
             howManyPulsing--;
@@ -99,7 +101,7 @@ public class ScoreView : MonoBehaviour
             for (int i = 0; i < times; i++)
             {
                 StartCoroutine(Fade(_UIpreFabList[i + 3]));
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(_duration);
             }
 
             howManyPulsing--;
@@ -111,7 +113,7 @@ public class ScoreView : MonoBehaviour
             for (int i = 0; i < times; i++)
             {
                 StartCoroutine(Fade(_UIpreFabList[i + 6]));
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(_duration);
             }
 
             howManyPulsing--;
@@ -123,7 +125,7 @@ public class ScoreView : MonoBehaviour
             for (int i = 0; i < times; i++)
             {
                 StartCoroutine(Fade(_UIpreFabList[i + 9]));
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(_duration);
             }
 
             howManyPulsing--;
@@ -135,18 +137,10 @@ public class ScoreView : MonoBehaviour
             for (int i = 0; i < times; i++)
             {
                 StartCoroutine(Fade(_UIpreFabList[i + 12]));
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(_duration);
             }
 
             howManyPulsing--;
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(FadeMultiple(3));
         }
     }
 
