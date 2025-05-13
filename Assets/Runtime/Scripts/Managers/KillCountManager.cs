@@ -23,14 +23,20 @@ public static class KillCountManager
             case Structs.BulletType.SCISSORS:
                 ScissorsKillCount++;
                 TotalScissorsKillCount++;
+
+                Debug.Log($"Scissors count: {ScissorsKillCount}");
                 break;
             case Structs.BulletType.PAPER:
                 PaperKillCount++;
                 TotalPaperKillCount++;
+
+                Debug.Log($"Paper count: {PaperKillCount}");
                 break;
             default:
                 RockKillCount++;
                 TotalRockKillCount++;
+
+                Debug.Log($"Rock count: {RockKillCount}");
                 break;
         }
     }
@@ -49,5 +55,12 @@ public static class KillCountManager
         {
             MaxScissorsKillCount = ScissorsKillCount;
         }
+    }
+
+    public static void Reset()
+    {
+        RockKillCount = 0;
+        PaperKillCount = 0;
+        ScissorsKillCount = 0;
     }
 }

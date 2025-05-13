@@ -64,6 +64,7 @@ public class PaperEnemy : MonoBehaviour
         {
             //Updates the Score 
             _gameController.UpdateScore(2);
+            KillCountManager.Incerement(Structs.BulletType.PAPER);
 
             deathSound.Play();
 
