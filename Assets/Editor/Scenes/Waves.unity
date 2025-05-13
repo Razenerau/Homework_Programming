@@ -2588,7 +2588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preFab: {fileID: 8945064412093396433, guid: 20ea0dd4896484642b8761a2612f6932, type: 3}
-  _waveIndex: 0
+  _waveIndex: 5
   CanSpawn: 0
 --- !u!4 &1507125026
 Transform:
