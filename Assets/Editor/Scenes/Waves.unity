@@ -2589,7 +2589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preFab: {fileID: 8945064412093396433, guid: 20ea0dd4896484642b8761a2612f6932, type: 3}
-  _waveIndex: 5
+  _waveIndex: 0
   CanSpawn: 0
 --- !u!4 &1507125026
 Transform:
@@ -2623,23 +2623,23 @@ MonoBehaviour:
     Duration: 20
     MaxEnemyCount: 5
     Requirements: []
-  - Type: 2
+  - Type: 1
     Duration: 20
     MaxEnemyCount: 5
     Requirements: []
-  - Type: 3
-    Duration: 30
-    MaxEnemyCount: 10
-    Requirements: []
-  - Type: 1
-    Duration: 30
-    MaxEnemyCount: 10
+  - Type: 2
+    Duration: 20
+    MaxEnemyCount: 4
     Requirements: []
   - Type: 4
-    Duration: 30
-    MaxEnemyCount: 12
+    Duration: 20
+    MaxEnemyCount: 10
     Requirements: []
   - Type: 3
+    Duration: 20
+    MaxEnemyCount: 12
+    Requirements: []
+  - Type: 5
     Duration: 30
     MaxEnemyCount: 12
     Requirements: []

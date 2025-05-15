@@ -104,6 +104,9 @@ public class SpawnerManager : MonoBehaviour
     private IEnumerator EndWave()
     {
         _waveIndex++;
+
+        KillCountManager.UpdateData();
+
         yield return StartCoroutine(DisplayText(3.5f, $"WAVE {_waveIndex} COMPLETE"));
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(FlashText(0.2f, $"WAVE {_waveIndex + 1}", 3));
