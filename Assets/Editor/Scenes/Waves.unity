@@ -787,6 +787,7 @@ MonoBehaviour:
   - {fileID: 1141769718}
   - {fileID: 518629571}
   - {fileID: 419207760}
+  spawnerManager: {fileID: 1507125025}
 --- !u!114 &371426104
 MonoBehaviour:
   m_ObjectHideFlags: 0

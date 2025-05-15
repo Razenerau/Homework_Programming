@@ -8,6 +8,7 @@ public class PlayerDie : MonoBehaviour
 
     public GameObject deathPanel;
     [SerializeField] private List<DeathScreenStats> _deathScreenStatsList;
+    [SerializeField] private SpawnerManager spawnerManager;
 
     // Tags
     private const string _boundsTag = "Bounds";
@@ -37,6 +38,7 @@ public class PlayerDie : MonoBehaviour
         {
             ItitializeDeathScreenStats();
 
+            spawnerManager.gameObject.SetActive(false);
             deathPanel.SetActive(true);
             gameObject.SetActive(false);
         }
