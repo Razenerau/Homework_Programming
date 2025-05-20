@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Runtime/Scenes/Tutorial.unity
     guid: 6b847479457f57643aa04d8901e1930d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Runtime/Scenes/Prototype.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Editor/Scenes/Waves.unity
+    guid: eb6944b08bf5a264aa6930ef829c84b9
   m_configObjects: {}
