@@ -3041,7 +3041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preFab: {fileID: 8945064412093396433, guid: 20ea0dd4896484642b8761a2612f6932, type: 3}
-  _waveIndex: 0
+  _waveIndex: 8
   CanSpawn: 0
 --- !u!4 &1507125026
 Transform:
@@ -3101,15 +3101,15 @@ MonoBehaviour:
     Requirements: []
   - Type: 6
     Duration: 25
-    MaxEnemyCount: 22
+    MaxEnemyCount: 20
     Requirements: []
   - Type: 0
     Duration: 45
     MaxEnemyCount: 1
     Requirements: []
   - Type: 6
-    Duration: 45
-    MaxEnemyCount: 30
+    Duration: 30
+    MaxEnemyCount: 24
     Requirements: []
 --- !u!1 &1629114351
 GameObject:

@@ -94,6 +94,8 @@ public class SpawnerManager : MonoBehaviour
     {
         List<Wave> wavesList = WaveList.Instance.WavesList;
 
+        if (waveIndex >= 10) { StartCoroutine(TheEnd()); return; }
+
         int maxEnemyCount = wavesList[waveIndex].MaxEnemyCount;
         float duration = wavesList[waveIndex].Duration;
         WaveType type = wavesList[waveIndex].Type;
@@ -112,7 +114,14 @@ public class SpawnerManager : MonoBehaviour
         yield return StartCoroutine(DisplayText(3.5f, $"WAVE {_waveIndex} COMPLETE", 100));
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(FlashText(0.2f, $"WAVE {_waveIndex + 1}", 3, 100));
-        StartWave(_waveIndex);  
+
+        if (_waveIndex < 11) StartWave(_waveIndex); 
+        else StartCoroutine(TheEnd());
+    }
+
+    private IEnumerator TheEnd()
+    {
+        yield return StartCoroutine(DisplayText(1000, "!!!YOU WIN!!!", 175));
     }
 
 }
