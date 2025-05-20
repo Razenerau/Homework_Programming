@@ -26,6 +26,7 @@ public class SpawnerManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        KillCountManager.Reset();
         StartCoroutine(LoadPrefabAfterDelay(1f));
     }
 
