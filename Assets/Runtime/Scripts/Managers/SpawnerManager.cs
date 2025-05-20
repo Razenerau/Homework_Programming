@@ -32,44 +32,44 @@ public class SpawnerManager : MonoBehaviour
     // Start of the wave
     private System.Collections.IEnumerator LoadPrefabAfterDelay(float delay)
     {
-        AnouncementTextView.SetVisible(false);
+        StartCounterView.SetVisible(false);
         yield return new WaitForSeconds(delay);
-        AnouncementTextView.SetVisible(true);
+        StartCounterView.SetVisible(true);
 
-        yield return StartCoroutine(Countdown(delay, 3, 175));
-        yield return StartCoroutine(FlashText(delay / 5, "GO GO GO", 3, 175));
+        yield return StartCoroutine(Countdown(delay, 3));
+        yield return StartCoroutine(FlashText(delay / 5, "GO GO GO", 3));
 
         _spawner = Instantiate(_preFab, Vector3.zero, Quaternion.identity);
         StartWave(0);
     }
 
-    private static IEnumerator FlashText(float delay, string text, int repeatTimes, int fontSize)
+    private static IEnumerator FlashText(float delay, string text, int repeatTimes)
     {
         for (int i = 0; i < repeatTimes; i++)
         {
             yield return new WaitForSeconds(delay);
-            AnouncementTextView.SetText(text , fontSize);
-            AnouncementTextView.SetVisible(true);
+            StartCounterView.SetText(text);
+            StartCounterView.SetVisible(true);
 
             yield return new WaitForSeconds(delay);
-            AnouncementTextView.SetVisible(false);
+            StartCounterView.SetVisible(false);
         }
     }
 
-    private static IEnumerator DisplayText(float delay, string text, int fontSize)
+    private static IEnumerator DisplayText(float delay, string text)
     {
-        AnouncementTextView.SetText(text, fontSize);
-        AnouncementTextView.SetVisible(true);
+        StartCounterView.SetText(text);
+        StartCounterView.SetVisible(true);
 
         yield return new WaitForSeconds(delay);
-        AnouncementTextView.SetVisible(false);
+        StartCounterView.SetVisible(false);
     }
 
-    private static IEnumerator Countdown(float delay, int startingNum, int fontSize)
+    private static IEnumerator Countdown(float delay, int startingNum)
     {
         for (int i = 3; i > 0; i--)
         {
-            AnouncementTextView.SetText(i + "", fontSize);
+            StartCounterView.SetText(i + "");
             yield return new WaitForSeconds(delay);
         }
     }
@@ -104,13 +104,9 @@ public class SpawnerManager : MonoBehaviour
     private IEnumerator EndWave()
     {
         _waveIndex++;
-
-        KillCountManager.UpdateData();
-        AnouncementTextView.SetLocation("up"); 
-
-        yield return StartCoroutine(DisplayText(3.5f, $"WAVE {_waveIndex} COMPLETE", 100));
-        yield return new WaitForSeconds(1.5f);
-        yield return StartCoroutine(FlashText(0.2f, $"WAVE {_waveIndex + 1}", 3, 100));
+        yield return StartCoroutine(DisplayText(3.5f, $"WAVE {_waveIndex} COMPLETE"));
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(FlashText(0.2f, $"WAVE {_waveIndex + 1}", 3));
         StartWave(_waveIndex);  
     }
 

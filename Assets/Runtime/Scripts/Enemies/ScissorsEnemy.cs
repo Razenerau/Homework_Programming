@@ -65,7 +65,6 @@ public class ScissorsEnemy : MonoBehaviour
         {
             //Updates the Score 
             _gameController.UpdateScore(3);
-            KillCountManager.Incerement(Structs.BulletType.SCISSORS);
 
             deathSound.clip = clip;
             deathSound.Play(); 

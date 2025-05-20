@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,11 +6,15 @@ public class PlayerDie : MonoBehaviour
     private PlayerHealth _playerHealth;
 
     public GameObject deathPanel;
-    [SerializeField] private List<DeathScreenStats> _deathScreenStatsList;
-    [SerializeField] private SpawnerManager spawnerManager;
 
     // Tags
     private const string _boundsTag = "Bounds";
+    //private const string _playerRockBulletTag = "Player Rock Bullet";
+    //private const string _playerPaperBulletTag = "Player Paper Bullet";
+    //private const string _playerScissorsBulletTag = "Player Scissors Bullet";
+    //private const string _enemyRockBulletTag = "Enemy Rock";
+    //private const string _enemyPaperBulletTag = "Enemy Paper";
+    //private const string _enemyrScissorsBulletTag = "Enemy Scissors";
 
     private void Start()
     {
@@ -36,18 +39,8 @@ public class PlayerDie : MonoBehaviour
         // If player's health reaches 0
         if (_playerHealth.getHealth() == 0)
         {
-            ItitializeDeathScreenStats();
-
-            spawnerManager.gameObject.SetActive(false);
             deathPanel.SetActive(true);
             gameObject.SetActive(false);
         }
-    }
-
-    private void ItitializeDeathScreenStats()
-    {
-        _deathScreenStatsList[0].SetText(KillCountManager.RockKillCount);
-        _deathScreenStatsList[1].SetText(KillCountManager.PaperKillCount);
-        _deathScreenStatsList[2].SetText(KillCountManager.ScissorsKillCount);
     }
 }

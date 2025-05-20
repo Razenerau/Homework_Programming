@@ -64,7 +64,6 @@ public class Enemy : MonoBehaviour
         {
             //Updates the Score 
             _gameController.UpdateScore();
-            KillCountManager.Incerement(Structs.BulletType.ROCK);
 
             deathSound.Play();
 
