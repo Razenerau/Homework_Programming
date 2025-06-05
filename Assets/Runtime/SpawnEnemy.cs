@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
@@ -13,12 +12,6 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject scissorsPreFab;
     public int maxEnemyCount;
     private int index = 0;
-
-    /* Update is called once per frame
-    void Update()
-    {
-        EnemySpawn();
-    } */
 
     public void EnemySpawn(SpawnerManager.WaveType type)
     {

@@ -102,6 +102,7 @@ public class SpawnerManager : MonoBehaviour
 
         _spawner.maxEnemyCount = maxEnemyCount;
         StartCoroutine(WaveDuration(duration, type));
+        StartCoroutine(WaveCountdownModel.Instance.Countdown(duration));
     }
 
     private IEnumerator EndWave()
