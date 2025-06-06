@@ -11,6 +11,10 @@ public class SwitchBulletType : MonoBehaviour
         get { return _currentBulletType; }
     }
 
+    private void Start()
+    {
+        switchBullet();
+    }
     void Update()
     {
         switchBullet();
@@ -20,26 +24,24 @@ public class SwitchBulletType : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //Pass ref to cooldownModel here
-
-            //CooldownModel.SetStateColor(false);
-
             switch (currentBulletType)
             {
                 case Structs.BulletType.ROCK:
+                    PlayerView.Instance.SetPaper();
                     _currentBulletType = Structs.BulletType.PAPER;
                     CooldownModel.SetState(CooldownModel.States.PAPER);
                     break;
                 case Structs.BulletType.PAPER:
+                    PlayerView.Instance.SetScissors();
                     _currentBulletType = Structs.BulletType.SCISSORS;
                     CooldownModel.SetState(CooldownModel.States.SCISSORS);
                     break;
                 case Structs.BulletType.SCISSORS:
-                    _currentBulletType = Structs.BulletType.ROCK;
-                    CooldownModel.SetState(CooldownModel.States.ROCK);
+                    PlayerView.Instance.SetRock(); // Update sprite
+                    _currentBulletType = Structs.BulletType.ROCK; // Update bullet type
+                    CooldownModel.SetState(CooldownModel.States.ROCK); // Update cooldown visuals
                     break;
             }
-           //Debug.Log("Current bullet type: " +  _currentBulletType);
         }
     }
 }

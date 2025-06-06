@@ -205,9 +205,9 @@ TextureImporter:
       name: RPS2-Tile-Map_5
       rect:
         serializedVersion: 2
-        x: 2000
+        x: 2062
         y: 12000
-        width: 1000
+        width: 938
         height: 1000
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -268,9 +268,9 @@ TextureImporter:
       name: RPS2-Tile-Map_8
       rect:
         serializedVersion: 2
-        x: 2000
+        x: 2061
         y: 11000
-        width: 1000
+        width: 939
         height: 1000
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
