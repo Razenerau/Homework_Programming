@@ -11,10 +11,6 @@ public class SwitchBulletType : MonoBehaviour
         get { return _currentBulletType; }
     }
 
-    private void Start()
-    {
-        switchBullet();
-    }
     void Update()
     {
         switchBullet();

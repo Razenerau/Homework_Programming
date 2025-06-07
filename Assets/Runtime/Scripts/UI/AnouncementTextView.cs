@@ -33,6 +33,11 @@ public class AnouncementTextView : MonoBehaviour
         _text.rectTransform.position = pos;
     }
 
+    public static void SetText(string text)
+    {
+        _text.text = text;
+    }
+
     public static void SetText(string text, float fontSize)
     {
         _text.text = text;
