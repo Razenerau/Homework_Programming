@@ -9,9 +9,12 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private AWSDView _AWSDView;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerRotation _playerRotation;
+    [SerializeField] private PlayerShoot _playerShoot;
+    [SerializeField] private SwitchBulletType _switchBulletType;
 
     private bool _shouldCheckAWSD = false;
     private bool _shouldCheckMouse = false;
+    private bool _shouldCheckShoot = false;
 
     private bool _isAPressed = false;
     private bool _isWPressed = false;
@@ -26,6 +29,8 @@ public class TutorialModel : MonoBehaviour
         _tutorialView.SetVisible(false);
         _AWSDView.SetVisible(false);
         _playerMovement.enabled = false;
+        _playerShoot.enabled = false;
+        _switchBulletType.enabled = false;
     }
 
     private IEnumerator TutorialStart()
@@ -40,6 +45,7 @@ public class TutorialModel : MonoBehaviour
         yield return new WaitForSecondsRealtime(duraiton);
     }
 
+    // Mouse tutorial
     private void StartMouseTutorial()
     {
         _tutorialView.SetText("Use MOUSE to turn");
@@ -50,9 +56,36 @@ public class TutorialModel : MonoBehaviour
     private IEnumerator EndMouseTutorial()
     {
         yield return StartCoroutine(Wait(3f));
-        StartAWSDTutorial();
+        yield return StartCoroutine(StartShootTutorial());
+        //StartAWSDTutorial();
     }
 
+    // Shooting tutorial
+    private IEnumerator StartShootTutorial()
+    {
+        _tutorialView.SetText("!!!WARNING!!!");
+        yield return StartCoroutine(Wait(1.5f));
+        _tutorialView.SetText("This scissors-enemy is trying to attack you!\nPress LEFT MOUSE KEY to shoot!");
+        _playerShoot.enabled = true;
+        _shouldCheckShoot = true;
+        _tutorialView.ShootTutorial();
+    }
+
+    private IEnumerator EndShootTutorial()
+    {
+        yield return StartCoroutine(Wait(3f));
+    }
+
+    // Shooting and killing scissors enemy tutorial
+
+    private IEnumerator EndKillTutorial()
+    {
+        yield return StartCoroutine(Wait(3f));
+    }
+
+    // Obtaining paper bullet and not being able to reahc next enemy
+
+    // Movement tutorial
     private void StartAWSDTutorial()
     {
         _playerMovement.enabled = true;
@@ -113,6 +146,16 @@ public class TutorialModel : MonoBehaviour
                 _tutorialView.SetText("Well done!");
                 _shouldCheckMouse = false;
                 StartCoroutine(EndMouseTutorial());
+            }
+        }
+
+        if (_shouldCheckShoot)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                _tutorialView.SetText("Well done!");
+                _shouldCheckShoot = false;
+                StartCoroutine(EndShootTutorial());
             }
         }
     }
