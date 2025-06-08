@@ -7,8 +7,12 @@ public class TutorialModel : MonoBehaviour
 {
     [SerializeField] private TutorialVIew _tutorialView;
     [SerializeField] private AWSDView _AWSDView;
+    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private PlayerRotation _playerRotation;
 
     private bool _shouldCheckAWSD = false;
+    private bool _shouldCheckMouse = false;
+
     private bool _isAPressed = false;
     private bool _isWPressed = false;
     private bool _isSPressed = false;
@@ -17,15 +21,18 @@ public class TutorialModel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _tutorialView.SetSize(70f);
         StartCoroutine(TutorialStart());
         _tutorialView.SetVisible(false);
         _AWSDView.SetVisible(false);
+        _playerMovement.enabled = false;
     }
 
     private IEnumerator TutorialStart()
     {
-        yield return new WaitForSecondsRealtime(1f);
-        StartAWSD();
+        yield return StartCoroutine(Wait(1f));
+        
+        StartMouseTutorial();
     }
 
     private IEnumerator Wait(float duraiton)
@@ -33,19 +40,32 @@ public class TutorialModel : MonoBehaviour
         yield return new WaitForSecondsRealtime(duraiton);
     }
 
-    private void StartAWSD()
+    private void StartMouseTutorial()
     {
-        _tutorialView.SetSize(70f);
-        _tutorialView.SetText("Use StartAWSD to move");
+        _tutorialView.SetText("Use MOUSE to turn");
+        _tutorialView.SetVisible(true);
+        _shouldCheckMouse = true;
+    }
+
+    private IEnumerator EndMouseTutorial()
+    {
+        yield return StartCoroutine(Wait(3f));
+        StartAWSDTutorial();
+    }
+
+    private void StartAWSDTutorial()
+    {
+        _playerMovement.enabled = true;
+        _tutorialView.SetText("Use AWSD to move");
         _tutorialView.SetVisible(true);
         _AWSDView.SetVisible(true);
         _shouldCheckAWSD = true;
     }
 
-    private void EndAWSD()
+    private IEnumerator EndAWSDTutorial()
     {
         _tutorialView.SetText("Well done!");
-        StartCoroutine(Wait(1f));
+        yield return StartCoroutine(Wait(1f));
         _AWSDView.SetVisible(false);
     }
 
@@ -78,7 +98,21 @@ public class TutorialModel : MonoBehaviour
 
             if(_isAPressed && _isWPressed && _isSPressed && _isDPressed)
             {
-                EndAWSD();
+                StartCoroutine(EndAWSDTutorial());
+                _shouldCheckAWSD = false;
+            }
+        }
+
+        if(_shouldCheckMouse)
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+
+            if (mouseX != 0 || mouseY != 0)
+            {
+                _tutorialView.SetText("Well done!");
+                _shouldCheckMouse = false;
+                StartCoroutine(EndMouseTutorial());
             }
         }
     }
