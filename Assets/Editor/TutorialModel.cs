@@ -11,10 +11,13 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private PlayerRotation _playerRotation;
     [SerializeField] private PlayerShoot _playerShoot;
     [SerializeField] private SwitchBulletType _switchBulletType;
+    [SerializeField] private SpawnerManager _spawnerManager;
+
+    
 
     private bool _shouldCheckAWSD = false;
     private bool _shouldCheckMouse = false;
-    private bool _shouldCheckShoot = false;
+    private bool _shouldCheckScissorsDeath = false;
 
     private bool _isAPressed = false;
     private bool _isWPressed = false;
@@ -45,7 +48,10 @@ public class TutorialModel : MonoBehaviour
         yield return new WaitForSecondsRealtime(duraiton);
     }
 
+    // ----------------------------------------------------
     // Mouse tutorial
+    // ----------------------------------------------------
+
     private void StartMouseTutorial()
     {
         _tutorialView.SetText("Use MOUSE to turn");
@@ -60,32 +66,83 @@ public class TutorialModel : MonoBehaviour
         //StartAWSDTutorial();
     }
 
+    // ----------------------------------------------------
     // Shooting tutorial
+    // ----------------------------------------------------
+
     private IEnumerator StartShootTutorial()
     {
-        _tutorialView.SetText("!!!WARNING!!!");
+        _tutorialView.SetText("! ! ! WARNING ! ! !");
+        ShootTutorial();
         yield return StartCoroutine(Wait(1.5f));
         _tutorialView.SetText("This scissors-enemy is trying to attack you!\nPress LEFT MOUSE KEY to shoot!");
         _playerShoot.enabled = true;
-        _shouldCheckShoot = true;
-        _tutorialView.ShootTutorial();
+        _shouldCheckScissorsDeath = true;
+        
+    }
+
+    public void ShootTutorial()
+    {
+        Vector3 pos = new Vector3(12, 0, 0);
+        Vector3 targetPos = new Vector3(4, 0, 0);
+
+        GameObject scissorsEnemy = _tutorialView.InstanciateScissorsEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
+
+        ScissorsEnemy script = scissorsEnemy.GetComponent<ScissorsEnemy>();
+        script.deathTime = 999999f;
+
+        StartCoroutine(MoveObject(scissorsEnemy, targetPos, 100));
+    }
+
+    private IEnumerator MoveObject(GameObject gameObject, Vector3 targetPos, float moveDuration)
+    {
+        if (gameObject != null)
+        {
+            Vector3 startPos = gameObject.transform.position;
+            float elapsedTime = 0;
+            while (elapsedTime < moveDuration)
+            {
+                if (gameObject == null)
+                {
+                    Debug.Log("Scissors were destroyed");
+                    break;
+                }
+
+                float startingX = gameObject.transform.position.x;
+                float finalX = targetPos.x;
+                float slope = (finalX - startingX) / moveDuration;
+                float currentX = slope * elapsedTime + startingX;
+
+                gameObject.transform.position = new Vector3(currentX, 0, 0);
+                elapsedTime += Time.deltaTime * 0.1f;
+                yield return null;
+            }
+        }
     }
 
     private IEnumerator EndShootTutorial()
     {
         yield return StartCoroutine(Wait(3f));
+        StartCoroutine(HarderShootTutorial());
     }
 
-    // Shooting and killing scissors enemy tutorial
-
-    private IEnumerator EndKillTutorial()
+    private IEnumerator HarderShootTutorial()
     {
-        yield return StartCoroutine(Wait(3f));
+        BoundsView boundsView = GetComponent<BoundsView>();
+        boundsView.SetBoundsActive(true);
+
+        _spawnerManager.ForceInstantiateSpawner();
+        _spawnerManager.StartWave(0);
+
+        yield return StartCoroutine(Wait(20f));
     }
 
-    // Obtaining paper bullet and not being able to reahc next enemy
+    // Obtaining paper bullet and not being able to reach next enemy
 
+    // ----------------------------------------------------
     // Movement tutorial
+    // ----------------------------------------------------
+
     private void StartAWSDTutorial()
     {
         _playerMovement.enabled = true;
@@ -102,7 +159,7 @@ public class TutorialModel : MonoBehaviour
         _AWSDView.SetVisible(false);
     }
 
-
+    
 
     private void Update()
     {
@@ -149,12 +206,12 @@ public class TutorialModel : MonoBehaviour
             }
         }
 
-        if (_shouldCheckShoot)
+        if (_shouldCheckScissorsDeath)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (gameObject.transform.childCount == 0)
             {
                 _tutorialView.SetText("Well done!");
-                _shouldCheckShoot = false;
+                _shouldCheckScissorsDeath = false;
                 StartCoroutine(EndShootTutorial());
             }
         }

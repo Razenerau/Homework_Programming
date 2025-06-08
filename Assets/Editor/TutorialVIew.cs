@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static UnityEditor.PlayerSettings;
 
 public class TutorialVIew : MonoBehaviour
 {
@@ -36,35 +37,15 @@ public class TutorialVIew : MonoBehaviour
 
     }
 
-    public void ShootTutorial()
+    public GameObject InstanciateScissorsEnemy(Vector3 pos, Quaternion rotation, Transform transform)
     {
-        Vector3 pos = new Vector3(12, 0, 0);
-        Vector3 targetPos = new Vector3(4, 0, 0);
-        GameObject scissorsEnemy = Instantiate(_scissorsEnemy, pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
-        
-        ScissorsEnemy script = scissorsEnemy.GetComponent<ScissorsEnemy>();
-        script.deathTime = 999999f;
-
-        StartCoroutine(MoveObject(scissorsEnemy, targetPos, 100));
+        GameObject scissorsEnemy = Instantiate(_scissorsEnemy, pos, rotation, transform);
+        return scissorsEnemy;
     }
 
-    private IEnumerator MoveObject(GameObject gameObject, Vector3 targetPos, float moveDuration)
+    private void SetPosition(GameObject gameObject, Vector3 pos)
     {
-        
-        Vector3 startPos = gameObject.transform.position;
-        float elapsedTime = 0;
-        while (elapsedTime < moveDuration)
-        {
-            float startingX = gameObject.transform.position.x;
-            float finalX = targetPos.x;
-            float slope = (finalX - startingX) / moveDuration;
-            float currentX = slope * elapsedTime + startingX;
-
-            gameObject.transform.position = new Vector3(currentX, 0, 0);
-            elapsedTime += Time.deltaTime * 0.1f;
-            yield return null;
-        }
-
+        gameObject.transform.position = pos;
     }
 
 }

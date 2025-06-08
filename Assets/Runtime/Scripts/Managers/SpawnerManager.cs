@@ -28,6 +28,7 @@ public class SpawnerManager : MonoBehaviour
     {
         KillCountManager.Reset();
         StartCoroutine(LoadPrefabAfterDelay(1f));
+        Debug.Log("SpawnManager Loaded");
     }
 
     // Start of the wave
@@ -68,7 +69,7 @@ public class SpawnerManager : MonoBehaviour
 
     private static IEnumerator Countdown(float delay, int startingNum, int fontSize)
     {
-        for (int i = 3; i > 0; i--)
+        for (int i = startingNum; i > 0; i--)
         {
             AnouncementTextView.SetText(i + "", fontSize);
             yield return new WaitForSeconds(delay);
@@ -90,7 +91,7 @@ public class SpawnerManager : MonoBehaviour
         StartCoroutine(EndWave());
     }
 
-    private void StartWave(int waveIndex)
+    public void StartWave(int waveIndex)
     {
         List<Wave> wavesList = WaveList.Instance.WavesList;
 
@@ -100,6 +101,7 @@ public class SpawnerManager : MonoBehaviour
         float duration = wavesList[waveIndex].Duration;
         WaveType type = wavesList[waveIndex].Type;
 
+        if (_spawner == null) Debug.LogWarning("spawner not found");
         _spawner.maxEnemyCount = maxEnemyCount;
         StartCoroutine(WaveDuration(duration, type));
         StartCoroutine(WaveCountdownModel.Instance.Countdown(duration));
@@ -123,6 +125,11 @@ public class SpawnerManager : MonoBehaviour
     private IEnumerator TheEnd()
     {
         yield return StartCoroutine(DisplayText(1000, "!!!YOU WIN!!!", 175));
+    }
+
+    public void ForceInstantiateSpawner()
+    {
+        _spawner = Instantiate(_preFab, Vector3.zero, Quaternion.identity);
     }
 
 }

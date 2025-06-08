@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 6509627}
   - component: {fileID: 6509626}
   - component: {fileID: 6509625}
+  - component: {fileID: 6509628}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   _playerRotation: {fileID: 1136735135}
   _playerShoot: {fileID: 1136735132}
   _switchBulletType: {fileID: 1136735130}
+  _spawnerManager: {fileID: 1830538584}
 --- !u!4 &6509627
 Transform:
   m_ObjectHideFlags: 0
@@ -187,6 +189,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6509628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad243afab0ba9343aa4bf42f01f89db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundsList:
+  - {fileID: 795584676}
+  - {fileID: 2027630421}
+  - {fileID: 1834470335}
+  - {fileID: 147461115}
 --- !u!1 &88028748
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,45 +4060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WavesList:
-  - Type: 0
-    Duration: 20
-    MaxEnemyCount: 5
-    Requirements: []
-  - Type: 1
-    Duration: 20
-    MaxEnemyCount: 5
-    Requirements: []
   - Type: 2
     Duration: 20
-    MaxEnemyCount: 4
-    Requirements: []
-  - Type: 4
-    Duration: 20
-    MaxEnemyCount: 10
-    Requirements: []
-  - Type: 3
-    Duration: 20
-    MaxEnemyCount: 12
-    Requirements: []
-  - Type: 5
-    Duration: 30
-    MaxEnemyCount: 12
-    Requirements: []
-  - Type: 6
-    Duration: 30
-    MaxEnemyCount: 12
-    Requirements: []
-  - Type: 6
-    Duration: 25
-    MaxEnemyCount: 20
-    Requirements: []
-  - Type: 0
-    Duration: 45
-    MaxEnemyCount: 1
-    Requirements: []
-  - Type: 6
-    Duration: 30
-    MaxEnemyCount: 24
+    MaxEnemyCount: 3
     Requirements: []
 --- !u!4 &1830538586
 Transform:
@@ -5210,7 +5193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2034158295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5333,12 +5316,12 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2034158296}
   - {fileID: 944378715}
   - {fileID: 193463820}
   - {fileID: 2061812910}
   - {fileID: 6509627}
   - {fileID: 292166639}
+  - {fileID: 2034158296}
   - {fileID: 1830538586}
   - {fileID: 1855579569}
   - {fileID: 1867942363}
