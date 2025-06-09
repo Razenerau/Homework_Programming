@@ -16,7 +16,7 @@ public class LivesCounter : MonoBehaviour
     public void updateLivesCounter()
     {
         _rect = transform as RectTransform;
-        _rect.sizeDelta = new Vector2(playerHealth.getHealth() * _tileWidth, _rect.sizeDelta.y);
-        _rect.anchoredPosition = new Vector2(playerHealth.getHealth() * 50, 0);
+        _rect.sizeDelta = new Vector2(playerHealth.GetHealth() * _tileWidth, _rect.sizeDelta.y);
+        _rect.anchoredPosition = new Vector2(playerHealth.GetHealth() * 50, 0);
     }
 }

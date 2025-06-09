@@ -34,7 +34,7 @@ public class PlayerDie : MonoBehaviour
         }
         
         // If player's health reaches 0
-        if (_playerHealth.getHealth() == 0)
+        if (_playerHealth.GetHealth() == 0)
         {
             ItitializeDeathScreenStats();
 

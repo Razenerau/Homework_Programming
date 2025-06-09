@@ -12,6 +12,7 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private PlayerShoot _playerShoot;
     [SerializeField] private SwitchBulletType _switchBulletType;
     [SerializeField] private SpawnerManager _spawnerManager;
+    [SerializeField] private KeepPositionStatic _keepPositionStatic;
 
     
 
@@ -128,6 +129,7 @@ public class TutorialModel : MonoBehaviour
 
     private IEnumerator HarderShootTutorial()
     {
+        _tutorialView.SetText("Let's make it a bit harder!");
         BoundsView boundsView = GetComponent<BoundsView>();
         boundsView.SetBoundsActive(true);
 
@@ -145,6 +147,7 @@ public class TutorialModel : MonoBehaviour
 
     private void StartAWSDTutorial()
     {
+        _keepPositionStatic.enabled = false;
         _playerMovement.enabled = true;
         _tutorialView.SetText("Use AWSD to move");
         _tutorialView.SetVisible(true);
@@ -158,8 +161,6 @@ public class TutorialModel : MonoBehaviour
         yield return StartCoroutine(Wait(1f));
         _AWSDView.SetVisible(false);
     }
-
-    
 
     private void Update()
     {

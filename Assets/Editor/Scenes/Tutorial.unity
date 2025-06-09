@@ -174,6 +174,7 @@ MonoBehaviour:
   _playerShoot: {fileID: 1136735132}
   _switchBulletType: {fileID: 1136735130}
   _spawnerManager: {fileID: 1830538584}
+  _keepPositionStatic: {fileID: 0}
 --- !u!4 &6509627
 Transform:
   m_ObjectHideFlags: 0
@@ -767,7 +768,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 297.00003}
+  m_AnchoredPosition: {x: 0, y: 354}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &409366116
@@ -2394,6 +2395,7 @@ GameObject:
   - component: {fileID: 1136735131}
   - component: {fileID: 1136735130}
   - component: {fileID: 1136735129}
+  - component: {fileID: 1136735141}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2720,6 +2722,18 @@ Transform:
   - {fileID: 1783452155}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1136735141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136735128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c288208efe304364a97fc0092ee3d2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154964512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3674,7 +3688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 297}
+  m_AnchoredPosition: {x: 0, y: 255}
   m_SizeDelta: {x: 301.082, y: 98.135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724121722
@@ -3749,8 +3763,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.73
-  m_fontSizeBase: 68.73
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

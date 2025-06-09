@@ -30,5 +30,5 @@ public class PlayerHealth : MonoBehaviour
         livesCounter.updateLivesCounter();
     }
 
-    public int getHealth() { return health; }
+    public int GetHealth() { return health; }
 }
