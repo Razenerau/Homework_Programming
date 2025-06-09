@@ -167,14 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19f5ef714a75d343bd69a6dd1410994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnerManager: {fileID: 1830538584}
   _tutorialView: {fileID: 6509625}
   _AWSDView: {fileID: 1783452156}
   _playerMovement: {fileID: 1136735136}
   _playerRotation: {fileID: 1136735135}
   _playerShoot: {fileID: 1136735132}
   _switchBulletType: {fileID: 1136735130}
-  _spawnerManager: {fileID: 1830538584}
-  _keepPositionStatic: {fileID: 0}
+  _keepPositionStatic: {fileID: 1136735141}
+  _playerHealth: {fileID: 1136735133}
 --- !u!4 &6509627
 Transform:
   m_ObjectHideFlags: 0

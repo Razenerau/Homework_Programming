@@ -25,15 +25,15 @@ public class PlayerDie : MonoBehaviour
         if (collision.gameObject.tag.Contains("Enemy"))
         {
             Destroy(collision.gameObject);
-            _playerHealth.decreaseHealth(1);
+            _playerHealth.DecreaseHealth(1);
         }
         else if (collision.gameObject.tag == _boundsTag)
         {
             gameObject.transform.position = Vector2.zero;
-            _playerHealth.decreaseHealth(1);
+            _playerHealth.DecreaseHealth(1);
         }
         
-        // If player's health reaches 0
+        // If player's Health reaches 0
         if (_playerHealth.GetHealth() == 0)
         {
             ItitializeDeathScreenStats();

@@ -9,26 +9,34 @@ public class PlayerHealth : MonoBehaviour
     private int _health = 5;
     private int _maxHealth = 5;
 
-    public int health
+    public int Health
     {
         get => _health;
-        private set
+        set
         {
             _health = Mathf.Clamp(value, 0, _maxHealth);
         }
     }
 
-    public void decreaseHealth(int damage)
+    public void DecreaseHealth(int damage)
     {
-        health -= damage;
+        Health -= damage;
         livesCounter.updateLivesCounter();
     }
 
-    public void increaseLife(int num)
+    public void IncreaseLife(int num)
     {
-        health += num;
+        Health += num;
         livesCounter.updateLivesCounter();
     }
 
-    public int GetHealth() { return health; }
+    public int GetHealth() { return Health; }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            DecreaseHealth(1);
+        }
+    }
 }

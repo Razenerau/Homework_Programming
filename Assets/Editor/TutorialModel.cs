@@ -5,20 +5,25 @@ using UnityEngine;
 
 public class TutorialModel : MonoBehaviour
 {
+    [SerializeField] private SpawnerManager _spawnerManager;
     [SerializeField] private TutorialVIew _tutorialView;
     [SerializeField] private AWSDView _AWSDView;
+
+    [Header("Player")]
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerRotation _playerRotation;
     [SerializeField] private PlayerShoot _playerShoot;
     [SerializeField] private SwitchBulletType _switchBulletType;
-    [SerializeField] private SpawnerManager _spawnerManager;
     [SerializeField] private KeepPositionStatic _keepPositionStatic;
+    [SerializeField] private PlayerHealth _playerHealth;
+   
 
     
 
     private bool _shouldCheckAWSD = false;
     private bool _shouldCheckMouse = false;
     private bool _shouldCheckScissorsDeath = false;
+    private bool _shouldCheckPlayerHealth = false;
 
     private bool _isAPressed = false;
     private bool _isWPressed = false;
@@ -127,16 +132,35 @@ public class TutorialModel : MonoBehaviour
         StartCoroutine(HarderShootTutorial());
     }
 
+    // ----------------------------------------------------
+    // Harer Shooting tutorial
+    // ----------------------------------------------------
+
     private IEnumerator HarderShootTutorial()
     {
         _tutorialView.SetText("Let's make it a bit harder!");
         BoundsView boundsView = GetComponent<BoundsView>();
         boundsView.SetBoundsActive(true);
+        _shouldCheckPlayerHealth = true;
 
         _spawnerManager.ForceInstantiateSpawner();
         _spawnerManager.StartWave(0);
 
         yield return StartCoroutine(Wait(20f));
+    }
+
+    private IEnumerator TryAgain(int stage)
+    {
+        switch (stage)
+        {
+            case 0:
+                _tutorialView.SetText("You were so close!");
+                yield return StartCoroutine(Wait(3f));
+                _tutorialView.SetText("Let's try again!");
+                _playerHealth.Health = 5;
+                _shouldCheckPlayerHealth = true;
+                break;
+        }
     }
 
     // Obtaining paper bullet and not being able to reach next enemy
@@ -214,6 +238,15 @@ public class TutorialModel : MonoBehaviour
                 _tutorialView.SetText("Well done!");
                 _shouldCheckScissorsDeath = false;
                 StartCoroutine(EndShootTutorial());
+            }
+        }
+
+        if (_shouldCheckPlayerHealth)
+        {
+            if(_playerHealth.GetHealth() <= 1)
+            {
+                _shouldCheckPlayerHealth = false;
+                StartCoroutine(TryAgain(0));
             }
         }
     }
