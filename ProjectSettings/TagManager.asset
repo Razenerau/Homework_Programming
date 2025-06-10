@@ -15,6 +15,7 @@ TagManager:
   - Player Rock Bullet
   - Player Paper Bullet
   - Player Scissors Bullet
+  - Unlock
   layers:
   - Default
   - TransparentFX

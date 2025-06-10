@@ -26,7 +26,7 @@ public class TutorialModel : MonoBehaviour
 
     private bool _shouldCheckAWSD = false;
     private bool _shouldCheckMouse = false;
-    private bool _shouldCheckScissorsDeath = false;
+    private bool _shouldCheckEnemyDeath = false;
     private bool _shouldCheckPlayerHealth = false;
 
     private bool _isAPressed = false;
@@ -83,25 +83,46 @@ public class TutorialModel : MonoBehaviour
     private IEnumerator StartShootTutorial()
     {
         _tutorialView.SetText("! ! ! WARNING ! ! !");
-        ShootTutorial();
+        ShootTutorial(Structs.BulletType.SCISSORS);
         yield return StartCoroutine(Wait(1.5f));
         _tutorialView.SetText("This scissors-enemy is trying to attack you!\nPress LEFT MOUSE KEY to shoot!");
         _playerShoot.enabled = true;
-        _shouldCheckScissorsDeath = true;
+        _shouldCheckEnemyDeath = true;
         
     }
 
-    public void ShootTutorial()
+    public void ShootTutorial(string enemyType)
     {
+        BoundsView _boundsView = GetComponent<BoundsView>();
+        _boundsView.SetBoundsActive(false);
+
         Vector3 pos = new Vector3(12, 0, 0);
         Vector3 targetPos = new Vector3(4, 0, 0);
 
-        GameObject scissorsEnemy = _tutorialView.InstanciateScissorsEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
+        GameObject enemy;
 
-        ScissorsEnemy script = scissorsEnemy.GetComponent<ScissorsEnemy>();
-        script.deathTime = 999999f;
+        switch (enemyType)
+        {
+            case Structs.BulletType.ROCK:
+                Debug.LogWarning("Rock created");
+                enemy = _tutorialView.InstanciateRockEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
+                Enemy rockScript = enemy.GetComponent<Enemy>();
+                rockScript.deathTime = 999999f;
+                if (rockScript != null) Debug.LogWarning("script found");
+                break;
+            case Structs.BulletType.SCISSORS:
+                enemy = _tutorialView.InstanciateScissorsEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
+                ScissorsEnemy scissrosScript = enemy.GetComponent<ScissorsEnemy>();
+                scissrosScript.deathTime = 999999f;
+                break;
+            default: // creates rock even tho its supposed to be paper
+                enemy = _tutorialView.InstanciateRockEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
+                Enemy paperScript = enemy.GetComponent<Enemy>();
+                paperScript.deathTime = 999999f;
+                break;
+        }
 
-        StartCoroutine(MoveObject(scissorsEnemy, targetPos, 100));
+        StartCoroutine(MoveObject(enemy, targetPos, 100));
     }
 
     private IEnumerator MoveObject(GameObject gameObject, Vector3 targetPos, float moveDuration)
@@ -128,6 +149,9 @@ public class TutorialModel : MonoBehaviour
                 yield return null;
             }
         }
+
+        BoundsView _boundsView = GetComponent<BoundsView>();
+        _boundsView.SetBoundsActive(true);
     }
 
     private IEnumerator EndShootTutorial()
@@ -199,9 +223,11 @@ public class TutorialModel : MonoBehaviour
         }
         _tutorialView.SetText("Well done!");
         yield return StartCoroutine(Wait(3f));
-        _tutorialView.SetText("Remember that ROCK beats SCISSORS\nSCISSORS beat PAPER\nAnd PAPER beats ROCK");
-        yield return StartCoroutine(Wait(5f));
+        //_tutorialView.SetText("Remember that ROCK beats SCISSORS\nSCISSORS beat PAPER\nAnd PAPER beats ROCK");
+        //yield return StartCoroutine(Wait(5f));
         _tutorialView.SetText("Try to defeat this enemy by choosing PAPER!");
+        ShootTutorial(Structs.BulletType.ROCK);
+        //_shouldCheckEnemyDeath = true;
     }
 
     public void NextTutorial()
@@ -285,12 +311,12 @@ public class TutorialModel : MonoBehaviour
             }
         }
 
-        if (_shouldCheckScissorsDeath)
+        if (_shouldCheckEnemyDeath)
         {
             if (gameObject.transform.childCount == 0)
             {
                 _tutorialView.SetText("Well done!");
-                _shouldCheckScissorsDeath = false;
+                _shouldCheckEnemyDeath = false;
                 StartCoroutine(EndShootTutorial());
             }
         }
