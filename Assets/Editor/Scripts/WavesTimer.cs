@@ -3,13 +3,14 @@ using System.Collections;
 
 public class WavesTimer : MonoBehaviour
 {
+    [SerializeField] TutorialModel _tutorialModel;
+
     public float TimeElapsed { get; private set; }
     private float _targetTime;
     private bool _isRunning = false;
 
     public void StartTimer(float time)
     {
-        Debug.Log("Timer started");
         _targetTime = time;
         TimeElapsed = 0;
         _isRunning = true;
@@ -35,7 +36,7 @@ public class WavesTimer : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        Debug.Log("Time has ran out0");
+        _tutorialModel.NextTutorial();
         _isRunning = false; // Stop when the timer reaches the target
     }
 }

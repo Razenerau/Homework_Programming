@@ -176,7 +176,6 @@ public class TutorialModel : MonoBehaviour
                 _wavesTimer.StartTimer(20f);
                 break;
         }
-
     }
 
     private IEnumerator EndHarderShootTutorial()
