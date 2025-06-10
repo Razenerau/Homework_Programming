@@ -42,6 +42,12 @@ public class PlayerDie : MonoBehaviour
             deathPanel.SetActive(true);
             gameObject.SetActive(false);
         }
+
+        if (collision.gameObject.tag == "Unlock")
+        {
+            Debug.Log("Object destroyed");
+            Destroy(collision.gameObject);
+        }
     }
 
     private void ItitializeDeathScreenStats()
