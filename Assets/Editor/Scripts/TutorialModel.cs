@@ -8,6 +8,9 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private SpawnerManager _spawnerManager;
     [SerializeField] private TutorialVIew _tutorialView;
     [SerializeField] private AWSDView _AWSDView;
+    [SerializeField] private SpawnEnemy _spawnEnemy;
+    [SerializeField] private GameController _gameController;
+    [SerializeField] private WavesTimer _wavesTimer;
 
     [Header("Player")]
     [SerializeField] private PlayerMovement _playerMovement;
@@ -16,8 +19,8 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private SwitchBulletType _switchBulletType;
     [SerializeField] private KeepPositionStatic _keepPositionStatic;
     [SerializeField] private PlayerHealth _playerHealth;
-   
 
+    private int _tutorialIndex = 0;
     
 
     private bool _shouldCheckAWSD = false;
@@ -146,21 +149,53 @@ public class TutorialModel : MonoBehaviour
         _spawnerManager.ForceInstantiateSpawner();
         _spawnerManager.StartWave(0);
 
-        yield return StartCoroutine(Wait(20f));
+        _wavesTimer.StartTimer(20f);
+
+        yield return null;
     }
 
     private IEnumerator TryAgain(int stage)
     {
+        _wavesTimer.StopTimer();
+        _spawnerManager.gameObject.SetActive(false);
+        _spawnEnemy.gameObject.SetActive(false);
+        _tutorialView.SetText("You were so close!");
+        yield return StartCoroutine(Wait(4f));
+        _tutorialView.SetText("Let's try again!");
+        _playerHealth.Health = 5;
+        _shouldCheckPlayerHealth = true;
+        yield return StartCoroutine(Wait(2f));
+
         switch (stage)
         {
             case 0:
-                _tutorialView.SetText("You were so close!");
-                yield return StartCoroutine(Wait(3f));
-                _tutorialView.SetText("Let's try again!");
-                _playerHealth.Health = 5;
-                _shouldCheckPlayerHealth = true;
+                _spawnerManager.gameObject.SetActive(true);
+                _spawnEnemy.gameObject.SetActive(true);
+                _spawnerManager.StartWave(0);
+                _gameController.SetScore(0);
+                _wavesTimer.StartTimer(20f);
                 break;
         }
+
+    }
+
+    private IEnumerator EndHarderShootTutorial()
+    {
+        _tutorialView.SetText("Well done!");
+        _shouldCheckPlayerHealth = false;
+        yield return StartCoroutine(Wait(3f));
+    }
+
+    public void NextTutorial()
+    {
+        switch (_tutorialIndex)
+        {
+            case 0:
+                StartCoroutine(EndHarderShootTutorial());
+                break;
+        }
+
+        _tutorialIndex++;
     }
 
     // Obtaining paper bullet and not being able to reach next enemy

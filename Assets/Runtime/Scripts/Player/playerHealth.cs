@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
         set
         {
             _health = Mathf.Clamp(value, 0, _maxHealth);
+            livesCounter.updateLivesCounter();
         }
     }
 

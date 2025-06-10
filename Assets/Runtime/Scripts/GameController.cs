@@ -24,6 +24,12 @@ public class GameController: MonoBehaviour
         ScoreView.Instance.VisualizeLikes(addScore);
     }
 
+    public void SetScore(int score)
+    {
+        this.score = score;
+        scoreText.text = score.ToString();
+    }
+
     // Reload the current scene 
     public void ReloadLevel() {   SceneManager.LoadScene(SceneManager.GetActiveScene().name);}
 }

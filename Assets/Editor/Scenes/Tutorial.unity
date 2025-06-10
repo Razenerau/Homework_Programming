@@ -170,6 +170,8 @@ MonoBehaviour:
   _spawnerManager: {fileID: 1830538584}
   _tutorialView: {fileID: 6509625}
   _AWSDView: {fileID: 1783452156}
+  _enemyTrash: {fileID: 631484665}
+  _spawnEnemy: {fileID: 2034158295}
   _playerMovement: {fileID: 1136735136}
   _playerRotation: {fileID: 1136735135}
   _playerShoot: {fileID: 1136735132}
@@ -1435,6 +1437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 631484666}
+  - component: {fileID: 631484667}
   m_Layer: 0
   m_Name: EnemyTrash
   m_TagString: Untagged
@@ -1457,6 +1460,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2034158296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &631484667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631484665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffc16fdd620a4f49b75f54da2a109b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &639885287
 GameObject:
   m_ObjectHideFlags: 0
