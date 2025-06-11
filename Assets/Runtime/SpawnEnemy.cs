@@ -32,10 +32,13 @@ public class SpawnEnemy : MonoBehaviour
                 enemyType = 3;
                 break;
             case SpawnerManager.WaveType.ROCK_PAPER:
+                Debug.LogWarning("Rock Paper");
                 enemyType = Random.Range(1, 3);
                 break;
             case SpawnerManager.WaveType.ROCK_SCISSORS:
-                enemyType = (int) 1.5f * (Random.Range(1, 3));
+                
+                enemyType = Random.value > 0.5f ? 1 : 3;
+                Debug.LogWarning("Rock Scissors: " + enemyType);
                 break;
             case SpawnerManager.WaveType.PAPER_SCISSORS:
                 enemyType = Random.Range(2, 4);

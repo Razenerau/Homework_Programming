@@ -105,11 +105,9 @@ public class TutorialModel : MonoBehaviour
         switch (enemyType)
         {
             case Structs.BulletType.ROCK:
-                Debug.LogWarning("Rock created");
                 enemy = _tutorialView.InstanciateRockEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
                 Enemy rockScript = enemy.GetComponent<Enemy>();
                 rockScript.deathTime = 999999f;
-                if (rockScript != null) Debug.LogWarning("script found");
                 break;
             case Structs.BulletType.SCISSORS:
                 enemy = _tutorialView.InstanciateScissorsEnemy(pos, Quaternion.Euler(0, 0, 90), gameObject.transform);
@@ -248,6 +246,9 @@ public class TutorialModel : MonoBehaviour
             case 0:
                 StartCoroutine(EndHarderShootTutorial());
                 break;
+            case 1:
+                StartCoroutine(EndLastTutorial());
+                break;
         }
 
         _tutorialIndex++;
@@ -294,15 +295,32 @@ public class TutorialModel : MonoBehaviour
     {
         _tempScore = _gameController.GetScore();
         _tutorialView.SetText("Let's see how well you can do!");
+        yield return StartCoroutine(Wait(3f));
         BoundsView boundsView = GetComponent<BoundsView>();
         boundsView.SetBoundsActive(true);
         _shouldCheckPlayerHealth = true;
 
         _spawnerManager.StartWave(1);
 
-        _wavesTimer.StartTimer(20f); // FIX THE VALUE LATER TO 20f
+        _wavesTimer.StartTimer(20f);
 
         yield return null;
+    }
+
+    private IEnumerator EndLastTutorial()
+    {
+        _tutorialView.SetText("Good Job!");
+        yield return StartCoroutine(Wait(3f));
+        _tutorialView.SetText("Now you're ready for the game!");
+        yield return StartCoroutine(Wait(3f));
+        _tutorialView.SetText("Press ENTER whenever you're ready");
+
+        while (!Input.GetKeyDown(KeyCode.Return) && !Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            yield return null;
+        }
+
+        Debug.Log("Load mainn game");
     }
 
     private void Update()
