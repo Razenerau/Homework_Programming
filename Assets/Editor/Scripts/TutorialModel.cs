@@ -11,6 +11,7 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private SpawnEnemy _spawnEnemy;
     [SerializeField] private GameController _gameController;
     [SerializeField] private WavesTimer _wavesTimer;
+    [SerializeField] private MenuManager _menuManager;
 
     [Header("Player")]
     [SerializeField] private PlayerMovement _playerMovement;
@@ -320,7 +321,7 @@ public class TutorialModel : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Load mainn game");
+        _menuManager.LoadNextScene();
     }
 
     private void Update()

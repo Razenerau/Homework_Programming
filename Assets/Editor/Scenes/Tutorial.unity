@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6509625}
   - component: {fileID: 6509628}
   - component: {fileID: 6509630}
+  - component: {fileID: 6509631}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -176,6 +177,7 @@ MonoBehaviour:
   _spawnEnemy: {fileID: 2034158295}
   _gameController: {fileID: 2061812909}
   _wavesTimer: {fileID: 6509629}
+  _menuManager: {fileID: 6509631}
   _playerMovement: {fileID: 1136735136}
   _playerRotation: {fileID: 1136735135}
   _playerShoot: {fileID: 1136735132}
@@ -241,6 +243,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameObject: {fileID: 3138335818432005242}
+--- !u!114 &6509631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a133d7e71634040abf65f247886bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &88028748
 GameObject:
   m_ObjectHideFlags: 0
@@ -4122,11 +4136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WavesList:
   - Type: 2
-    Duration: 20
+    Duration: 1
     MaxEnemyCount: 3
     Requirements: []
   - Type: 3
-    Duration: 20
+    Duration: 1
     MaxEnemyCount: 5
     Requirements: []
 --- !u!4 &1830538586
