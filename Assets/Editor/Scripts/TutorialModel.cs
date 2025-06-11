@@ -22,7 +22,7 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private UnlockBulletsModel _unlockBulletsModel;
 
     private int _tutorialIndex = 0;
-    
+    private int _tempScore = 0;
 
     private bool _shouldCheckAWSD = false;
     private bool _shouldCheckMouse = false;
@@ -180,7 +180,7 @@ public class TutorialModel : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator TryAgain(int stage)
+    private IEnumerator TryAgain()
     {
         _wavesTimer.StopTimer();
         _spawnerManager.gameObject.SetActive(false);
@@ -192,13 +192,20 @@ public class TutorialModel : MonoBehaviour
         _shouldCheckPlayerHealth = true;
         yield return StartCoroutine(Wait(2f));
 
-        switch (stage)
+        switch (_tutorialIndex)
         {
             case 0:
                 _spawnerManager.gameObject.SetActive(true);
                 _spawnEnemy.gameObject.SetActive(true);
                 _spawnerManager.StartWave(0);
                 _gameController.SetScore(0);
+                _wavesTimer.StartTimer(20f);
+                break;
+            case 1:
+                _spawnerManager.gameObject.SetActive(true);
+                _spawnEnemy.gameObject.SetActive(true);
+                _spawnerManager.StartWave(1);
+                _gameController.SetScore(_tempScore);
                 _wavesTimer.StartTimer(20f);
                 break;
         }
@@ -279,6 +286,25 @@ public class TutorialModel : MonoBehaviour
         _AWSDView.SetVisible(false);
     }
 
+    // ----------------------------------------------------
+    // Last tutorial
+    // ----------------------------------------------------
+
+    private IEnumerator LastTutorial()
+    {
+        _tempScore = _gameController.GetScore();
+        _tutorialView.SetText("Let's see how well you can do!");
+        BoundsView boundsView = GetComponent<BoundsView>();
+        boundsView.SetBoundsActive(true);
+        _shouldCheckPlayerHealth = true;
+
+        _spawnerManager.StartWave(1);
+
+        _wavesTimer.StartTimer(20f); // FIX THE VALUE LATER TO 20f
+
+        yield return null;
+    }
+
     private void Update()
     {
         if (_shouldCheckAWSD)
@@ -340,7 +366,12 @@ public class TutorialModel : MonoBehaviour
             {
                 _tutorialView.SetText("Well done!");
                 _shouldCheckRockEnemyDeath = false;
-                
+                StartCoroutine(LastTutorial());
+
+                // Make sure that awsd button dont appear
+                _AWSDView.SetVisible(false);
+                _shouldCheckAWSD = false;
+
             }
         }
 
@@ -349,7 +380,7 @@ public class TutorialModel : MonoBehaviour
             if(_playerHealth.GetHealth() <= 1)
             {
                 _shouldCheckPlayerHealth = false;
-                StartCoroutine(TryAgain(0));
+                StartCoroutine(TryAgain());
             }
         }
     }

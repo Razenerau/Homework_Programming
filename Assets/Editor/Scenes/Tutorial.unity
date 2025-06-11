@@ -4125,6 +4125,10 @@ MonoBehaviour:
     Duration: 20
     MaxEnemyCount: 3
     Requirements: []
+  - Type: 3
+    Duration: 20
+    MaxEnemyCount: 5
+    Requirements: []
 --- !u!4 &1830538586
 Transform:
   m_ObjectHideFlags: 0

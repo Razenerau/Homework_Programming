@@ -30,6 +30,11 @@ public class GameController: MonoBehaviour
         scoreText.text = score.ToString();
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
+
     // Reload the current scene 
     public void ReloadLevel() {   SceneManager.LoadScene(SceneManager.GetActiveScene().name);}
 }
