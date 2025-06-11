@@ -26,8 +26,9 @@ public class TutorialModel : MonoBehaviour
 
     private bool _shouldCheckAWSD = false;
     private bool _shouldCheckMouse = false;
-    private bool _shouldCheckEnemyDeath = false;
+    private bool _shouldCheckScissorsEnemyDeath = false;
     private bool _shouldCheckPlayerHealth = false;
+    private bool _shouldCheckRockEnemyDeath = false;
 
     private bool _isAPressed = false;
     private bool _isWPressed = false;
@@ -87,7 +88,7 @@ public class TutorialModel : MonoBehaviour
         yield return StartCoroutine(Wait(1.5f));
         _tutorialView.SetText("This scissors-enemy is trying to attack you!\nPress LEFT MOUSE KEY to shoot!");
         _playerShoot.enabled = true;
-        _shouldCheckEnemyDeath = true;
+        _shouldCheckScissorsEnemyDeath = true;
         
     }
 
@@ -174,7 +175,7 @@ public class TutorialModel : MonoBehaviour
         _spawnerManager.ForceInstantiateSpawner();
         _spawnerManager.StartWave(0);
 
-        _wavesTimer.StartTimer(20f);
+        _wavesTimer.StartTimer(1f); // FIX THE VALUE LATER TO 20f
 
         yield return null;
     }
@@ -227,8 +228,11 @@ public class TutorialModel : MonoBehaviour
         //yield return StartCoroutine(Wait(5f));
         _tutorialView.SetText("Try to defeat this enemy by choosing PAPER!");
         ShootTutorial(Structs.BulletType.ROCK);
-        //_shouldCheckEnemyDeath = true;
+        _shouldCheckRockEnemyDeath = true;
+        StartCoroutine(StartAWSDTutorial());
     }
+
+    
 
     public void NextTutorial()
     {
@@ -249,8 +253,17 @@ public class TutorialModel : MonoBehaviour
     // Movement tutorial
     // ----------------------------------------------------
 
-    private void StartAWSDTutorial()
+    private IEnumerator StartAWSDTutorial()
     {
+        //Debug.Log($"{Input.GetKeyDown(KeyCode.Mouse0)}    {SwitchBulletType.currentBulletType != Structs.BulletType.PAPER}");
+        while (!Input.GetKeyDown(KeyCode.Mouse0) || SwitchBulletType.currentBulletType != Structs.BulletType.PAPER)
+        {
+            yield return null;
+        }
+
+        _tutorialView.SetText("Oops... I forgot you can't move...");
+         yield return StartCoroutine(Wait(5f));
+
         _keepPositionStatic.enabled = false;
         _playerMovement.enabled = true;
         _tutorialView.SetText("Use AWSD to move");
@@ -261,7 +274,7 @@ public class TutorialModel : MonoBehaviour
 
     private IEnumerator EndAWSDTutorial()
     {
-        _tutorialView.SetText("Well done!");
+        _tutorialView.SetText("That's better!");
         yield return StartCoroutine(Wait(1f));
         _AWSDView.SetVisible(false);
     }
@@ -311,13 +324,23 @@ public class TutorialModel : MonoBehaviour
             }
         }
 
-        if (_shouldCheckEnemyDeath)
+        if (_shouldCheckScissorsEnemyDeath)
         {
             if (gameObject.transform.childCount == 0)
             {
                 _tutorialView.SetText("Well done!");
-                _shouldCheckEnemyDeath = false;
+                _shouldCheckScissorsEnemyDeath = false;
                 StartCoroutine(EndShootTutorial());
+            }
+        }
+
+        if (_shouldCheckRockEnemyDeath)
+        {
+            if (gameObject.transform.childCount == 0)
+            {
+                _tutorialView.SetText("Well done!");
+                _shouldCheckRockEnemyDeath = false;
+                
             }
         }
 
