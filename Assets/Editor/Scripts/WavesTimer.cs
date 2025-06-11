@@ -36,7 +36,7 @@ public class WavesTimer : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        _tutorialModel.NextTutorial();
+        if (_isRunning) _tutorialModel.NextTutorial();
         _isRunning = false; // Stop when the timer reaches the target
     }
 }

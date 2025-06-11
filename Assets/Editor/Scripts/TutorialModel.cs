@@ -174,7 +174,7 @@ public class TutorialModel : MonoBehaviour
         _spawnerManager.ForceInstantiateSpawner();
         _spawnerManager.StartWave(0);
 
-        _wavesTimer.StartTimer(1f); // FIX THE VALUE LATER TO 20f
+        _wavesTimer.StartTimer(20f); 
 
         yield return null;
     }
