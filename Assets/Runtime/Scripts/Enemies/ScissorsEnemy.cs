@@ -10,8 +10,8 @@ public class ScissorsEnemy : MonoBehaviour
 
     //Movement Controls 
     public Rigidbody2D rigidbody2D;       //The rigidbody that will move the bullet 
-    public float minSpeed = 1f;           //Speed at which the bullet moves 
-    public float maxSpeed = 4f;           //Speed at which the bullet moves 
+    public float minSpeed = 0.5f;           //Speed at which the bullet moves 
+    public float maxSpeed = 1f;           //Speed at which the bullet moves 
 
     //Flag and Timer 
     public float deathTime = 100f;   //How long before the bullet dies 

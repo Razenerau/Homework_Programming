@@ -28,7 +28,6 @@ public class SpawnerManager : MonoBehaviour
     {
         KillCountManager.Reset();
         StartCoroutine(LoadPrefabAfterDelay(1f));
-        Debug.Log("SpawnManager Loaded");
     }
 
     // Start of the wave
