@@ -792,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a4e54c1c571b448807b3f4a9c43e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ifHasErrorTurnOn: 0
   livesCounter: {fileID: 0}
 --- !u!114 &316247920
 MonoBehaviour:
@@ -1497,7 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb53902824c9f2449978c1b90f0881bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 316247919}
 --- !u!1 &518629569
 GameObject:
   m_ObjectHideFlags: 0
