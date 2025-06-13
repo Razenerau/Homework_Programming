@@ -223,7 +223,7 @@ public class TutorialModel : MonoBehaviour
         _tutorialView.SetText("Your fingers aren't glued together...\nPress RIGHT MOUSE KEY to change their position!");
         _switchBulletType.enabled = true;
 
-        while (!Input.GetKeyDown(KeyCode.Space))
+        while (!Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Mouse1))
         {
             yield return null;
         }

@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1da729774199849817305372e55894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 0
   deathPanel: {fileID: 1884140213}
   _deathScreenStatsList:
   - {fileID: 1141769718}
@@ -1445,7 +1446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 177, y: -230}
+  m_AnchoredPosition: {x: 177, y: -271}
   m_SizeDelta: {x: 500, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &503438463
@@ -2082,7 +2083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -684, y: -402}
+  m_AnchoredPosition: {x: -777, y: -462}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.49999964}
 --- !u!1 &880646910
@@ -4242,7 +4243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -851, y: -413}
+  m_AnchoredPosition: {x: -882, y: -479}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1943639705
