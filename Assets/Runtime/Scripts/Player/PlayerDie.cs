@@ -45,7 +45,7 @@ public class PlayerDie : MonoBehaviour
 
         if (collision.gameObject.tag == "Unlock")
         {
-            Debug.Log("Object destroyed");
+            Debug.Log("Object destroyed");  
             Destroy(collision.gameObject);
         }
     }

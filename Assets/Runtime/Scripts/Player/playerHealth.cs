@@ -32,12 +32,4 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public int GetHealth() { return Health; }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            DecreaseHealth(1);
-        }
-    }
 }
