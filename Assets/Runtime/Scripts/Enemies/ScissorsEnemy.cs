@@ -68,7 +68,11 @@ public class ScissorsEnemy : MonoBehaviour
             KillCountManager.Incerement(Structs.BulletType.SCISSORS);
 
             deathSound.clip = clip;
-            deathSound.Play(); 
+            deathSound.Play();
+
+            //spawn a heart
+            DropHeartModel heartModel = GetComponent<DropHeartModel>();
+            heartModel.CreateHeart();
 
             //Destorys the enemy 
             Destroy(gameObject);

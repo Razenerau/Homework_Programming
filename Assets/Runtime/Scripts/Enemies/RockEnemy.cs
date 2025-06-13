@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     private GameController _gameController;
     private PlayerShoot _playerShoot;
     public AudioSource deathSound;
+    
     //public AudioClip clip;
 
     //==================================================================================================================
@@ -65,6 +66,10 @@ public class Enemy : MonoBehaviour
             //Updates the Score 
             _gameController.UpdateScore();
             KillCountManager.Incerement(Structs.BulletType.ROCK);
+
+            //spawn a heart
+            DropHeartModel heartModel = GetComponent<DropHeartModel>();
+            heartModel.CreateHeart();
 
             deathSound.Play();
 

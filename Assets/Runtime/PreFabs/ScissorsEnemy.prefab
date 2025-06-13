@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 3601545212584631959}
   - component: {fileID: 3056601202008134084}
   - component: {fileID: 8124235889130416246}
+  - component: {fileID: 4543111691042695041}
   m_Layer: 0
   m_Name: ScissorsEnemy
   m_TagString: Enemy Scissors
@@ -531,3 +532,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4543111691042695041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609101725108192800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7cd3e0754dd454408e4e712611916a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heart: {fileID: 1943464466779476085, guid: 2480a90a08928c5458b6e6e1b9073297, type: 3}

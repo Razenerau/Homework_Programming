@@ -68,6 +68,10 @@ public class PaperEnemy : MonoBehaviour
 
             deathSound.Play();
 
+            //spawn a heart
+            DropHeartModel heartModel = GetComponent<DropHeartModel>();
+            heartModel.CreateHeart();
+
             //Destorys the enemy 
             Destroy(gameObject);
         }

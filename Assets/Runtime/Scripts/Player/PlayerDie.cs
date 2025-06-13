@@ -44,9 +44,16 @@ public class PlayerDie : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Unlock")
-        {
-            Debug.Log("Object destroyed");  
+        { 
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Heart")
+        {
+            Destroy(collision.gameObject);
+            PlayerHealth playerHealth = GetComponent<PlayerHealth>(); 
+
+            playerHealth.IncreaseLife(1);
         }
     }
 

@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 4664048730041516776}
   - component: {fileID: 7611574177056890845}
   - component: {fileID: 2011767075544101092}
+  - component: {fileID: 1416634266231848854}
   m_Layer: 0
   m_Name: PaperEnemy
   m_TagString: Enemy Paper
@@ -508,3 +509,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1416634266231848854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609101725108192800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7cd3e0754dd454408e4e712611916a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heart: {fileID: 1943464466779476085, guid: 2480a90a08928c5458b6e6e1b9073297, type: 3}
