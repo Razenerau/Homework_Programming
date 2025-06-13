@@ -16,6 +16,7 @@ TagManager:
   - Player Paper Bullet
   - Player Scissors Bullet
   - Unlock
+  - Screen
   layers:
   - Default
   - TransparentFX
