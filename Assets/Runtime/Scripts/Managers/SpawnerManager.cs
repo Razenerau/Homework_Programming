@@ -11,6 +11,7 @@ public class SpawnerManager : MonoBehaviour
     private SpawnEnemy _spawner;
     public bool CanSpawn = false;
 
+    [SerializeField] private bool removeStart = false;
 
     public enum WaveType
     {
@@ -27,7 +28,12 @@ public class SpawnerManager : MonoBehaviour
     private void Start()
     {
         KillCountManager.Reset();
-        StartCoroutine(LoadPrefabAfterDelay(1f));
+
+        if (!removeStart)
+        {
+            StartCoroutine(LoadPrefabAfterDelay(1f));
+        }
+        
     }
 
     // Start of the wave

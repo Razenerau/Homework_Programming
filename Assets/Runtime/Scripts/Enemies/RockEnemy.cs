@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     //==================================================================================================================
 
     //Movement Controls 
-    public Rigidbody2D rigidbody2D;       //The rigidbody that will move the bullet 
+    new public Rigidbody2D rigidbody2D;       //The rigidbody that will move the bullet 
     public float minSpeed = 1f;           //Speed at which the bullet moves 
     public float maxSpeed = 4f;           //Speed at which the bullet moves 
 

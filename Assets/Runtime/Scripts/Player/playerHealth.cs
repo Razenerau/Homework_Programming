@@ -43,28 +43,17 @@ public class PlayerHealth : MonoBehaviour
         {
             int health = GetHealth();
 
-            if (num == 1)
+            if (health > 3)
             {
-                if (health == 4)
-                {
-                    audioModel.SetClip(5);
-                }
-                else 
-                {
-                    audioModel.SetClip(3);
-                }
-
+                audioModel.SetClip(5);
+            }
+            else if (health > 1)
+            {
+                audioModel.SetClip(3);
             }
             else
             {
-                if (health == 1)
-                {
-                    audioModel.SetClip(3);
-                }
-                else
-                {
-                    audioModel.SetClip(1);
-                }
+                audioModel.SetClip(1);
             }
 
             

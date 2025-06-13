@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livesCounter: {fileID: 503438465}
+  audioModel: {fileID: 720206258}
 --- !u!114 &316247920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,7 +1659,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Game_Camera
   m_TagString: MainCamera
@@ -1740,18 +1740,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef264fe5dbd51634881c2f424582aef5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &704959016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,6 +2015,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2342f1f6e7d1040a87eee2c815fae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip5: {fileID: 8300000, guid: 7e3a60d371b035f4a8f4b5a10f77ef32, type: 3}
+  clip3: {fileID: 8300000, guid: 34b4e9dc4ade36747aae3370de732f68, type: 3}
+  clip1: {fileID: 8300000, guid: 076aa590e8cb81c49a48bdbbf48bffa7, type: 3}
 --- !u!1 &761859148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3539,6 +3530,7 @@ MonoBehaviour:
   _preFab: {fileID: 8945064412093396433, guid: 20ea0dd4896484642b8761a2612f6932, type: 3}
   _waveIndex: 0
   CanSpawn: 0
+  removeStart: 0
 --- !u!4 &1507125026
 Transform:
   m_ObjectHideFlags: 0

@@ -67,7 +67,7 @@ public class PlayerShoot : MonoBehaviour
         InitializePool(10, Structs.BulletType.SCISSORS);
         InitializePool(5, Structs.BulletType.PAPER);
 
-        _spawnEnemy = Spawner.GetComponent<SpawnEnemy>();
+        //_spawnEnemy = Spawner.GetComponent<SpawnEnemy>();
         //_spawnEnemy.SetPlayerShoot(this);
     }
 
