@@ -9,7 +9,7 @@ public class ScissorsEnemy : MonoBehaviour
     //==================================================================================================================
 
     //Movement Controls 
-    public Rigidbody2D rigidbody2D;       //The rigidbody that will move the bullet 
+    new public Rigidbody2D rigidbody2D;       //The rigidbody that will move the bullet 
     public float minSpeed = 0.5f;           //Speed at which the bullet moves 
     public float maxSpeed = 1f;           //Speed at which the bullet moves 
 
