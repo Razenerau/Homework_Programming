@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDie : MonoBehaviour
 {
     private PlayerHealth _playerHealth;
+    [SerializeField] private bool isTutorial = false;
 
     public GameObject deathPanel;
     [SerializeField] private List<DeathScreenStats> _deathScreenStatsList;
@@ -34,7 +35,7 @@ public class PlayerDie : MonoBehaviour
         }
         
         // If player's Health reaches 0
-        if (_playerHealth.GetHealth() == 0)
+        if (_playerHealth.GetHealth() == 0 && !isTutorial)
         {
             ItitializeDeathScreenStats();
 

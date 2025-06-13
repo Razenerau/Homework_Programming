@@ -2698,6 +2698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1da729774199849817305372e55894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: 1
   deathPanel: {fileID: 951529266}
   _deathScreenStatsList:
   - {fileID: 1437905119}
@@ -4404,11 +4405,11 @@ MonoBehaviour:
   WavesList:
   - Type: 2
     Duration: 20
-    MaxEnemyCount: 3
+    MaxEnemyCount: 2
     Requirements: []
   - Type: 3
     Duration: 20
-    MaxEnemyCount: 5
+    MaxEnemyCount: 3
     Requirements: []
 --- !u!4 &1830538586
 Transform:

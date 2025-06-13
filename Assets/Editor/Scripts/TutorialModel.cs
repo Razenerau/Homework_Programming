@@ -20,7 +20,7 @@ public class TutorialModel : MonoBehaviour
     [SerializeField] private SwitchBulletType _switchBulletType;
     [SerializeField] private KeepPositionStatic _keepPositionStatic;
     [SerializeField] private PlayerHealth _playerHealth;
-    [SerializeField] private UnlockBulletsModel _unlockBulletsModel;
+   
 
     private int _tutorialIndex = 0;
     private int _tempScore = 0;
@@ -229,11 +229,11 @@ public class TutorialModel : MonoBehaviour
             yield return null;
         }
         _tutorialView.SetText("Well done!");
+        ShootTutorial(Structs.BulletType.ROCK);
         yield return StartCoroutine(Wait(3f));
         //_tutorialView.SetText("Remember that ROCK beats SCISSORS\nSCISSORS beat PAPER\nAnd PAPER beats ROCK");
         //yield return StartCoroutine(Wait(5f));
         _tutorialView.SetText("Try to defeat this enemy by choosing PAPER!");
-        ShootTutorial(Structs.BulletType.ROCK);
         _shouldCheckRockEnemyDeath = true;
         StartCoroutine(StartAWSDTutorial());
     }
