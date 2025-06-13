@@ -135,7 +135,6 @@ public class TutorialModel : MonoBehaviour
             {
                 if (gameObject == null)
                 {
-                    Debug.Log("Scissors were destroyed");
                     break;
                 }
 
@@ -185,7 +184,7 @@ public class TutorialModel : MonoBehaviour
         _spawnerManager.gameObject.SetActive(false);
         _spawnEnemy.gameObject.SetActive(false);
         _tutorialView.SetText("You were so close!");
-        yield return StartCoroutine(Wait(4f));
+        yield return StartCoroutine(Wait(3f));
         _tutorialView.SetText("Let's try again!");
         _playerHealth.Health = 5;
         _shouldCheckPlayerHealth = true;
@@ -221,7 +220,7 @@ public class TutorialModel : MonoBehaviour
 
     private IEnumerator UnlockOtherBullets()
     {
-        _tutorialView.SetText("Your fingers aren't glued together...\nPress SPACE to change their position!");
+        _tutorialView.SetText("Your fingers aren't glued together...\nPress RIGHT MOUSE KEY to change their position!");
         _switchBulletType.enabled = true;
 
         while (!Input.GetKeyDown(KeyCode.Space))
@@ -231,8 +230,6 @@ public class TutorialModel : MonoBehaviour
         _tutorialView.SetText("Well done!");
         ShootTutorial(Structs.BulletType.ROCK);
         yield return StartCoroutine(Wait(3f));
-        //_tutorialView.SetText("Remember that ROCK beats SCISSORS\nSCISSORS beat PAPER\nAnd PAPER beats ROCK");
-        //yield return StartCoroutine(Wait(5f));
         _tutorialView.SetText("Try to defeat this enemy by choosing PAPER!");
         _shouldCheckRockEnemyDeath = true;
         StartCoroutine(StartAWSDTutorial());
@@ -255,16 +252,12 @@ public class TutorialModel : MonoBehaviour
         _tutorialIndex++;
     }
 
-    // Obtaining paper bullet and not being able to reach next enemy
-
-
     // ----------------------------------------------------
     // Movement tutorial
     // ----------------------------------------------------
 
     private IEnumerator StartAWSDTutorial()
     {
-        //Debug.Log($"{Input.GetKeyDown(KeyCode.Mouse0)}    {SwitchBulletType.currentBulletType != Structs.BulletType.PAPER}");
         while (!Input.GetKeyDown(KeyCode.Mouse0) || SwitchBulletType.currentBulletType != Structs.BulletType.PAPER)
         {
             yield return null;

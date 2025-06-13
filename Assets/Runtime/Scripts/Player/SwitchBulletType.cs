@@ -18,7 +18,7 @@ public class SwitchBulletType : MonoBehaviour
 
     public static void switchBullet()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1))
         {
             switch (currentBulletType)
             {
