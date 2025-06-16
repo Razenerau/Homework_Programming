@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SkipModel : MonoBehaviour
+public class SkipTutorialModel : MonoBehaviour
 {
     private float keyHoldTime = 0f;
     private bool keyHeld = false;
