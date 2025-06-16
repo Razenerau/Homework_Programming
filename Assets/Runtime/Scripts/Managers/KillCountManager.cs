@@ -78,8 +78,8 @@ public static class KillCountManager
         int thisWaveScissorsCount = ScissorsKillCount - scissorsSum;
         ScissorsKillWaveList.Add(thisWaveScissorsCount);
         //Debug.Log("RockKillWaveList: " + string.Join(", ", RockKillWaveList) + "\n" +
-                  "PaperKillWaveList: "+ string.Join(", ", PaperKillWaveList) + "\n" +
-                  "ScissrosKillWaveList: " + string.Join(", ", ScissorsKillWaveList));
+        //          "PaperKillWaveList: "+ string.Join(", ", PaperKillWaveList) + "\n" +
+        //          "ScissrosKillWaveList: " + string.Join(", ", ScissorsKillWaveList));
     }
 
     public static void Reset()
