@@ -7,6 +7,8 @@ public class SpawnerManager : MonoBehaviour
 {
     [SerializeField] private SpawnEnemy _preFab;
     [SerializeField] private int _waveIndex;
+
+    [SerializeField] private bool _isTutorial;
     
     private SpawnEnemy _spawner;
     public bool CanSpawn = false;
@@ -123,7 +125,7 @@ public class SpawnerManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(FlashText(0.2f, $"WAVE {_waveIndex + 1}", 3, 100));
 
-        if (_waveIndex < 11) StartWave(_waveIndex); 
+        if (_waveIndex < 11 && !_isTutorial) StartWave(_waveIndex); 
         else StartCoroutine(TheEnd());
     }
 

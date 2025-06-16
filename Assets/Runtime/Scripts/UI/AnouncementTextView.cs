@@ -20,6 +20,8 @@ public class AnouncementTextView : MonoBehaviour
     {
         Vector3 pos;
 
+        if (_text == null) return;
+
         switch (type)
         {
             case "up":
@@ -40,12 +42,15 @@ public class AnouncementTextView : MonoBehaviour
 
     public static void SetText(string text, float fontSize)
     {
+        if (_text == null) return;
         _text.text = text;
         _text.fontSize = fontSize;  // 175 or 100
     }
 
     public static void SetVisible(bool isvisible)
     {
+        if (_text == null) return;
+
         Color newColor;
         switch (isvisible)
         {

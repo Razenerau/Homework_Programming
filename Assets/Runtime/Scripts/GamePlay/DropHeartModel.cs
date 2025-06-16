@@ -9,7 +9,7 @@ public class DropHeartModel : MonoBehaviour
     public void CreateHeart()
     {
         float random = Random.value;
-        Debug.Log(random);
+      
         if (random < 0.20f)
         {
             Vector3 pos = gameObject.transform.position;

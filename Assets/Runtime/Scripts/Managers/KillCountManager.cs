@@ -30,19 +30,19 @@ public static class KillCountManager
                 ScissorsKillCount++;
                 TotalScissorsKillCount++;
 
-                Debug.Log($"Scissors count: {ScissorsKillCount}");
+                //Debug.Log($"Scissors count: {ScissorsKillCount}");
                 break;
             case Structs.BulletType.PAPER:
                 PaperKillCount++;
                 TotalPaperKillCount++;
 
-                Debug.Log($"Paper count: {PaperKillCount}");
+                //Debug.Log($"Paper count: {PaperKillCount}");
                 break;
             default:
                 RockKillCount++;
                 TotalRockKillCount++;
 
-                Debug.Log($"Rock count: {RockKillCount}");
+                //Debug.Log($"Rock count: {RockKillCount}");
                 break;
         }
     }
@@ -77,7 +77,7 @@ public static class KillCountManager
         int scissorsSum = ScissorsKillWaveList.Sum();
         int thisWaveScissorsCount = ScissorsKillCount - scissorsSum;
         ScissorsKillWaveList.Add(thisWaveScissorsCount);
-        Debug.Log("RockKillWaveList: " + string.Join(", ", RockKillWaveList) + "\n" +
+        //Debug.Log("RockKillWaveList: " + string.Join(", ", RockKillWaveList) + "\n" +
                   "PaperKillWaveList: "+ string.Join(", ", PaperKillWaveList) + "\n" +
                   "ScissrosKillWaveList: " + string.Join(", ", ScissorsKillWaveList));
     }
