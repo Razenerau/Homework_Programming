@@ -9,16 +9,14 @@ public abstract class BulletControllerBase : MonoBehaviour
     //==================================================================================================================
     // Variables 
     //================================================================================================================== 
-
-    //Movement Controls 
    
     [SerializeField] protected float _speed = 0f;                    //Speed at which the bullet moves  
     [SerializeField] protected float _deathTime = 2f;                //How long before the bullet dies 
     [SerializeField] protected Sprite _sprite;
     
-    [SerializeField] protected string _targetEnemyTag;            //The enemy the bullet would kill
-    [SerializeField] protected string _lethalEnemyTag;         //The enemy that will kill the bullet
-    [SerializeField] protected string _neutralEnemyTag;        //The enemy with the same type as the bullet
+    [SerializeField] protected string _targetEnemyTag;               //The enemy the bullet would kill
+    [SerializeField] protected string _lethalEnemyTag;               //The enemy that will kill the bullet
+    [SerializeField] protected string _neutralEnemyTag;              //The enemy with the same type as the bullet
 
     //==================================================================================================================
     // Bullet Set Up  
