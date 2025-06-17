@@ -247,7 +247,7 @@ public class PlayerShoot : MonoBehaviour
     public void returnBulletToPool(GameObject bullet, string bulletType)
     {
         Rigidbody2D rigidbody2D = bullet.GetComponent<Rigidbody2D>();
-        if (rigidbody2D != null) rigidbody2D.velocity = Vector2.zero;
+        if (rigidbody2D != null) rigidbody2D.linearVelocity = Vector2.zero;
 
         bullet.SetActive(false);
 

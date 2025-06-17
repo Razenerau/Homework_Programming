@@ -43,7 +43,7 @@ public class ScissorsEnemy : MonoBehaviour
 
     public void SetSpeed(Vector3 newSpeed)
     {
-        rigidbody2D.velocity = newSpeed * Random.Range(minSpeed,maxSpeed);
+        rigidbody2D.linearVelocity = newSpeed * Random.Range(minSpeed,maxSpeed);
         transform.rotation = Structs.CollisionRotation(rigidbody2D);
     }
 
@@ -81,7 +81,7 @@ public class ScissorsEnemy : MonoBehaviour
         if (collision.gameObject.tag == _playerScissorsBulletTag)
         {
             // change vector
-            rigidbody2D.velocity = Structs.CollisionVector(rigidbody2D, collision);
+            rigidbody2D.linearVelocity = Structs.CollisionVector(rigidbody2D, collision);
 
             // Change rotation
             transform.rotation = Structs.CollisionRotation(rigidbody2D);

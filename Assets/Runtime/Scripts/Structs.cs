@@ -14,7 +14,7 @@ public class Structs
     public static Quaternion CollisionRotation(Rigidbody2D rigidbody)
     {
         // Change rotation
-        Vector2 velocity = rigidbody.velocity;
+        Vector2 velocity = rigidbody.linearVelocity;
         float Ax = velocity.x;
         float Ay = velocity.y;
         //float A = Mathf.Sqrt((Ax * Ax)  + (Ay * Ay));
@@ -28,10 +28,10 @@ public class Structs
 
     public static Vector2 CollisionVector(Rigidbody2D rigidbody, Collider2D collision)
     {
-        Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-        Vector2 incidentDirection = rigidbody.velocity.normalized;
+        Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity.normalized;
+        Vector2 incidentDirection = rigidbody.linearVelocity.normalized;
         Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
 
-        return reflectedDirection * rigidbody.velocity.magnitude;
+        return reflectedDirection * rigidbody.linearVelocity.magnitude;
     }
 }

@@ -75,10 +75,10 @@ public class PaperBullet : MonoBehaviour
         //Collision with paper
         if (collision.gameObject.tag == _enemyPaperBulletTag)
         {
-            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
+            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity.normalized;
+            Vector2 incidentDirection = _rigidbody2D.linearVelocity.normalized;
             Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
-            _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
+            _rigidbody2D.linearVelocity = reflectedDirection * _rigidbody2D.linearVelocity.magnitude;
         }
         else if (collision.gameObject.tag == _enemyScissorsBulletTag)
         {

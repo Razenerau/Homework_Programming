@@ -43,7 +43,7 @@ public class PaperEnemy : MonoBehaviour
 
     public void SetSpeed(Vector3 newSpeed)
     {
-        rigidbody2D.velocity = newSpeed * Random.Range(minSpeed,maxSpeed);
+        rigidbody2D.linearVelocity = newSpeed * Random.Range(minSpeed,maxSpeed);
     }
 
     //==================================================================================================================
@@ -78,7 +78,7 @@ public class PaperEnemy : MonoBehaviour
         // If it touches the paper, it bounces  
         if (collision.gameObject.tag == _playerPaperBulletTag)
         {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x * -1, rigidbody2D.velocity.y * -1);
+            rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x * -1, rigidbody2D.linearVelocity.y * -1);
         }
         // If the enemy touches a bound it gets destored 
         else if(collision.gameObject.tag == _boundsTag)

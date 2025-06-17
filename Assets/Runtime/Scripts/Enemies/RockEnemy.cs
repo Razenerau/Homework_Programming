@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     public void SetSpeed(Vector3 newSpeed)
     {
-        rigidbody2D.velocity = newSpeed * Random.Range(minSpeed,maxSpeed);
+        rigidbody2D.linearVelocity = newSpeed * Random.Range(minSpeed,maxSpeed);
     }
 
     //==================================================================================================================
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == _playerRockBulletTag)
         {
             // change vector
-            rigidbody2D.velocity = Structs.CollisionVector(rigidbody2D, collision);
+            rigidbody2D.linearVelocity = Structs.CollisionVector(rigidbody2D, collision);
 
             // Change rotation
             transform.rotation = Structs.CollisionRotation(rigidbody2D);

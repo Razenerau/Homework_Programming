@@ -1,10 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor
+[CreateAssetMenu(fileName = "BulletModel", menuName = "Bullets/BulletModel")]
+public class BulletModel : ScriptableObject
 {
-    public class BulletModel : ScriptableObject
-    {
-        
-    }
+    
 }

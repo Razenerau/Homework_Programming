@@ -60,7 +60,7 @@ public class ScissorsBullet : MonoBehaviour
         var pos2 = transform.position;
         var dir = pos1 - pos2;
         var rotation = pos2 - pos1;
-        _rigidbody2D.velocity = new Vector2(dir.x, dir.y).normalized * speed;
+        _rigidbody2D.linearVelocity = new Vector2(dir.x, dir.y).normalized * speed;
         var rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
     }
@@ -87,7 +87,7 @@ public class ScissorsBullet : MonoBehaviour
         if (collision.gameObject.tag ==  _enemyScissorsBulletTag)
         {
             // change vector
-            _rigidbody2D.velocity = Structs.CollisionVector(_rigidbody2D, collision);
+            _rigidbody2D.linearVelocity = Structs.CollisionVector(_rigidbody2D, collision);
 
             // Change rotation
             transform.rotation = Structs.CollisionRotation(_rigidbody2D);
