@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
-public abstract class BulletBase : MonoBehaviour
+public abstract class BulletControllerBase : MonoBehaviour
 {
     //==================================================================================================================
     // Variables 
@@ -25,7 +25,7 @@ public abstract class BulletBase : MonoBehaviour
     //==================================================================================================================
 
     //Waits till timer is out then destroys the bullet 
-    private IEnumerator Death()
+    private IEnumerator Expiration()
     {
         yield return new WaitForSeconds(_deathTime);
         //gameObject.SetActive(false);
@@ -44,33 +44,53 @@ public abstract class BulletBase : MonoBehaviour
             case _targetEnemyTag:        //Destroy enemy
 
                 break;
-            case _neutralEnemyTag:       //Repell each-other
-                Repell(collision.gameObject);
+            case _neutralEnemyTag:       //RepellSelf each-other
+                RepellSelf(collision.gameObject);
                 break;
             default:                     //Destroy this
 
                 break;
         }
-
-        /*if (collision.gameObject.tag == _enemyPaperBulletTag)
-        {
-            Vector2 normal = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-            Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
-            Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
-            _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
-        }
-        else if (collision.gameObject.tag == _enemyScissorsBulletTag)
-        {
-            _playerShoot.returnBulletToPool(gameObject, _bulletType);
-        }*/
     }
 
-    protected void Repell(GameObject collisionObj)
+    protected void Shoot(Vector2 pos, Vector2 velocity, Quaternion rotation)
+    {
+        SetPosition(pos);
+        SetVelocity(velocity);
+        SetRotation(rotation);
+    }
+
+    protected void RepellSelf(GameObject collisionObj)
     {
         Rigidbody2D _rigidbody2D = this.gameObject.GetComponent<Rigidbody2D>();
         Vector2 normal = collisionObj.GetComponent<Rigidbody2D>().velocity.normalized;
         Vector2 incidentDirection = _rigidbody2D.velocity.normalized;
         Vector2 reflectedDirection = Vector2.Reflect(incidentDirection, normal);
         _rigidbody2D.velocity = reflectedDirection * _rigidbody2D.velocity.magnitude;
+    }
+
+    //--------------------------------------------------------------------------------
+    //                  GETTER AND SETTER
+    //--------------------------------------------------------------------------------
+
+    protected void SetPosition(Vector2 pos)
+    {
+        gameObject.transform.position = pos;
+    }
+
+    protected void SetRotation(Quaternion rotation)
+    {
+        gameObject.transform.rotation = rotation;
+    }
+
+    protected void SetVelocity(Vector2 velocity)
+    {
+        Rigidbody2D _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        _rigidbody2D.velocity = velocity;
+    }
+
+    protected void ReturnToBulletPool(GameObject[] pool)
+    {
+
     }
 }
