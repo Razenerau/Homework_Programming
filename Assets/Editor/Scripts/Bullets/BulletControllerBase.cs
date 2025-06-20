@@ -9,18 +9,29 @@ public abstract class BulletControllerBase : MonoBehaviour
     //==================================================================================================================
     // Variables 
     //================================================================================================================== 
-   
-    [SerializeField] protected float _speed = 0f;                    //Speed at which the bullet moves  
-    [SerializeField] protected float _deathTime = 2f;                //How long before the bullet dies 
-    [SerializeField] protected Sprite _sprite;
+
+    [SerializeField] protected readonly float _speed = 0f;                    //Speed at which the bullet moves  
+    [SerializeField] protected readonly float _deathTime = 2f;                //How long before the bullet dies 
     
-    [SerializeField] protected string _targetEnemyTag;               //The enemy the bullet would kill
-    [SerializeField] protected string _lethalEnemyTag;               //The enemy that will kill the bullet
-    [SerializeField] protected string _neutralEnemyTag;              //The enemy with the same type as the bullet
+    [SerializeField] protected readonly string _targetEnemyTag;               //The enemy the bullet would kill
+    [SerializeField] protected readonly string _lethalEnemyTag;               //The enemy that will kill the bullet
+    [SerializeField] protected readonly string _neutralEnemyTag;              //The enemy with the same type as the bullet
+
+    [SerializeField] protected BulletModel _bulletModel;
 
     //==================================================================================================================
     // Bullet Set Up  
     //==================================================================================================================
+
+    BulletControllerBase()
+    {
+        gameObject.name = _bulletModel.Name;
+        _targetEnemyTag = _bulletModel.TargetEnemyTag;
+        _lethalEnemyTag = _bulletModel.LethalEnemyTag;
+        _neutralEnemyTag = _bulletModel.NeutralEnemyTag;
+
+        Debug.Log($"{name} was constructed");
+    }
 
     //Waits till timer is out then destroys the bullet 
     private IEnumerator Expiration()
@@ -35,17 +46,18 @@ public abstract class BulletControllerBase : MonoBehaviour
         string tag = collision.gameObject.tag;
         if(tag == _lethalEnemyTag)                  //Collision with object that kills the bullet
         {
-
+            Debug.Log("collitsion with lethal enemy");
         }
         else if (tag == _targetEnemyTag)            //Collision with object that the bullet defeats
         {
-            
+            Debug.Log("collitsion with target enemy");
         }
         else if (tag == _neutralEnemyTag)           //Collision with the same object as the bullet
         {
             RepellSelf(collision.gameObject);
+            Debug.Log("collitsion with neutral enemy");
         }
-        else                                        //Collision with bounds or other objects
+        else                                                    //Collision with bounds or other objects
         {
 
         }
@@ -87,8 +99,16 @@ public abstract class BulletControllerBase : MonoBehaviour
         _rigidbody2D.linearVelocity = velocity;
     }
 
-    protected void ReturnToBulletPool(GameObject[] pool)
+    protected GameObject TakeBulletFromPool(Queue<GameObject> pool)
     {
+        GameObject bullet = pool.Dequeue();
+        bullet.SetActive(true);
+        return bullet;
+    }
 
+    protected void ReturnToBulletPool(Queue<GameObject> pool)
+    {
+        gameObject.SetActive(false);
+        pool.Enqueue(gameObject);
     }
 }
