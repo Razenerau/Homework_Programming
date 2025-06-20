@@ -4,11 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BulletModel", menuName = "Bullets/BulletModel")]
 public class BulletModel : ScriptableObject
 {
-    public float _speed = 0f;                    //Speed at which the bullet moves  
-    public float _deathTime = 2f;                //How long before the bullet dies 
-    public Sprite _sprite;
+    public float Speed = 0f;                    //Speed at which the bullet moves  
+    public float DeathTime = 2f;                //How long before the bullet dies 
+    public Sprite Sprite;
+    public float Area;
 
-    public string _targetEnemyTag;               //The enemy the bullet would kill
-    public string _lethalEnemyTag;               //The enemy that will kill the bullet
-    public string _neutralEnemyTag;              //The enemy with the same type as the bullet
+    public string TargetEnemyTag;               //The enemy the bullet would kill
+    public string LethalEnemyTag;               //The enemy that will kill the bullet
+    public string NeutralEnemyTag;              //The enemy with the same type as the bullet
 }
