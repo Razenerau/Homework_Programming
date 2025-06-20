@@ -1,6 +1,7 @@
 using Codice.ThemeImages;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
@@ -10,12 +11,13 @@ public abstract class BulletControllerBase : MonoBehaviour
     // Variables 
     //================================================================================================================== 
 
-    [SerializeField] protected readonly float _speed = 0f;                    //Speed at which the bullet moves  
-    [SerializeField] protected readonly float _deathTime = 2f;                //How long before the bullet dies 
+    [SerializeField][ReadOnly] protected float _speed;                    //Speed at which the bullet moves  
+    [SerializeField][ReadOnly] protected float _deathTime;                //How long before the bullet dies 
+    [SerializeField][ReadOnly] protected Queue<GameObject> _pool;
     
-    [SerializeField] protected readonly string _targetEnemyTag;               //The enemy the bullet would kill
-    [SerializeField] protected readonly string _lethalEnemyTag;               //The enemy that will kill the bullet
-    [SerializeField] protected readonly string _neutralEnemyTag;              //The enemy with the same type as the bullet
+    [SerializeField][ReadOnly] protected string _targetEnemyTag;               //The enemy the bullet would kill
+    [SerializeField][ReadOnly] protected string _lethalEnemyTag;               //The enemy that will kill the bullet
+    [SerializeField][ReadOnly] protected string _neutralEnemyTag;              //The enemy with the same type as the bullet
 
     [SerializeField] protected BulletModel _bulletModel;
 
@@ -23,15 +25,6 @@ public abstract class BulletControllerBase : MonoBehaviour
     // Bullet Set Up  
     //==================================================================================================================
 
-    BulletControllerBase()
-    {
-        gameObject.name = _bulletModel.Name;
-        _targetEnemyTag = _bulletModel.TargetEnemyTag;
-        _lethalEnemyTag = _bulletModel.LethalEnemyTag;
-        _neutralEnemyTag = _bulletModel.NeutralEnemyTag;
-
-        Debug.Log($"{name} was constructed");
-    }
 
     //Waits till timer is out then destroys the bullet 
     private IEnumerator Expiration()

@@ -10,7 +10,7 @@ public class DropHeartModel : MonoBehaviour
     {
         float random = Random.value;
       
-        if (random < 0.20f)
+        if (random < 0.15f)
         {
             Vector3 pos = gameObject.transform.position;
             Instantiate(heart, pos, Quaternion.identity);
