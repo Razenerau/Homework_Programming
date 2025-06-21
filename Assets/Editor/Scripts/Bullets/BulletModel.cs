@@ -7,12 +7,12 @@ using UnityEngine;
 public class BulletModel : ScriptableObject
 {
     public string Name;
-    //public Queue<GameObject> BulletPool;        //Queue under which all of the bullets of this kind will be pooled
 
     [Header("Variables")]
     public float Area;                          //Area of the bullet's "explosion." If 0 = no area damage
     public float Speed = 0f;                    //Speed at which the bullet moves  
     public float DeathTime = 2f;                //How long before the bullet dies 
+    public int PoolBulletNumber;
 
     [Header("Sprites")]
     public Sprite LineArt;

@@ -11,10 +11,13 @@ public abstract class BulletControllerBase : MonoBehaviour
     // Variables 
     //================================================================================================================== 
 
+    [SerializeField] protected Transform _parentTransform;
+
     [Header("Variables")]
     [SerializeField][ReadOnly] protected float _speed;                    //Speed at which the bullet moves  
     [SerializeField][ReadOnly] protected float _deathTime;                //How long before the bullet dies 
     [SerializeField][ReadOnly] protected Queue<GameObject> _pool;
+    [SerializeField] protected int _poolBulletNumber;                     //How many bullets containde inside a bullet pool                            
 
     [Header("Tags")]
     [SerializeField][ReadOnly] protected string _targetEnemyTag;               //The enemy the bullet would kill
@@ -35,15 +38,23 @@ public abstract class BulletControllerBase : MonoBehaviour
 
     private void Start()
     {
+        InitializeBullet();
+    }
+
+    private void InitializeBullet()
+    {
         gameObject.name = _bulletModel.Name;
-        _targetEnemyTag = _bulletModel.TargetEnemyTag;
-        _lethalEnemyTag = _bulletModel.LethalEnemyTag;
-        _neutralEnemyTag = _bulletModel.NeutralEnemyTag;
-        _deathTime = _bulletModel.DeathTime;
-        _speed = _bulletModel.Speed;
+ 
+        SetTargetEnemy(_bulletModel.TargetEnemyTag);
+        SetLethalEnemy(_bulletModel.LethalEnemyTag);
+        SetNeutralEnemy(_bulletModel.NeutralEnemyTag);
+        SetDeathTime(_bulletModel.DeathTime);
+        SetSpeed(_bulletModel.Speed);
+        SetParentTransform(_bulletModel.ParentTransform);
+        SetPoolBulletNumber(_bulletModel.PoolBulletNumber);
         Debug.Log($"{name} was constructed");
     }
-    
+
     //Waits till timer is out then destroys the bullet 
     private IEnumerator Expiration()
     {
@@ -96,19 +107,21 @@ public abstract class BulletControllerBase : MonoBehaviour
     //                  GETTER AND SETTER
     //--------------------------------------------------------------------------------
 
-    protected void SetPosition(Vector2 pos)
-    {
-        gameObject.transform.position = pos;
-    }
-
-    protected void SetRotation(Quaternion rotation)
-    {
-        gameObject.transform.rotation = rotation;
-    }
+    public int GetPoolBulletNumber() { return  _poolBulletNumber; }
+    protected void SetPoolBulletNumber(int num) {  _poolBulletNumber = num; }
+    public Transform GetParentTransform() { return _parentTransform; }
+    protected void SetParentTransform(Transform gameObject) { _parentTransform = gameObject; }
+    protected void SetPosition(Vector2 pos) { gameObject.transform.position = pos; }
+    protected void SetRotation(Quaternion rotation) { gameObject.transform.rotation = rotation; }
 
     protected void SetVelocity(Vector2 velocity)
     {
         Rigidbody2D _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         _rigidbody2D.linearVelocity = velocity;
     }
+    protected void SetSpeed(float num) { _speed = num; }
+    protected void SetDeathTime(float num) { _deathTime = num; }
+    protected void SetLethalEnemy(string tag) { _lethalEnemyTag = tag; }
+    protected void SetTargetEnemy(string tag) { _targetEnemyTag = tag; }
+    protected void SetNeutralEnemy(string tag) { _neutralEnemyTag = tag; }
 }
