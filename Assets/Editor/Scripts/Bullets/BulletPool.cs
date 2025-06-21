@@ -13,22 +13,26 @@ public class BulletPool : MonoBehaviour
         else Destroy(gameObject);
 
         _bulletPools = new Dictionary<string, Queue<GameObject>>();
-        //InitializePool();
+        InitializePools();
     }
 
-    private void InitialzePool()
+    private void InitializePools()
     {
+
         foreach (GameObject bulletPrototype in _bulletPrototypes)
         {
             BulletControllerBase bulletController = bulletPrototype.GetComponent<BulletControllerBase>();
             int poolBulletNumber = bulletController.GetPoolBulletNumber();
             Queue<GameObject> pool = new Queue<GameObject>();
+            Debug.Log($"Initialized {bulletPrototype.name} pool with {poolBulletNumber} bullets");
 
             for (int i = 0; i < poolBulletNumber; i++)
             {
                 GameObject bullet = Instantiate(bulletPrototype);
                 AddBulletToPool(bullet, pool);
             }
+
+            _bulletPools.Add(bulletPrototype.name, pool);
         }
     }
 

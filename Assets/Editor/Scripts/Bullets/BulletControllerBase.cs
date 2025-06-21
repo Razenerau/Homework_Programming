@@ -36,21 +36,26 @@ public abstract class BulletControllerBase : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Backspace)) Shoot(Vector2.zero, Vector2.up * _speed, Quaternion.identity);
     }
 
-    private void Start()
+    private void Awake()
     {
         InitializeBullet();
     }
 
     private void InitializeBullet()
     {
+        //Unity object setup
         gameObject.name = _bulletModel.Name;
         SetTransform(BulletPool.Instance.GetPoolTranform(gameObject));
+
+        //Enemies setup
         SetTargetEnemy(_bulletModel.TargetEnemyTag);
         SetLethalEnemy(_bulletModel.LethalEnemyTag);
         SetNeutralEnemy(_bulletModel.NeutralEnemyTag);
+
+        //Variables setup
         SetDeathTime(_bulletModel.DeathTime);
         SetSpeed(_bulletModel.Speed);
-        
+        SetPoolBulletNumber(_bulletModel.PoolBulletNumber);
         SetPoolBulletNumber(_bulletModel.PoolBulletNumber);
         Debug.Log($"{name} was constructed");
     }

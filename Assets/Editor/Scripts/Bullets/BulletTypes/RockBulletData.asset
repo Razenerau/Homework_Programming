@@ -16,6 +16,7 @@ MonoBehaviour:
   Area: 0
   Speed: 3
   DeathTime: 5
+  PoolBulletNumber: 3
   LineArt: {fileID: 0}
   Body: {fileID: 0}
   Shadows: {fileID: 0}
