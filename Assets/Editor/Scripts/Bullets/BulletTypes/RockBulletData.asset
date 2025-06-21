@@ -19,6 +19,6 @@ MonoBehaviour:
   LineArt: {fileID: 0}
   Body: {fileID: 0}
   Shadows: {fileID: 0}
-  TargetEnemyTag: Scissors
-  LethalEnemyTag: Paper
-  NeutralEnemyTag: Rock
+  TargetEnemyTag: Enemy Scissors
+  LethalEnemyTag: Enemy Paper
+  NeutralEnemyTag: Enemy Rock

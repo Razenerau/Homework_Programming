@@ -11,27 +11,46 @@ public abstract class BulletControllerBase : MonoBehaviour
     // Variables 
     //================================================================================================================== 
 
+    [Header("Variables")]
     [SerializeField][ReadOnly] protected float _speed;                    //Speed at which the bullet moves  
     [SerializeField][ReadOnly] protected float _deathTime;                //How long before the bullet dies 
     [SerializeField][ReadOnly] protected Queue<GameObject> _pool;
-    
+
+    [Header("Tags")]
     [SerializeField][ReadOnly] protected string _targetEnemyTag;               //The enemy the bullet would kill
     [SerializeField][ReadOnly] protected string _lethalEnemyTag;               //The enemy that will kill the bullet
     [SerializeField][ReadOnly] protected string _neutralEnemyTag;              //The enemy with the same type as the bullet
 
+    [Header("Data")]
     [SerializeField] protected BulletModel _bulletModel;
 
     //==================================================================================================================
     // Bullet Set Up  
     //==================================================================================================================
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Backspace)) Shoot(Vector2.zero, Vector2.up * _speed, Quaternion.identity);
+    }
 
+    private void Start()
+    {
+        gameObject.name = _bulletModel.Name;
+        _targetEnemyTag = _bulletModel.TargetEnemyTag;
+        _lethalEnemyTag = _bulletModel.LethalEnemyTag;
+        _neutralEnemyTag = _bulletModel.NeutralEnemyTag;
+        _deathTime = _bulletModel.DeathTime;
+        _speed = _bulletModel.Speed;
+        Debug.Log($"{name} was constructed");
+    }
+    
     //Waits till timer is out then destroys the bullet 
     private IEnumerator Expiration()
     {
         yield return new WaitForSeconds(_deathTime);
-        //gameObject.SetActive(false);
-        //ReturnBulletToPool(gameObject, _bulletType);
+        Debug.Log("BUlletExpired");
+        
+        //ReturnBulletToPool();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,6 +80,7 @@ public abstract class BulletControllerBase : MonoBehaviour
         SetPosition(pos);
         SetVelocity(velocity);
         SetRotation(rotation);
+        StartCoroutine(Expiration());
     }
 
     protected void RepellSelf(GameObject collisionObj)
@@ -90,18 +110,5 @@ public abstract class BulletControllerBase : MonoBehaviour
     {
         Rigidbody2D _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         _rigidbody2D.linearVelocity = velocity;
-    }
-
-    protected GameObject TakeBulletFromPool(Queue<GameObject> pool)
-    {
-        GameObject bullet = pool.Dequeue();
-        bullet.SetActive(true);
-        return bullet;
-    }
-
-    protected void ReturnToBulletPool(Queue<GameObject> pool)
-    {
-        gameObject.SetActive(false);
-        pool.Enqueue(gameObject);
     }
 }
