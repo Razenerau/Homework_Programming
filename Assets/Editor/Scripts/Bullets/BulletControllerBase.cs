@@ -44,13 +44,13 @@ public abstract class BulletControllerBase : MonoBehaviour
     private void InitializeBullet()
     {
         gameObject.name = _bulletModel.Name;
- 
+        SetTransform(BulletPool.Instance.GetPoolTranform(gameObject));
         SetTargetEnemy(_bulletModel.TargetEnemyTag);
         SetLethalEnemy(_bulletModel.LethalEnemyTag);
         SetNeutralEnemy(_bulletModel.NeutralEnemyTag);
         SetDeathTime(_bulletModel.DeathTime);
         SetSpeed(_bulletModel.Speed);
-        SetParentTransform(_bulletModel.ParentTransform);
+        
         SetPoolBulletNumber(_bulletModel.PoolBulletNumber);
         Debug.Log($"{name} was constructed");
     }
@@ -120,6 +120,7 @@ public abstract class BulletControllerBase : MonoBehaviour
         _rigidbody2D.linearVelocity = velocity;
     }
     protected void SetSpeed(float num) { _speed = num; }
+    protected void SetTransform(Transform transform) { this.gameObject.transform.SetParent(transform); }
     protected void SetDeathTime(float num) { _deathTime = num; }
     protected void SetLethalEnemy(string tag) { _lethalEnemyTag = tag; }
     protected void SetTargetEnemy(string tag) { _targetEnemyTag = tag; }

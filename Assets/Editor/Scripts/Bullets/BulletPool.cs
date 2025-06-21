@@ -44,4 +44,38 @@ public class BulletPool : MonoBehaviour
         bullet.SetActive(false);
         pool.Enqueue(bullet);
     }
+
+    public Transform GetPoolTranform(GameObject bullet)
+    {
+        string parentName = bullet.name + " Bullet Pool";
+        Transform existingParent = FindPoolParent(parentName);
+
+        if (existingParent != null)
+        {
+            return existingParent;
+        }
+        else
+        {
+            return CreateNewPoolParent(parentName);
+        }
+    }
+
+    private Transform FindPoolParent(string poolName)
+    {
+        foreach (Transform child in transform) // Only check direct children
+        {
+            if (child.name == poolName)
+            {
+                return child;
+            }
+        }
+        return null;
+    }
+    private Transform CreateNewPoolParent(string poolName)
+    {
+        GameObject newParent = new GameObject(poolName);
+        newParent.transform.SetParent(this.transform); // Parent to this object
+        return newParent.transform;
+        //bullet.transform.SetParent(newParent.transform);
+    }
 }
