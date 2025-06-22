@@ -31,11 +31,11 @@ public class BulletPool : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrototype);
                 AddBulletToPool(bullet, pool);
-                Debug.Log($"Bullet's name is {bullet.name}");
+                //Debug.Log($"Bullet's name is {bullet.name}");
             }
 
             _bulletPools.Add(name, pool);
-            Debug.Log($"Dictionary name is {name}");
+            //Debug.Log($"Dictionary name is {name}");
         }
     }
     private Transform FindPoolParent(string poolName)
@@ -60,11 +60,21 @@ public class BulletPool : MonoBehaviour
     //                  GETTER AND SETTER
     //--------------------------------------------------------------------------------
 
-    public GameObject GetBulletFromPool(Queue<GameObject> pool)
+    public GameObject GetBulletFromPool(string bulletName)
     {
-        GameObject bullet = pool.Dequeue();
-        bullet.SetActive(true);
-        return bullet;
+        Queue<GameObject> pool = _bulletPools[bulletName];
+        if (pool.Count > 0)
+        {
+            GameObject bullet = pool.Dequeue();
+            bullet.SetActive(true);
+            return bullet;
+        }
+        else
+        {
+            Debug.Log("Queue is empry");
+            return null;
+        }
+        
     }
 
     public void AddBulletToPool(GameObject bullet, Queue<GameObject> pool)

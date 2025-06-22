@@ -31,11 +31,6 @@ public abstract class BulletControllerBase : MonoBehaviour
     // Bullet Set Up  
     //==================================================================================================================
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Backspace)) Shoot(Vector2.zero, Vector2.up * _speed, Quaternion.identity);
-    }
-
     private void Awake()
     {
         InitializeBullet();
@@ -66,7 +61,7 @@ public abstract class BulletControllerBase : MonoBehaviour
         yield return new WaitForSeconds(_deathTime);
         Debug.Log("BUlletExpired");
         
-        //ReturnBulletToPool();
+        ReturnBulletToPool();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -75,10 +70,12 @@ public abstract class BulletControllerBase : MonoBehaviour
         if(tag == _lethalEnemyTag)                  //Collision with object that kills the bullet
         {
             Debug.Log("collitsion with lethal enemy");
+            ReturnBulletToPool();
         }
         else if (tag == _targetEnemyTag)            //Collision with object that the bullet defeats
         {
-            Debug.Log("collitsion with target enemy");
+            Debug.Log("collitsion with target enemy"); // find a way to make bullet presist after hitting enemy
+            ReturnBulletToPool();
         }
         else if (tag == _neutralEnemyTag)           //Collision with the same object as the bullet
         {
@@ -87,11 +84,11 @@ public abstract class BulletControllerBase : MonoBehaviour
         }
         else                                                    //Collision with bounds or other objects
         {
-
+            ReturnBulletToPool();
         }
     }
 
-    protected void Shoot(Vector2 pos, Vector2 velocity, Quaternion rotation)
+    public void Shoot(Vector2 pos, Vector2 velocity, Quaternion rotation)
     {
         SetPosition(pos);
         SetVelocity(velocity);
