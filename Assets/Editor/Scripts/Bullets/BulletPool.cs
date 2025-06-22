@@ -18,10 +18,11 @@ public class BulletPool : MonoBehaviour
 
     private void InitializePools()
     {
-
         foreach (GameObject bulletPrototype in _bulletPrototypes)
         {
             BulletControllerBase bulletController = bulletPrototype.GetComponent<BulletControllerBase>();
+            BulletModel bulletModel = bulletController.GetBulletModel();
+            string name = bulletModel.Name;
             int poolBulletNumber = bulletController.GetPoolBulletNumber();
             Queue<GameObject> pool = new Queue<GameObject>();
             Debug.Log($"Initialized {bulletPrototype.name} pool with {poolBulletNumber} bullets");
@@ -30,40 +31,13 @@ public class BulletPool : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrototype);
                 AddBulletToPool(bullet, pool);
+                Debug.Log($"Bullet's name is {bullet.name}");
             }
 
-            _bulletPools.Add(bulletPrototype.name, pool);
+            _bulletPools.Add(name, pool);
+            Debug.Log($"Dictionary name is {name}");
         }
     }
-
-    public GameObject GetBulletFromPool(Queue<GameObject> pool)
-    {
-        GameObject bullet = pool.Dequeue();
-        bullet.SetActive(true);
-        return bullet;
-    }
-
-    public void AddBulletToPool(GameObject bullet, Queue<GameObject> pool)
-    {
-        bullet.SetActive(false);
-        pool.Enqueue(bullet);
-    }
-
-    public Transform GetPoolTranform(GameObject bullet)
-    {
-        string parentName = bullet.name + " Bullet Pool";
-        Transform existingParent = FindPoolParent(parentName);
-
-        if (existingParent != null)
-        {
-            return existingParent;
-        }
-        else
-        {
-            return CreateNewPoolParent(parentName);
-        }
-    }
-
     private Transform FindPoolParent(string poolName)
     {
         foreach (Transform child in transform) // Only check direct children
@@ -80,6 +54,44 @@ public class BulletPool : MonoBehaviour
         GameObject newParent = new GameObject(poolName);
         newParent.transform.SetParent(this.transform); // Parent to this object
         return newParent.transform;
-        //bullet.transform.SetParent(newParent.transform);
+    }
+
+    //--------------------------------------------------------------------------------
+    //                  GETTER AND SETTER
+    //--------------------------------------------------------------------------------
+
+    public GameObject GetBulletFromPool(Queue<GameObject> pool)
+    {
+        GameObject bullet = pool.Dequeue();
+        bullet.SetActive(true);
+        return bullet;
+    }
+
+    public void AddBulletToPool(GameObject bullet, Queue<GameObject> pool)
+    {
+        bullet.SetActive(false);
+        pool.Enqueue(bullet);
+    }
+
+    public void AddBulletToPool(GameObject bullet)
+    {
+        bullet.SetActive(false);
+        Queue<GameObject> pool = _bulletPools[bullet.name];
+        pool.Enqueue(bullet);
+    }
+
+    public Transform GetPoolTranform(GameObject bullet)
+    {
+        string parentName = bullet.name + " Bullet Pool";
+        Transform existingParent = FindPoolParent(parentName);
+
+        if (existingParent != null)
+        {
+            return existingParent;
+        }
+        else
+        {
+            return CreateNewPoolParent(parentName);
+        }
     }
 }

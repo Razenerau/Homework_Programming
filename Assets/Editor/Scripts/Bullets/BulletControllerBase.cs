@@ -108,10 +108,16 @@ public abstract class BulletControllerBase : MonoBehaviour
         _rigidbody2D.linearVelocity = reflectedDirection * _rigidbody2D.linearVelocity.magnitude;
     }
 
+    private void ReturnBulletToPool()
+    {
+        BulletPool.Instance.AddBulletToPool(gameObject);
+    }
+
     //--------------------------------------------------------------------------------
     //                  GETTER AND SETTER
     //--------------------------------------------------------------------------------
 
+    public BulletModel GetBulletModel() { return _bulletModel; }
     public int GetPoolBulletNumber() { return  _poolBulletNumber; }
     protected void SetPoolBulletNumber(int num) {  _poolBulletNumber = num; }
     public Transform GetParentTransform() { return _parentTransform; }
