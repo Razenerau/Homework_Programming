@@ -14,10 +14,10 @@ public abstract class BulletControllerBase : MonoBehaviour
     [SerializeField] protected Transform _parentTransform;
 
     [Header("Variables")]
-    [SerializeField][ReadOnly] protected float _speed;                    //Speed at which the bullet moves  
-    [SerializeField][ReadOnly] protected float _deathTime;                //How long before the bullet dies 
+    [SerializeField][ReadOnly] protected float _speed;                         //Speed at which the bullet moves  
+    [SerializeField][ReadOnly] protected float _deathTime;                     //How long before the bullet dies 
     [SerializeField][ReadOnly] protected Queue<GameObject> _pool;
-    [SerializeField] protected int _poolBulletNumber;                     //How many bullets containde inside a bullet pool                            
+    [SerializeField] protected int _poolBulletNumber;                          //How many bullets containde inside a bullet pool                            
 
     [Header("Tags")]
     [SerializeField][ReadOnly] protected string _targetEnemyTag;               //The enemy the bullet would kill
@@ -81,6 +81,10 @@ public abstract class BulletControllerBase : MonoBehaviour
         {
             RepellSelf(collision.gameObject);
             Debug.Log("collitsion with neutral enemy");
+        }
+        else if (tag.Contains("Player"))
+        {
+            return;
         }
         else                                                    //Collision with bounds or other objects
         {

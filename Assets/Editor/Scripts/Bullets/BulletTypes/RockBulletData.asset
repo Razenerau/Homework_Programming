@@ -17,9 +17,9 @@ MonoBehaviour:
   Speed: 3
   DeathTime: 5
   PoolBulletNumber: 3
-  LineArt: {fileID: 0}
-  Body: {fileID: 0}
-  Shadows: {fileID: 0}
+  LineArt: {fileID: 1792430378, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
+  Body: {fileID: -797136051, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
+  Shadows: {fileID: -1337839484, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
   TargetEnemyTag: Enemy Scissors
   LethalEnemyTag: Enemy Paper
   NeutralEnemyTag: Enemy Rock

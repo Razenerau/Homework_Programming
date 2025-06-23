@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class BulletView : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Sprite Renderers")]
+    [SerializeField] private SpriteRenderer _lineArt;
+    [SerializeField] private SpriteRenderer _body;
+    [SerializeField] private SpriteRenderer _shadows;
+
+    [Header("Bullet Data")]
+    [SerializeField] private BulletModel _bulletModel;
+ 
+    private void Awake()
     {
-        
+        InitializeSprites();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void InitializeSprites() 
     {
-        
+        _lineArt.sprite = _bulletModel.LineArt;
+        _body.sprite = _bulletModel.Body;
+        _shadows.sprite = _bulletModel.Shadows;
     }
 }
