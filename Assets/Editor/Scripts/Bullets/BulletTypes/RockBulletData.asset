@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Rock
   Area: 0
-  Speed: 3
+  Speed: 1
   DeathTime: 5
   PoolBulletNumber: 3
+  size: 1
   LineArt: {fileID: 1792430378, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
   Body: {fileID: -797136051, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
   Shadows: {fileID: -1337839484, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}

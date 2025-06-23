@@ -27,9 +27,18 @@ public abstract class BulletControllerBase : MonoBehaviour
     [Header("Data")]
     [SerializeField] protected BulletModel _bulletModel;
 
+    protected bool isActive = false;
+
     //==================================================================================================================
     // Bullet Set Up  
     //==================================================================================================================
+
+    /*private void Update() 
+    {
+        if (!isActive) return;
+        int layer = (int)gameObject.transform.position.y;
+        Debug.Log(layer);
+    }*/
 
     private void Awake()
     {
@@ -58,7 +67,35 @@ public abstract class BulletControllerBase : MonoBehaviour
     //Waits till timer is out then destroys the bullet 
     private IEnumerator Expiration()
     {
-        yield return new WaitForSeconds(_deathTime);
+        float timeElapsed = 0;
+        while (timeElapsed < _deathTime) 
+        {
+            // Set sprites' layer according to the y pos
+            //At the bottom of the screen the layer is the highest
+            //At the top it's 10, 11, 12 respictively
+            //Find the height of the screen in unity coordinates
+
+            float yPos = gameObject.transform.position.y;
+            int baseLayer = 10;
+
+            Camera cam = Camera.main;
+            float screenHeight = cam.orthographicSize;
+
+            // f(x) returns a layer #, x is object's height
+            // at x = sceenHeigh, y = 10
+            // at x = 0, y = screenHeight + 10
+            // at x = screen/2; y = screen/2 + 10
+            // y = mx + b; b = 10;
+            // 0 = m(screen) 
+            // (screen) = m(0) 
+
+            int layer = (int)(screenHeight + yPos) + 10;
+            Debug.Log("Layer: " + layer);
+
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(_deathTime);
         Debug.Log("BUlletExpired");
         
         ReturnBulletToPool();
@@ -132,6 +169,7 @@ public abstract class BulletControllerBase : MonoBehaviour
         _rigidbody2D.linearVelocity = velocity;
     }
     protected void SetSpeed(float num) { _speed = num; }
+    public float GetSpeed() { return _speed; }
     protected void SetTransform(Transform transform) { this.gameObject.transform.SetParent(transform); }
     protected void SetDeathTime(float num) { _deathTime = num; }
     protected void SetLethalEnemy(string tag) { _lethalEnemyTag = tag; }
