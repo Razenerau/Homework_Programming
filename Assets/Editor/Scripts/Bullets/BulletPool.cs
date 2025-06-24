@@ -23,7 +23,7 @@ public class BulletPool : MonoBehaviour
             BulletControllerBase bulletController = bulletPrototype.GetComponent<BulletControllerBase>();
             BulletModel bulletModel = bulletController.GetBulletModel();
             string name = bulletModel.Name;
-            int poolBulletNumber = bulletController.GetPoolBulletNumber();
+            int poolBulletNumber = bulletController.GetBulletModel().PoolBulletNumber;
             Queue<GameObject> pool = new Queue<GameObject>();
             Debug.Log($"Initialized {bulletPrototype.name} pool with {poolBulletNumber} bullets");
 
@@ -31,11 +31,9 @@ public class BulletPool : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrototype);
                 AddBulletToPool(bullet, pool);
-                //Debug.Log($"Bullet's name is {bullet.name}");
             }
 
             _bulletPools.Add(name, pool);
-            //Debug.Log($"Dictionary name is {name}");
         }
     }
     private Transform FindPoolParent(string poolName)
