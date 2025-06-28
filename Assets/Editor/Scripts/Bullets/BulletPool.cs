@@ -72,7 +72,7 @@ public class BulletPool : MonoBehaviour
             Debug.Log("Queue is empry");
             return null;
         }
-        
+
     }
 
     public void AddBulletToPool(GameObject bullet, Queue<GameObject> pool)
@@ -101,5 +101,10 @@ public class BulletPool : MonoBehaviour
         {
             return CreateNewPoolParent(parentName);
         }
+    }
+
+    public List<GameObject> GetBulletPrototypesList()
+    {
+        return _bulletPrototypes;
     }
 }
