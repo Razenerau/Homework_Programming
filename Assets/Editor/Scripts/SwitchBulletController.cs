@@ -20,17 +20,19 @@ public class SwitchBulletType : MonoBehaviour
         {
             List<string> bulletNames = BulletTypesData.Instance.GetBulletNames();
             int bulletNamesNum = bulletNames.Count;
-            /*if (bulletIndex >= bulletNamesNum - 1)
+
+            Debug.Log($"number of bullets: {bulletNames.Count} index: {bulletIndex}");
+
+            if (bulletIndex >= bulletNamesNum - 1)
             {
                 bulletIndex = 0;  
             }
             else
             {
                 bulletIndex++;
-            }*/
-            bulletIndex = bulletIndex >= bulletNamesNum - 1 ? 0 : bulletIndex++;
+            }
             CurrentBulletType = bulletNames[bulletIndex];
-            Debug.Log(bulletNames[bulletIndex]);
+            Debug.Log(CurrentBulletType);
         }
     }
 }

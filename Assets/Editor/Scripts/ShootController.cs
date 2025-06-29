@@ -7,9 +7,10 @@ public class ShootController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject bullet = _bulletPool.GetBulletFromPool("Rock");
+            string bulletName = SwitchBulletType.CurrentBulletType;
+            GameObject bullet = _bulletPool.GetBulletFromPool(bulletName);
 
             if(bullet == null) {
                 return;

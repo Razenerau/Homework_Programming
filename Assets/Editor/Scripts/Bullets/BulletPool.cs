@@ -14,7 +14,6 @@ public class BulletPool : MonoBehaviour
 
         _bulletPools = new Dictionary<string, Queue<GameObject>>();
         InitializePools();
-        //BulletTypesData.Instance.InitializeBulletData();
     }
 
     private void InitializePools()

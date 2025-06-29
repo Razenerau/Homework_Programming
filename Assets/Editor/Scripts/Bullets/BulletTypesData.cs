@@ -31,13 +31,13 @@ public class BulletTypesData : MonoBehaviour
     }
 
     // Debugging
-    /*public void InitializeBulletData()
+    public void InitializeBulletData()
     {
         foreach(string name in GetBulletNames())
         {
             Debug.Log(name);
         }
-    }*/
+    }
 
     
 }
