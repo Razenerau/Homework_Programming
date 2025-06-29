@@ -14,13 +14,11 @@ public class BulletPool : MonoBehaviour
 
         _bulletPools = new Dictionary<string, Queue<GameObject>>();
         InitializePools();
-        BulletTypesData.Instance.InitializeBulletData();
+        //BulletTypesData.Instance.InitializeBulletData();
     }
 
     private void InitializePools()
     {
-        Debug.Log("Pools initialized");
-
         foreach (GameObject bulletPrototype in _bulletPrototypes)
         {
             BulletControllerBase bulletController = bulletPrototype.GetComponent<BulletControllerBase>();

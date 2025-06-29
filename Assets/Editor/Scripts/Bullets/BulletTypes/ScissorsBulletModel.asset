@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d7103cf64bf654e8c52aeb366e0774, type: 3}
+  m_Name: ScissorsBulletModel
+  m_EditorClassIdentifier: 
+  Name: Scissors
+  Area: 0
+  Speed: 4
+  DeathTime: 3
+  PoolBulletNumber: 5
+  size: 1
+  LineArt: {fileID: -449296852, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
+  Body: {fileID: -822908641, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
+  Shadows: {fileID: -1242286302, guid: 5beeadd067077024ea23d6c8c350a4fb, type: 3}
+  TargetEnemyTag: Enemy Paper
+  LethalEnemyTag: Enemy Rock
+  NeutralEnemyTag: Enemy Scissors

@@ -80,7 +80,7 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0)) // && _canShootCommonBullets == true)
         {
             //shoot(Structs.BulletType.ROCK);
-            shoot(SwitchBulletType.currentBulletType);
+            shoot(SwitchBulletType.CurrentBulletType);
         }
     }
 

@@ -1107,6 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrototypes:
   - {fileID: 59285955785588545, guid: c73896934513854458cf6af87907a71a, type: 3}
+  - {fileID: 436492822843587476, guid: 0c7e740658cd993498621a66a8c39f0e, type: 3}
 --- !u!4 &373729141
 Transform:
   m_ObjectHideFlags: 0
@@ -1136,6 +1137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentBulletTypes:
   - {fileID: 59285955785588545, guid: c73896934513854458cf6af87907a71a, type: 3}
+  - {fileID: 436492822843587476, guid: 0c7e740658cd993498621a66a8c39f0e, type: 3}
 --- !u!1 &440071211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4451,7 @@ GameObject:
   - component: {fileID: 1892122278}
   - component: {fileID: 1892122285}
   - component: {fileID: 1892122289}
+  - component: {fileID: 1892122290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4792,6 +4795,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPool: {fileID: 373729140}
   _spawnPoint: {fileID: 1018627665}
+--- !u!114 &1892122290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892122275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924517fa453bdf34dba4d57c2f9844c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1898909144
 GameObject:
   m_ObjectHideFlags: 0

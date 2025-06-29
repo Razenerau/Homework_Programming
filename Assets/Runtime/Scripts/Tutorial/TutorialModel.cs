@@ -258,7 +258,7 @@ public class TutorialModel : MonoBehaviour
 
     private IEnumerator StartAWSDTutorial()
     {
-        while (!Input.GetKeyDown(KeyCode.Mouse0) || SwitchBulletType.currentBulletType != Structs.BulletType.PAPER)
+        while (!Input.GetKeyDown(KeyCode.Mouse0) || SwitchBulletType.CurrentBulletType != Structs.BulletType.PAPER)
         {
             yield return null;
         }

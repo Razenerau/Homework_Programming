@@ -8,9 +8,10 @@ public class SwitchBulletType : MonoBehaviour
 {
     private static string _currentBulletType = Tags.ROCK; //Structs.BulletType.ROCK;
 
-    public static string currentBulletType
+    public static string CurrentBulletType
     {
         get { return _currentBulletType; }
+        private set { _currentBulletType = value; }
     }
 
     void Update()
@@ -22,7 +23,7 @@ public class SwitchBulletType : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1))
         {
-            switch (currentBulletType)
+            switch (CurrentBulletType)
             {
                 case Tags.ROCK:
                     PlayerView.Instance.SetPaper();

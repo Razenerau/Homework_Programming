@@ -7,10 +7,16 @@ public class BulletTypesData : MonoBehaviour
 {
     // Stores bullet types available for player to use by pressing RMS or SPACE
     [SerializeField] private List<GameObject> _currentBulletTypes;
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     public static BulletTypesData Instance { get; private set; }
 
     // Returns a list of names of bullets from the list selected by the game;
-    private List<string> GetBulletNames()
+    public List<string> GetBulletNames()
     {
         List<GameObject> prototypesList = BulletPool.Instance.GetBulletPrototypesList();
         List<string> bulletNamesList = new List<string>();
@@ -24,14 +30,14 @@ public class BulletTypesData : MonoBehaviour
         return bulletNamesList;
     }
 
-    public void InitializeBulletData()
+    // Debugging
+    /*public void InitializeBulletData()
     {
-        Debug.Log(Instance.GetBulletNames());
-    }
+        foreach(string name in GetBulletNames())
+        {
+            Debug.Log(name);
+        }
+    }*/
 
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
+    
 }
